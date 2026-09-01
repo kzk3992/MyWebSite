@@ -1,0 +1,199 @@
+.hero {
+  min-height: min(810px, calc(100svh - 76px));
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  align-items: center;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  width: min(700px, 76vw);
+  aspect-ratio: 1;
+  right: max(-220px, -12vw);
+  top: 50%;
+  border: 1px solid rgba(164, 255, 89, 0.11);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 70px rgba(164, 255, 89, 0.018),
+    0 0 0 140px rgba(164, 255, 89, 0.014),
+    inset 0 0 90px rgba(121, 255, 48, 0.025);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.heroInner {
+  position: relative;
+  z-index: 1;
+  padding: 112px 0;
+}
+
+.heroKicker {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--text-dim);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.heroKicker::before {
+  content: "";
+  width: 34px;
+  height: 1px;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+.hero h1 {
+  max-width: 960px;
+  margin-top: 38px;
+}
+
+.heroTitlePrimary,
+.heroTitleOutline {
+  display: block;
+}
+
+.heroTitleOutline {
+  color: transparent;
+  -webkit-text-stroke: 1px #667062;
+}
+
+.heroCopy {
+  max-width: 650px;
+  margin-top: 42px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: 20px;
+}
+
+.heroNumber {
+  margin-top: 5px;
+  color: var(--accent-text);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+}
+
+.heroLead {
+  color: var(--text);
+  font-size: clamp(1.25rem, 2.4vw, 1.7rem);
+  font-weight: 610;
+  letter-spacing: -0.025em;
+  line-height: 1.6;
+}
+
+.heroTagline {
+  margin-top: 10px;
+  color: var(--text-dim);
+  font-size: 0.84rem;
+  letter-spacing: 0.04em;
+}
+
+.heroAside {
+  position: absolute;
+  right: 0;
+  bottom: 46px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--text-dim);
+  font-size: 0.63rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transform: rotate(90deg) translateX(100%);
+  transform-origin: bottom right;
+}
+
+.heroAside::after {
+  content: "";
+  width: 54px;
+  height: 1px;
+  background: var(--line);
+}
+
+.aboutGrid {
+  display: grid;
+  grid-template-columns: 0.65fr 1.35fr;
+  gap: clamp(48px, 10vw, 140px);
+}
+
+.aboutLabel {
+  color: var(--accent-text);
+  font-size: 0.7rem;
+  font-weight: 750;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.aboutCopy p {
+  color: var(--text-muted);
+  font-size: clamp(1.12rem, 2.4vw, 1.5rem);
+  line-height: 1.9;
+}
+
+.aboutCopy p:first-child {
+  color: var(--text);
+}
+
+.aboutCopy p + p {
+  margin-top: 26px;
+}
+
+.aboutLink {
+  display: inline-flex;
+  margin-top: 34px;
+  color: var(--accent-text);
+  font-size: 0.82rem;
+  font-weight: 740;
+  text-decoration: none;
+}
+
+.aboutLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+@media (max-width: 760px) {
+  .hero {
+    min-height: 670px;
+  }
+
+  .heroInner {
+    padding: 88px 0 108px;
+  }
+
+  .hero h1 {
+    max-width: 100%;
+    font-size: clamp(3rem, 13vw, 3.5rem);
+  }
+
+  .heroCopy {
+    margin-top: 36px;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .heroCopy > div {
+    min-width: 0;
+  }
+
+  .heroLead {
+    font-size: 1.08rem;
+  }
+
+  .heroAside {
+    display: none;
+  }
+
+  .aboutGrid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}

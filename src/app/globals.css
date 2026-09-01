@@ -1,0 +1,128 @@
+:root {
+  color-scheme: dark;
+  --bg: #090c0a;
+  --bg-raised: #0c100d;
+  --surface: #111612;
+  --surface-hover: #171d18;
+  --text: #eff5ed;
+  --text-muted: #a2aca0;
+  --text-dim: #788176;
+  --line: #293129;
+  --line-soft: #1b211c;
+  --accent: #a6f85b;
+  --accent-bright: #c2ff83;
+  --accent-text: #b7ff74;
+  --accent-glow: rgba(142, 255, 53, 0.52);
+  --accent-shadow: rgba(112, 222, 33, 0.17);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
+}
+
+body {
+  margin: 0;
+  overflow-x: clip;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 82% 7%, rgba(127, 230, 53, 0.055), transparent 28rem),
+    var(--bg);
+  font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans JP", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  color: #091107;
+  background: var(--accent);
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+}
+
+h1,
+h2,
+h3,
+p,
+dl,
+dd,
+ul,
+ol {
+  margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--text);
+  font-weight: 760;
+  letter-spacing: -0.045em;
+}
+
+h1 {
+  font-size: clamp(3.3rem, 8vw, 7.2rem);
+  line-height: 0.98;
+}
+
+h2 {
+  font-size: clamp(2.3rem, 5vw, 4.2rem);
+  line-height: 1.05;
+}
+
+h3 {
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+a {
+  color: inherit;
+}
+
+main {
+  min-height: 70vh;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: 12px;
+  left: 12px;
+  padding: 12px 16px;
+  color: #071006;
+  background: var(--accent);
+  border-radius: 8px;
+  font-weight: 800;
+  transform: translateY(-150%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.eyebrow {
+  color: var(--accent-text);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
