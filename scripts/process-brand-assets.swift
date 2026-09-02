@@ -37,7 +37,6 @@ let sheet = try loadImage(sourceURL)
 let iconSize = 140
 let crops = [
     IconCrop(name: "wolf", centerX: 119, centerY: 104),
-    IconCrop(name: "spark", centerX: 1_068, centerY: 104),
     IconCrop(name: "paw", centerX: 119, centerY: 370),
     IconCrop(name: "power", centerX: 119, centerY: 506),
     IconCrop(name: "arrow-left", centerX: 797, centerY: 506),
@@ -78,4 +77,4 @@ for crop in crops {
     try writePNG(result, to: outputURL.appendingPathComponent("\(crop.name).png"))
 }
 
-print("Created \(crops.count) brand icons in \(outputURL.path)")
+print("Created \(crops.count) brand icons in \(outputURL.path) (spark.png is maintained separately from the supplied standalone asset)")
