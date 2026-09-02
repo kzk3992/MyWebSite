@@ -23,7 +23,7 @@ const faqs = [
   },
   {
     question: "データはどこに保存されますか？",
-    answer: "現在、アイデアノートやトレーニング履歴等のデータは端末内に保存され、運営者のサーバーへ送信されません。将来iCloud同期を導入する場合は、アプリ内およびプライバシーポリシーでご案内します。",
+    answer: "アイデアノートやトレーニング履歴等は端末内に保存されます。iCloudが有効な環境では、同じApple Accountの端末間で同期される場合があります。運営者独自のサーバーへは送信されません。",
   },
   {
     question: "アプリを削除するとデータはどうなりますか？",
@@ -31,7 +31,7 @@ const faqs = [
   },
   {
     question: "機種変更時にデータを移行できますか？",
-    answer: "現在、Hirame独自のデータ移行・クラウド同期機能は提供していません。端末全体の移行やバックアップによる復元可否は、iOSの仕様や設定により異なります。",
+    answer: "同じApple AccountでiCloudを有効にしている場合、データが同期されることがあります。端末全体の移行やバックアップによる復元可否は、iOSおよびiCloudの状態により異なります。",
   },
 ];
 
@@ -53,7 +53,7 @@ export default function HirameSupportPage() {
             <dl>
               <div><dt>Platform</dt><dd>iOS</dd></div>
               <div><dt>Account</dt><dd>不要</dd></div>
-              <div><dt>Storage</dt><dd>端末内</dd></div>
+              <div><dt>Storage</dt><dd>端末内 / iCloud</dd></div>
             </dl>
           </aside>
         </Container>

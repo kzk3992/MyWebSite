@@ -20,7 +20,15 @@ export const metadata: Metadata = {
     title: siteConfig.siteName,
     description: siteConfig.description,
     siteName: siteConfig.brandName,
+    images: [{ url: "/brand/header.jpg", width: 1983, height: 793, alt: "Mika Spark Studio" }],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.siteName,
+    description: siteConfig.description,
+    images: ["/brand/header.jpg"],
+  },
+  icons: { icon: "/brand/logo.png" },
   robots: { index: true, follow: true },
 };
 

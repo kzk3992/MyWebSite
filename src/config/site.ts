@@ -41,5 +41,5 @@ export const hirame = siteConfig.products[0];
 
 export const legalDates = {
   established: "2026年9月1日",
-  updated: "2026年9月1日",
+  updated: "2026年9月2日",
 } as const;

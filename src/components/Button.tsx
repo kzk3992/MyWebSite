@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { BrandIcon } from "./BrandIcon";
 import styles from "./components.module.css";
 
 type ButtonProps = {
@@ -21,7 +22,7 @@ export function Button({
   if (!href || disabled) {
     return (
       <span className={`${className} ${styles.buttonDisabled}`} aria-disabled="true">
-        {children}
+        {children}<span className={styles.buttonStatus}>—</span>
       </span>
     );
   }
@@ -29,10 +30,10 @@ export function Button({
   if (external) {
     return (
       <a className={className} href={href} target="_blank" rel="noopener noreferrer">
-        {children}
+        {children}<BrandIcon name="arrow-right" size={26} />
       </a>
     );
   }
 
-  return <a className={className} href={href}>{children}</a>;
+  return <a className={className} href={href}>{children}<BrandIcon name="arrow-right" size={26} /></a>;
 }

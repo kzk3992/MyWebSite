@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Container } from "./Container";
+import { BrandIcon } from "./BrandIcon";
 import styles from "./components.module.css";
 
 type SectionProps = {
@@ -27,7 +28,7 @@ export function Section({
       <Container>
         {(eyebrow || title || intro) && (
           <header className={styles.sectionHeader}>
-            {eyebrow && <p className="eyebrow">{eyebrow}</p>}
+            {eyebrow && <div className={styles.sectionEyebrow}><BrandIcon name="spark" size={28} /><p className="eyebrow">{eyebrow}</p></div>}
             {title && <h2>{title}</h2>}
             {intro && <p>{intro}</p>}
           </header>

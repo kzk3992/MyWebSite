@@ -39,6 +39,25 @@ for (const requiredFile of ["404.html", "robots.txt", "sitemap.xml"]) {
   }
 }
 
+const brandFiles = [
+  "brand/header.jpg",
+  "brand/logo.png",
+  "brand/logo-white.png",
+  "brand/icons/wolf.png",
+  "brand/icons/spark.png",
+  "brand/icons/paw.png",
+  "brand/icons/power.png",
+  "brand/icons/arrow-left.png",
+  "brand/icons/arrow-right.png",
+  "brand/hirame/app-icon.jpg",
+  "brand/hirame/home.jpg",
+  "brand/hirame/mascot.png",
+];
+
+for (const file of brandFiles) {
+  if (!existsSync(join(outputDirectory, file))) failures.push(`${file}: ブランド画像が出力されていません`);
+}
+
 const htmlFiles = [];
 function collectHtml(directory) {
   for (const entry of readdirSync(directory, { withFileTypes: true })) {
@@ -52,6 +71,9 @@ collectHtml(outputDirectory);
 const hrefPattern = /href="(\/[^"]*)"/g;
 for (const file of htmlFiles) {
   const html = readFileSync(file, "utf8");
+  for (const image of html.matchAll(/<img\b[^>]*>/g)) {
+    if (!/\balt="[^"]*"/.test(image[0])) failures.push(`${file}: alt属性のない画像があります`);
+  }
   for (const match of html.matchAll(hrefPattern)) {
     const href = match[1];
     if (href.startsWith("/_next/") || href.startsWith("//")) continue;
@@ -63,6 +85,15 @@ for (const file of htmlFiles) {
       failures.push(`${file.replace(`${outputDirectory}\\`, "")}: リンク先 ${href} がありません`);
     }
   }
+}
+
+const rootHtml = readFileSync(routeFile("/"), "utf8");
+if (!rootHtml.includes("<details")) failures.push("Header: モバイルメニューがありません");
+if (!rootHtml.includes('href="/#works"')) failures.push("Header: Worksリンクがありません");
+
+const hirameHtml = readFileSync(routeFile("/apps/hirame/"), "utf8");
+for (const href of ["/apps/hirame/privacy/", "/apps/hirame/terms/", "/apps/hirame/support/"]) {
+  if (!hirameHtml.includes(`href="${href}"`)) failures.push(`Hirame: ${href} へのリンクがありません`);
 }
 
 const configSource = readFileSync(join(process.cwd(), "src", "config", "site.ts"), "utf8");
