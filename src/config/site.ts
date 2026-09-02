@@ -29,7 +29,7 @@ export const siteConfig = {
       platform: "iOS",
       tagline: "ひらめきを、習慣に。",
       description:
-        "発想力をゲーム感覚で鍛える、アイデアトレーニングアプリ。",
+        "アイデアを記録し、強制発想法や連想ゲームで発想を広げるトレーニングアプリ。",
       href: "/apps/hirame/",
       appStoreUrl: null,
       screenshots: [],

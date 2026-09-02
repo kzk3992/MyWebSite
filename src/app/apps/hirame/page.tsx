@@ -8,27 +8,27 @@ import styles from "../../content.module.css";
 
 export const metadata: Metadata = {
   title: "Hirame",
-  description: "ひらめきを習慣に。発想力をゲーム感覚で鍛えるiOS向けアイデアトレーニングアプリ。",
+  description: "ひらめきを習慣に。アイデアノートを中心に、強制発想法や連想ゲームで発想を広げるiOSアプリ。",
   alternates: { canonical: "/apps/hirame/" },
   openGraph: {
     title: "Hirame | Mika Spark Studio",
-    description: "ひらめきを習慣に。発想力をゲーム感覚で鍛えるアイデアトレーニングアプリ。",
+    description: "アイデアノートを中心に、強制発想法や連想ゲームで発想を広げるiOSアプリ。",
     url: "/apps/hirame/",
   },
 };
 
 const features = [
   {
-    title: "発想トレーニング",
-    description: "ランダムな言葉やテーマから、新しいアイデアを考えるトレーニング。",
+    title: "Idea Note",
+    description: "思いついたアイデアを、その場で文章・画像・手書きと一緒に記録。",
+  },
+  {
+    title: "強制発想法",
+    description: "ランダムな言葉やテーマを組み合わせ、新しい視点を引き出すトレーニング。",
   },
   {
     title: "連想ゲーム",
     description: "離れた概念同士を連想でつなぎ、ゴールまでの経路を考えるゲーム。",
-  },
-  {
-    title: "Idea Note",
-    description: "思いついたアイデアをその場で記録。",
   },
   {
     title: "継続記録",
@@ -37,14 +37,14 @@ const features = [
 ];
 
 const screenshots = [
-  { src: "/brand/hirame/screens/home.jpg", label: "HOME", alt: "Hirameのホーム画面" },
+  { src: "/brand/hirame/screens/note.jpg", label: "IDEA NOTE", alt: "手書き添付を含むアイデアノート画面" },
+  { src: "/brand/hirame/screens/random-note.jpg", label: "PROMPT NOTE", alt: "発想ワードから作るアイデアノート画面" },
+  { src: "/brand/hirame/screens/methods.jpg", label: "METHODS", alt: "発想法の選択画面" },
+  { src: "/brand/hirame/screens/random.jpg", label: "RANDOM FUSION", alt: "Random Fusionの生成画面" },
   { src: "/brand/hirame/screens/association.jpg", label: "ASSOCIATION", alt: "連想ゲームの難易度選択画面" },
   { src: "/brand/hirame/screens/association-game.jpg", label: "PLAY", alt: "連想ゲームのプレイ画面" },
   { src: "/brand/hirame/screens/association-clear.jpg", label: "CLEAR", alt: "連想ゲームのクリア画面" },
-  { src: "/brand/hirame/screens/methods.jpg", label: "METHODS", alt: "発想法の選択画面" },
-  { src: "/brand/hirame/screens/random.jpg", label: "RANDOM FUSION", alt: "Random Fusionの生成画面" },
-  { src: "/brand/hirame/screens/random-note.jpg", label: "PROMPT NOTE", alt: "発想ワードから作るアイデアノート画面" },
-  { src: "/brand/hirame/screens/note.jpg", label: "IDEA NOTE", alt: "手書き添付を含むアイデアノート画面" },
+  { src: "/brand/hirame/screens/home.jpg", label: "HOME", alt: "Hirameのホーム画面" },
 ] as const;
 
 export default function HiramePage() {
@@ -77,7 +77,7 @@ export default function HiramePage() {
       <Section
         eyebrow="Core features / 04"
         title="ひらめくための、小さな習慣。"
-        intro="考える、つなぐ、残す、振り返る。Hirameは発想の反復をシンプルに支えます。"
+        intro="まず残す。次に広げ、つなぎ、振り返る。Hirameはアイデアノートを中心に発想の反復を支えます。"
       >
         <div className={styles.featureTimeline}>
           {features.map((feature, index) => (
@@ -93,7 +93,7 @@ export default function HiramePage() {
         tone="muted"
         eyebrow="Preview"
         title="Screenshots"
-        intro="開発中の実際の画面です。連想ゲーム、発想法、アイデアノートの流れをご覧いただけます。"
+        intro="開発中の実際の画面です。中心となるアイデアノートから、強制発想法、連想ゲームの順にご覧いただけます。"
       >
         <div className={styles.screenshotGallery} aria-label="Hirame アプリ画面">
           {screenshots.map((screenshot, index) => (

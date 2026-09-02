@@ -11,7 +11,7 @@
 .heroCopy { max-width: 570px; margin-top: 44px; display: grid; grid-template-columns: 38px 1fr; align-items: start; gap: 16px; }
 .heroLead { color: var(--color-text); font-size: clamp(1.04rem, 1.8vw, 1.35rem); font-weight: 620; letter-spacing: -.02em; line-height: 1.7; }
 .heroTagline { margin-top: 10px; color: var(--color-dim); font-size: .78rem; letter-spacing: .06em; }
-.heroArtwork { position: absolute; z-index: 1; width: 58%; inset: 32px 0; overflow: hidden; }
+.heroArtwork { position: absolute; z-index: 1; width: 52%; inset: 32px -5% 32px auto; overflow: hidden; }
 .heroArtwork img { width: 100%; height: 100%; object-fit: contain; object-position: center; filter: saturate(1.06) contrast(1.05); }
 .heroAside { position: absolute; z-index: 3; right: 0; bottom: 28px; display: flex; align-items: center; gap: 10px; color: var(--color-muted); font-size: .61rem; font-weight: 700; letter-spacing: .13em; text-decoration: none; text-transform: uppercase; }
 .heroAside:hover { color: var(--color-spark-soft); }
