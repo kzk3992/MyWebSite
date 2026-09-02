@@ -39,6 +39,12 @@ export const siteConfig = {
 
 export const hirame = siteConfig.products[0];
 
+export const legalOperator = {
+  name: siteConfig.brandName,
+  responsiblePerson: "Miyashita Kazuki",
+  email: siteConfig.supportEmail,
+} as const;
+
 export const legalDates = {
   established: "2026年9月1日",
   updated: "2026年9月2日",

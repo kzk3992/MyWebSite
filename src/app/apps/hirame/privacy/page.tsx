@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { LegalLayout } from "@/components/LegalLayout";
-import { siteConfig } from "@/config/site";
+import { OperatorInformation } from "@/components/OperatorInformation";
 
 export const metadata: Metadata = {
   title: "Hirame Privacy Policy",
@@ -124,12 +124,8 @@ export default function HiramePrivacyPage() {
       </section>
 
       <section>
-        <h2>15. お問い合わせ</h2>
-        <p>
-          本ポリシーに関するお問い合わせは、
-          <a href={`mailto:${siteConfig.supportEmail}`}>{siteConfig.supportEmail}</a>
-          までご連絡ください。
-        </p>
+        <h2>15. 運営者情報</h2>
+        <OperatorInformation />
       </section>
     </LegalLayout>
   );
