@@ -28,8 +28,9 @@
 .featureNumber { color: var(--color-spark-soft); font-size: .67rem; font-weight: 760; letter-spacing: .16em; }
 .featureItem h3 { font-size: clamp(1.55rem, 3vw, 2.3rem); }
 .featureItem div p { max-width: 540px; margin-top: 15px; color: var(--color-muted); line-height: 1.9; }
-.screenshotExhibit { margin: 0; min-height: 640px; position: relative; overflow: hidden; display: grid; place-items: center; border-block: 1px solid var(--color-border); background: #e9e9ee; }
-.screenshotExhibit img { width: min(46%, 370px); margin-top: 65px; box-shadow: 0 24px 72px rgb(0 0 0 / 24%); }
+.screenshotGallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--color-border); border-left: 1px solid var(--color-border); }
+.screenshotExhibit { margin: 0; min-height: 560px; position: relative; overflow: hidden; display: flex; align-items: flex-start; justify-content: center; border-right: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); background: #e9e9ee; }
+.screenshotExhibit img { width: 82%; margin-top: 62px; box-shadow: 0 20px 52px rgb(0 0 0 / 22%); }
 .screenshotExhibit figcaption { position: absolute; inset: 26px auto auto 28px; color: #676a6f; font-size: .62rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
 .screenshotExhibit figcaption span { margin-right: 18px; color: #458800; }
 .legalLinks { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--color-border); }
@@ -51,6 +52,14 @@
 .supportCard:hover { color: var(--color-spark-soft); background: var(--color-bg-elevated); }
 .supportCard p { margin-top: 12px; color: var(--color-muted); line-height: 1.7; }
 .supportCardArrow { color: var(--color-spark-soft); font-size: 1.3rem; }
+.policyList { border-top: 1px solid var(--color-border); }
+.policyList a { min-height: 132px; padding: 24px 30px; display: grid; grid-template-columns: 70px 1fr auto; align-items: center; gap: 24px; border-bottom: 1px solid var(--color-border); text-decoration: none; transition: color 160ms ease, background 160ms ease; }
+.policyList a:hover { color: var(--color-spark-soft); background: var(--color-bg-elevated); }
+.policyNumber { color: var(--color-spark-soft); font-size: .65rem; letter-spacing: .16em; }
+.policyList b, .policyList small { display: block; }
+.policyList b { font-size: 1.35rem; }
+.policyList small { margin-top: 9px; color: var(--color-muted); font-size: .72rem; font-weight: 500; letter-spacing: .04em; }
+.policyArrow { color: var(--color-spark-soft); }
 .faqList { border-top: 1px solid var(--color-border); }
 .faqItem { padding: 34px 0; border-bottom: 1px solid var(--color-border); }
 .faqQuestion, .faqAnswer { display: grid; grid-template-columns: 34px 1fr; gap: 10px; line-height: 1.9; }
@@ -77,6 +86,7 @@
   .legalLinks { grid-template-columns: 1fr; }
   .legalLinks a { min-height: 90px; border-left: 1px solid var(--color-border); }
   .proseGrid { grid-template-columns: 1fr; gap: 34px; }
+  .screenshotGallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 520px) {
   .hirameHero { min-height: 820px; }
@@ -88,7 +98,9 @@
   .hirameScreen { width: 62%; top: 30px; left: 9%; }
   .featureItem { grid-template-columns: 48px 1fr; gap: 12px; }
   .featureItem:nth-child(even) > div { margin-left: 0; }
-  .screenshotExhibit { min-height: 520px; }
-  .screenshotExhibit img { width: 68%; }
+  .screenshotGallery { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 84%; overflow-x: auto; overscroll-behavior-inline: contain; scroll-snap-type: inline mandatory; }
+  .screenshotExhibit { min-height: 540px; scroll-snap-align: start; }
+  .screenshotExhibit img { width: 78%; }
   .pageHeroSide { padding-left: 18px; }
+  .policyList a { min-height: 112px; padding: 20px 16px; grid-template-columns: 38px 1fr auto; gap: 12px; }
 }

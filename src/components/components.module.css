@@ -15,11 +15,16 @@
 .mobileMenu { display: none; position: relative; }
 .mobileMenu summary { list-style: none; cursor: pointer; }
 .mobileMenu summary::-webkit-details-marker { display: none; }
+.menuIcon { width: 40px; height: 40px; padding: 10px 8px; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid var(--color-border); }
+.menuIcon i { width: 100%; height: 1px; display: block; background: var(--color-text); transition: transform 160ms ease, opacity 160ms ease; }
+.mobileMenu[open] .menuIcon i:first-child { transform: translateY(9px) rotate(45deg); }
+.mobileMenu[open] .menuIcon i:nth-child(2) { opacity: 0; }
+.mobileMenu[open] .menuIcon i:last-child { transform: translateY(-9px) rotate(-45deg); }
 .section { padding: var(--space-xl) 0; }
 .sectionMuted { border-block: 1px solid var(--line-soft); background: var(--color-bg-elevated); }
 .sectionHeader { max-width: 760px; margin-bottom: 54px; display: grid; }
 .sectionEyebrow { display: flex; align-items: center; gap: 11px; }
-.sectionEyebrow img { filter: saturate(.85); }
+.sectionEyebrow img { width: 28px; height: 28px; padding: 2px; filter: saturate(.85); }
 .sectionHeader h2 { margin-top: 20px; }
 .sectionHeader > p:last-child:not(:first-child) { margin-top: 20px; max-width: 650px; color: var(--color-muted); font-size: 1rem; line-height: 1.9; }
 .button { min-height: 46px; padding: 0 10px 0 18px; border: 1px solid var(--color-border-active); display: inline-flex; align-items: center; justify-content: center; gap: 18px; color: var(--color-text); background: var(--color-bg); font-size: .78rem; font-weight: 760; letter-spacing: .04em; text-decoration: none; transition: color 160ms ease, border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease; }

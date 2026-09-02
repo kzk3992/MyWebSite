@@ -5,8 +5,8 @@ import { Container } from "./Container";
 import styles from "./components.module.css";
 
 const footerLinks = [
-  { label: "Privacy", href: "/apps/hirame/privacy/" },
-  { label: "Terms", href: "/apps/hirame/terms/" },
+  { label: "Privacy", href: "/privacy/" },
+  { label: "Terms", href: "/terms/" },
   { label: "Support", href: "/support/" },
   { label: "About", href: "/about/" },
 ];

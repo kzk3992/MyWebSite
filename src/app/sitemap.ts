@@ -9,6 +9,8 @@ const routes = [
   "/apps/hirame/privacy/",
   "/apps/hirame/terms/",
   "/apps/hirame/support/",
+  "/privacy/",
+  "/terms/",
   "/about/",
   "/support/",
 ];
@@ -16,7 +18,7 @@ const routes = [
 export default function sitemap(): MetadataRoute.Sitemap {
   return routes.map((route) => ({
     url: new URL(route || "/", siteConfig.baseUrl).toString(),
-    lastModified: new Date("2026-09-01"),
+    lastModified: new Date("2026-09-02"),
     changeFrequency: route === "" ? "monthly" : "yearly",
     priority: route === "" ? 1 : route === "/apps/hirame/" ? 0.9 : 0.6,
   }));

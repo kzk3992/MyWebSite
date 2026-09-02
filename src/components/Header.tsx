@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { siteConfig } from "@/config/site";
 import { Container } from "./Container";
-import { BrandIcon } from "./BrandIcon";
 import styles from "./components.module.css";
 
 const navigation = [
@@ -27,7 +26,7 @@ export function Header() {
         </nav>
         <details className={styles.mobileMenu}>
           <summary aria-label="メニューを開く">
-            <BrandIcon name="spark" size={38} />
+            <span className={styles.menuIcon} aria-hidden="true"><i /><i /><i /></span>
           </summary>
           <nav aria-label="モバイルナビゲーション">
             {navigation.map((item, index) => (

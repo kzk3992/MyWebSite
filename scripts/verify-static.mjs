@@ -9,6 +9,8 @@ const routes = [
   "/apps/hirame/privacy/",
   "/apps/hirame/terms/",
   "/apps/hirame/support/",
+  "/privacy/",
+  "/terms/",
   "/about/",
   "/support/",
 ];
@@ -41,6 +43,7 @@ for (const requiredFile of ["404.html", "robots.txt", "sitemap.xml"]) {
 
 const brandFiles = [
   "brand/header.jpg",
+  "brand/hero-wolf.jpg",
   "brand/logo.png",
   "brand/logo-white.png",
   "brand/icons/wolf.png",
@@ -50,7 +53,14 @@ const brandFiles = [
   "brand/icons/arrow-left.png",
   "brand/icons/arrow-right.png",
   "brand/hirame/app-icon.jpg",
-  "brand/hirame/home.jpg",
+  "brand/hirame/screens/home.jpg",
+  "brand/hirame/screens/association.jpg",
+  "brand/hirame/screens/association-clear.jpg",
+  "brand/hirame/screens/association-game.jpg",
+  "brand/hirame/screens/methods.jpg",
+  "brand/hirame/screens/random.jpg",
+  "brand/hirame/screens/random-note.jpg",
+  "brand/hirame/screens/note.jpg",
   "brand/hirame/mascot.png",
 ];
 
@@ -90,11 +100,15 @@ for (const file of htmlFiles) {
 const rootHtml = readFileSync(routeFile("/"), "utf8");
 if (!rootHtml.includes("<details")) failures.push("Header: モバイルメニューがありません");
 if (!rootHtml.includes('href="/#works"')) failures.push("Header: Worksリンクがありません");
+if (!rootHtml.includes('href="/privacy/"')) failures.push("Footer: Privacy一覧リンクがありません");
+if (!rootHtml.includes('href="/terms/"')) failures.push("Footer: Terms一覧リンクがありません");
 
 const hirameHtml = readFileSync(routeFile("/apps/hirame/"), "utf8");
 for (const href of ["/apps/hirame/privacy/", "/apps/hirame/terms/", "/apps/hirame/support/"]) {
   if (!hirameHtml.includes(`href="${href}"`)) failures.push(`Hirame: ${href} へのリンクがありません`);
 }
+if (hirameHtml.includes("BRIDGE")) failures.push("Hirame: 旧BRIDGE表記が残っています");
+if (!hirameHtml.includes("連想ゲーム")) failures.push("Hirame: 連想ゲームの表記がありません");
 
 const configSource = readFileSync(join(process.cwd(), "src", "config", "site.ts"), "utf8");
 const supportMatch = configSource.match(/supportEmail:\s*"([^"]+)"/);

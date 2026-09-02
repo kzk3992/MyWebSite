@@ -34,7 +34,7 @@ let outputURL = root.appendingPathComponent("public/brand/icons", isDirectory: t
 try FileManager.default.createDirectory(at: outputURL, withIntermediateDirectories: true)
 
 let sheet = try loadImage(sourceURL)
-let iconSize = 126
+let iconSize = 140
 let crops = [
     IconCrop(name: "wolf", centerX: 119, centerY: 104),
     IconCrop(name: "spark", centerX: 1_068, centerY: 104),

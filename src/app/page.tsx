@@ -39,7 +39,7 @@ export default function Home() {
             </div>
           </div>
           <div className={styles.heroArtwork} aria-hidden="true">
-            <Image src="/brand/header.jpg" width={1983} height={793} alt="" priority sizes="(max-width: 760px) 100vw, 62vw" />
+            <Image src="/brand/hero-wolf.jpg" width={943} height={793} alt="" priority sizes="(max-width: 900px) 100vw, 55vw" />
           </div>
           <a className={styles.heroAside} href="#works"><BrandIcon name="paw" size={30} />Explore works</a>
         </Container>
