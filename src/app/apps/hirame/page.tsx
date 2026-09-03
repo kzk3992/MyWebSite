@@ -68,7 +68,7 @@ export default function HiramePage() {
             </div>
           </div>
           <div className={styles.hiramePreview}>
-            <Image className={styles.hirameScreen} src="/brand/hirame/screens/home.jpg" width={738} height={1600} alt="Hirameのホーム画面。連想ゲーム、発想法、アイデアノートへ移動できます。" priority />
+            <Image className={styles.hirameScreen} src="/brand/hirame/screens/home.jpg" width={1179} height={2425} alt="Hirameのホーム画面。連想ゲーム、発想法、アイデアノートへ移動できます。" priority />
             <Image className={styles.hirameMascot} src="/brand/hirame/mascot.png" width={210} height={210} alt="" aria-hidden="true" />
           </div>
         </Container>
@@ -98,7 +98,7 @@ export default function HiramePage() {
         <div className={styles.screenshotGallery} aria-label="Hirame アプリ画面">
           {screenshots.map((screenshot, index) => (
             <figure className={styles.screenshotExhibit} key={screenshot.src}>
-              <Image src={screenshot.src} width={738} height={1600} alt={screenshot.alt} />
+              <Image src={screenshot.src} width={1179} height={2425} alt={screenshot.alt} />
               <figcaption><span>{String(index + 1).padStart(2, "0")}</span>{screenshot.label}</figcaption>
             </figure>
           ))}

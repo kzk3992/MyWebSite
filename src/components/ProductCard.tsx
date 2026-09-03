@@ -23,7 +23,7 @@ export function ProductCard({ product, index = 1 }: ProductCardProps) {
         <Button href={product.href}>詳しく見る</Button>
       </div>
       <div className={styles.productVisual}>
-        <Image className={styles.productScreenshot} src="/brand/hirame/screens/home.jpg" width={738} height={1600} alt="Hirame ホーム画面" />
+        <Image className={styles.productScreenshot} src="/brand/hirame/screens/home.jpg" width={1179} height={2425} alt="Hirame ホーム画面" />
         <Image className={styles.productMascot} src="/brand/hirame/mascot.png" width={170} height={170} alt="" aria-hidden="true" />
       </div>
     </article>
