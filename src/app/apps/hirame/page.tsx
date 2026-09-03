@@ -37,6 +37,7 @@ const features = [
 ];
 
 const screenshots = [
+  { src: "/brand/hirame/screens/home.jpg", label: "HOME", alt: "Hirameのホーム画面" },
   { src: "/brand/hirame/screens/note.jpg", label: "IDEA NOTE", alt: "手書き添付を含むアイデアノート画面" },
   { src: "/brand/hirame/screens/random-note.jpg", label: "PROMPT NOTE", alt: "発想ワードから作るアイデアノート画面" },
   { src: "/brand/hirame/screens/methods.jpg", label: "METHODS", alt: "発想法の選択画面" },
@@ -44,7 +45,6 @@ const screenshots = [
   { src: "/brand/hirame/screens/association.jpg", label: "ASSOCIATION", alt: "連想ゲームの難易度選択画面" },
   { src: "/brand/hirame/screens/association-game.jpg", label: "PLAY", alt: "連想ゲームのプレイ画面" },
   { src: "/brand/hirame/screens/association-clear.jpg", label: "CLEAR", alt: "連想ゲームのクリア画面" },
-  { src: "/brand/hirame/screens/home.jpg", label: "HOME", alt: "Hirameのホーム画面" },
 ] as const;
 
 export default function HiramePage() {
@@ -93,7 +93,7 @@ export default function HiramePage() {
         tone="muted"
         eyebrow="Preview"
         title="Screenshots"
-        intro="開発中の実際の画面です。中心となるアイデアノートから、強制発想法、連想ゲームの順にご覧いただけます。"
+        intro="開発中の実際の画面です。ホーム、アイデアノート、強制発想法、連想ゲームの順にご覧いただけます。"
       >
         <div className={styles.screenshotGallery} aria-label="Hirame アプリ画面">
           {screenshots.map((screenshot, index) => (
