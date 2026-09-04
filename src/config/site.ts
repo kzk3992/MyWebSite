@@ -27,9 +27,9 @@ export const siteConfig = {
       name: "Hirame",
       category: "App",
       platform: "iOS",
-      tagline: "ひらめきを、習慣に。",
+      tagline: "制約が、ひらめきを生む。",
       description:
-        "アイデアを記録し、強制発想法や連想ゲームで発想を広げるトレーニングアプリ。",
+        "制約下で考えることで、発想力を鍛えるアイデアトレーニングアプリ。",
       href: "/apps/hirame/",
       appStoreUrl: null,
       screenshots: [],

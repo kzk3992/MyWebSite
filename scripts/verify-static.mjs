@@ -109,6 +109,11 @@ for (const href of ["/apps/hirame/privacy/", "/apps/hirame/terms/", "/apps/hiram
 }
 if (hirameHtml.includes("BRIDGE")) failures.push("Hirame: 旧BRIDGE表記が残っています");
 if (!hirameHtml.includes("連想ゲーム")) failures.push("Hirame: 連想ゲームの表記がありません");
+if (!hirameHtml.includes("制約が、ひらめきを生む。")) failures.push("Hirame: 新しいメインコピーがありません");
+if (!hirameHtml.includes("発想力を鍛えるアイデアトレーニングアプリ")) failures.push("Hirame: 発想トレーニングの説明がありません");
+if (!hirameHtml.includes("AIに答えを考えてもらうのではなく、自分で考える。")) failures.push("Hirame: 自分で考えるという説明がありません");
+if (!hirameHtml.includes("ひらめきを起こすために、考えるアプリです。")) failures.push("Hirame: 新しい中核説明がありません");
+if (hirameHtml.includes("ひらめきを、習慣に。")) failures.push("Hirame: 旧メインコピーが残っています");
 
 const configSource = readFileSync(join(process.cwd(), "src", "config", "site.ts"), "utf8");
 const supportMatch = configSource.match(/supportEmail:\s*"([^"]+)"/);

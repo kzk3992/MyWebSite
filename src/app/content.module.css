@@ -14,7 +14,7 @@
 .hirameTitleRow { margin-top: 26px; display: flex; align-items: center; gap: 20px; }
 .hirameTitleRow > img { width: 72px; border-radius: 14px; }
 .hirameHero h1 { font-size: clamp(5rem, 10vw, 9rem); line-height: .8; }
-.hirameTagline { margin-top: 34px; color: var(--color-text); font-size: clamp(1.45rem, 3.3vw, 2.15rem); font-weight: 650; letter-spacing: -.04em; }
+.hirameTagline { max-width: 12em; margin-top: 34px; color: var(--color-text); font-size: clamp(1.45rem, 3.3vw, 2.15rem); font-weight: 650; letter-spacing: -.04em; text-wrap: balance; }
 .hirameDescription { max-width: 570px; margin-top: 18px; color: var(--color-muted); font-size: 1rem; line-height: 1.9; }
 .heroActions { margin-top: 38px; display: flex; align-items: center; flex-wrap: wrap; gap: 14px; }
 .platformNote { color: var(--color-dim); font-size: .72rem; }

@@ -8,11 +8,11 @@ import styles from "../../content.module.css";
 
 export const metadata: Metadata = {
   title: "Hirame",
-  description: "ひらめきを習慣に。アイデアノートを中心に、強制発想法や連想ゲームで発想を広げるiOSアプリ。",
+  description: "制約下で考えることを繰り返し、発想力そのものを鍛えるiOS向けアイデアトレーニングアプリ。",
   alternates: { canonical: "/apps/hirame/" },
   openGraph: {
     title: "Hirame | Mika Spark Studio",
-    description: "アイデアノートを中心に、強制発想法や連想ゲームで発想を広げるiOSアプリ。",
+    description: "制約が、ひらめきを生む。自分で考えることを通じて発想力を鍛えるiOSアプリ。",
     url: "/apps/hirame/",
   },
 };
@@ -20,11 +20,11 @@ export const metadata: Metadata = {
 const features = [
   {
     title: "Idea Note",
-    description: "思いついたアイデアを、その場で文章・画像・手書きと一緒に記録。",
+    description: "制約の中で考えたアイデアを、文章・画像・手書きと一緒に記録。",
   },
   {
     title: "強制発想法",
-    description: "ランダムな言葉やテーマを組み合わせ、新しい視点を引き出すトレーニング。",
+    description: "ランダムな言葉やテーマという条件を使い、普段とは異なる視点を引き出すトレーニング。",
   },
   {
     title: "連想ゲーム",
@@ -32,7 +32,7 @@ const features = [
   },
   {
     title: "継続記録",
-    description: "日々のトレーニング履歴を確認。",
+    description: "日々のトレーニング履歴を振り返り、考える反復を積み重ねる。",
   },
 ];
 
@@ -76,8 +76,8 @@ export default function HiramePage() {
 
       <Section
         eyebrow="Core features / 04"
-        title="ひらめくための、小さな習慣。"
-        intro="まず残す。次に広げ、つなぎ、振り返る。Hirameはアイデアノートを中心に発想の反復を支えます。"
+        title="制約を、思考のきっかけに。"
+        intro="Hirameは、ランダムな組み合わせ、離れた概念の接続、限られた条件や時間をあえて設け、自分で考えることを繰り返す発想トレーニングアプリです。AIに答えを考えてもらうのではなく、自分で考える。ひらめきを待つのではなく、ひらめきを起こすために、考えるアプリです。"
       >
         <div className={styles.featureTimeline}>
           {features.map((feature, index) => (
