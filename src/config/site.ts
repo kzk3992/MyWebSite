@@ -26,10 +26,10 @@ export const siteConfig = {
       slug: "hirame",
       name: "Hirame",
       category: "App",
-      platform: "iOS",
+      platform: "iPhone / iPad",
       tagline: "制約が、ひらめきを生む。",
       description:
-        "制約下で考えることで、発想力を鍛えるアイデアトレーニングアプリ。",
+        "言葉の組み合わせや連想などの制約から、発想する力を日常的に鍛えるアイデアトレーニングアプリ。",
       href: "/apps/hirame/",
       appStoreUrl: null,
       screenshots: [
@@ -54,5 +54,5 @@ export const legalOperator = {
 
 export const legalDates = {
   established: "2026年9月1日",
-  updated: "2026年9月2日",
+  updated: "2026年9月8日",
 } as const;

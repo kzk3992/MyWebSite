@@ -107,13 +107,29 @@ const hirameHtml = readFileSync(routeFile("/apps/hirame/"), "utf8");
 for (const href of ["/apps/hirame/privacy/", "/apps/hirame/terms/", "/apps/hirame/support/"]) {
   if (!hirameHtml.includes(`href="${href}"`)) failures.push(`Hirame: ${href} へのリンクがありません`);
 }
-if (hirameHtml.includes("BRIDGE")) failures.push("Hirame: 旧BRIDGE表記が残っています");
-if (!hirameHtml.includes("連想ゲーム")) failures.push("Hirame: 連想ゲームの表記がありません");
+if (!hirameHtml.includes("BRIDGE")) failures.push("Hirame: BRIDGEの表記がありません");
+if (!hirameHtml.includes("Random Fusion")) failures.push("Hirame: Random Fusionの表記がありません");
+if (!hirameHtml.includes("AI Assist")) failures.push("Hirame: AI Assistの表記がありません");
 if (!hirameHtml.includes("制約が、ひらめきを生む。")) failures.push("Hirame: 新しいメインコピーがありません");
-if (!hirameHtml.includes("発想力を鍛えるアイデアトレーニングアプリ")) failures.push("Hirame: 発想トレーニングの説明がありません");
-if (!hirameHtml.includes("AIに答えを考えてもらうのではなく、自分で考える。")) failures.push("Hirame: 自分で考えるという説明がありません");
-if (!hirameHtml.includes("ひらめきを起こすために、考えるアプリです。")) failures.push("Hirame: 新しい中核説明がありません");
+if (!hirameHtml.includes("発想する力を日常的に鍛える")) failures.push("Hirame: 発想トレーニングの説明がありません");
+if (!hirameHtml.includes("アイデアを自分で生み出す体験を中心に")) failures.push("Hirame: 自分で考えるという説明がありません");
+if (!hirameHtml.includes("Apple Intelligence")) failures.push("Hirame: AI支援の説明がありません");
 if (hirameHtml.includes("ひらめきを、習慣に。")) failures.push("Hirame: 旧メインコピーが残っています");
+
+const privacyHtml = readFileSync(routeFile("/apps/hirame/privacy/"), "utf8");
+for (const text of ["CloudKitプライベートデータベース", "Foundation Models", "Firebase Analytics", "Google Mobile Ads SDK", "買い切り型の「Ad-Free」"]) {
+  if (!privacyHtml.includes(text)) failures.push(`Hirame Privacy: ${text} の説明がありません`);
+}
+
+const termsHtml = readFileSync(routeFile("/apps/hirame/terms/"), "utf8");
+for (const text of ["AI支援機能", "買い切り型の「Ad-Free」", "Google AdMob"] ) {
+  if (!termsHtml.includes(text)) failures.push(`Hirame Terms: ${text} の説明がありません`);
+}
+
+const hirameSupportHtml = readFileSync(routeFile("/apps/hirame/support/"), "utf8");
+for (const text of ["iCloud同期を使わずに利用できますか？", "AI機能はどのように動作しますか？", "購入状態はどのように管理されますか？"]) {
+  if (!hirameSupportHtml.includes(text)) failures.push(`Hirame Support: ${text} がありません`);
+}
 
 const hirameScreenshots = [
   "/brand/hirame/screens/01-concept.png",

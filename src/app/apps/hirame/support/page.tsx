@@ -7,11 +7,11 @@ import styles from "../../../content.module.css";
 
 export const metadata: Metadata = {
   title: "Hirame Support",
-  description: "iOSアプリHirameのよくある質問、不具合、データ、プライバシー、お問い合わせについてご案内します。",
+  description: "iPhone・iPadアプリHirameのよくある質問、不具合、データ、プライバシー、お問い合わせについてご案内します。",
   alternates: { canonical: "/apps/hirame/support/" },
   openGraph: {
     title: "Hirame Support | Mika Spark Studio",
-    description: "iOSアプリHirameのサポート情報です。",
+    description: "iPhone・iPadアプリHirameのサポート情報です。",
     url: "/apps/hirame/support/",
   },
 };
@@ -23,15 +23,31 @@ const faqs = [
   },
   {
     question: "データはどこに保存されますか？",
-    answer: "アイデアノートやトレーニング履歴等は端末内に保存されます。iCloudが有効な環境では、同じApple Accountの端末間で同期される場合があります。運営者独自のサーバーへは送信されません。",
+    answer: "アイデアノート、画像・手書き、発想トレーニングの履歴等は端末内に保存されます。iCloudが利用できる環境では、CloudKitのプライベートデータベースを通じて同じApple Accountの端末間で同期されます。運営者独自のサーバーへノート内容を送信する機能はありません。",
+  },
+  {
+    question: "iCloud同期を使わずに利用できますか？",
+    answer: "iCloudにサインインしていない場合やCloudKitを利用できない場合も、端末内保存に切り替えて利用できます。Hirame内に同期専用のオン／オフ設定はありません。iCloudの利用設定は端末の「設定」で管理してください。",
   },
   {
     question: "アプリを削除するとデータはどうなりますか？",
-    answer: "アプリを端末から削除すると、通常、端末内に保存されたHirameのデータも削除されます。OSのバックアップに残る場合は、Appleまたは端末の設定に従います。大切な内容は削除前に必要に応じて控えてください。",
+    answer: "アプリを端末から削除すると、端末内のデータは通常削除されます。iCloudへ同期済みのデータはiCloud側に残り、再インストール後に同じApple Accountで同期される場合があります。アプリ内のデータ削除機能を使うと、同期中は削除もiCloudへ反映されます。",
   },
   {
     question: "機種変更時にデータを移行できますか？",
     answer: "同じApple AccountでiCloudを有効にしている場合、データが同期されることがあります。端末全体の移行やバックアップによる復元可否は、iOSおよびiCloudの状態により異なります。",
+  },
+  {
+    question: "AI機能はどのように動作しますか？",
+    answer: "対応端末では、AppleのFoundation Models frameworkと端末上のApple Intelligenceモデルを使い、発想の展開、レビュー、問い、次の一歩、BRIDGEのヒントや振り返りを生成します。処理対象は入力したノートの文章、選択範囲、画像・手書きから抽出した文字、ゲームの進行情報等です。画像・手書きのバイナリデータ自体は言語モデルへ渡しません。運営者独自のAIサーバーや外部LLM APIは使用していません。",
+  },
+  {
+    question: "購入状態はどのように管理されますか？",
+    answer: "Ad-Freeは買い切り型のアプリ内課金です。購入と復元はAppleのStoreKitで処理され、アプリはAppleが確認した購入権利を参照します。確認済みの状態は端末内にも一時保存されます。価格は購入画面でご確認ください。",
+  },
+  {
+    question: "広告は表示されますか？",
+    answer: "無料版では、文章量の上限拡張や画像・手書きの追加を一時的に解放するとき、選択に応じてリワード広告が表示されます。Ad-Freeを購入すると広告は表示されません。",
   },
 ];
 
@@ -51,7 +67,7 @@ export default function HirameSupportPage() {
           </div>
           <aside className={styles.pageHeroSide} aria-label="関連情報">
             <dl>
-              <div><dt>Platform</dt><dd>iOS</dd></div>
+              <div><dt>Platform</dt><dd>iPhone / iPad</dd></div>
               <div><dt>Account</dt><dd>不要</dd></div>
               <div><dt>Storage</dt><dd>端末内 / iCloud</dd></div>
             </dl>

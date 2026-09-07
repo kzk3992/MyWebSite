@@ -8,11 +8,11 @@ import styles from "../../content.module.css";
 
 export const metadata: Metadata = {
   title: "Hirame",
-  description: "制約下で考えることを繰り返し、発想力そのものを鍛えるiOS向けアイデアトレーニングアプリ。",
+  description: "言葉の組み合わせや連想などの制約から、発想する力を鍛えるiPhone・iPad向けアイデアトレーニングアプリ。",
   alternates: { canonical: "/apps/hirame/" },
   openGraph: {
     title: "Hirame | Mika Spark Studio",
-    description: "制約が、ひらめきを生む。自分で考えることを通じて発想力を鍛えるiOSアプリ。",
+    description: "制約が、ひらめきを生む。自分で考えることを通じて発想力を鍛えるiPhone・iPadアプリ。",
     url: "/apps/hirame/",
   },
 };
@@ -20,19 +20,19 @@ export const metadata: Metadata = {
 const features = [
   {
     title: "Idea Note",
-    description: "制約の中で考えたアイデアを、文章・画像・手書きと一緒に記録。",
+    description: "思いつきを文章で整理し、画像や手書きも添えて記録。ライブラリ検索やお気に入り、カレンダーから振り返れます。",
   },
   {
-    title: "強制発想法",
-    description: "ランダムな言葉やテーマという条件を使い、普段とは異なる視点を引き出すトレーニング。",
+    title: "Random Fusion",
+    description: "Random Fusion、SCAMPER、逆転発想、制約発想、類推発想。5つの発想法で普段とは異なる視点を引き出します。",
   },
   {
-    title: "連想ゲーム",
-    description: "離れた概念同士を連想でつなぎ、ゴールまでの経路を考えるゲーム。",
+    title: "BRIDGE",
+    description: "離れた概念を言葉の連想でつなぎ、ゴールまでの思考経路を組み立てる。",
   },
   {
-    title: "継続記録",
-    description: "日々のトレーニング履歴を振り返り、考える反復を積み重ねる。",
+    title: "AI Assist",
+    description: "対応端末のApple Intelligenceと一緒に、視点を広げ、レビューや問い、次の一歩を考える。",
   },
 ];
 
@@ -42,7 +42,7 @@ const screenshots = [
   { src: "/brand/hirame/screens/03-with-ai.png", label: "WITH AI", alt: "Apple Intelligenceを使った発想支援とレビュー画面" },
   { src: "/brand/hirame/screens/04-random-fusion.png", label: "RANDOM FUSION", alt: "組み合わせから発想する発想法の選択画面" },
   { src: "/brand/hirame/screens/05-library.png", label: "LIBRARY", alt: "蓄積したアイデアを検索できるライブラリ画面" },
-  { src: "/brand/hirame/screens/06-association.png", label: "ASSOCIATION", alt: "言葉をつないで考える連想ゲーム画面" },
+  { src: "/brand/hirame/screens/06-association.png", label: "BRIDGE", alt: "言葉をつないで考えるBRIDGE（連想ゲーム）画面" },
 ] as const;
 
 export default function HiramePage() {
@@ -51,7 +51,7 @@ export default function HiramePage() {
       <section className={styles.hirameHero} aria-labelledby="hirame-title">
         <Container className={styles.hirameHeroInner}>
           <div className={styles.hirameCopy}>
-            <p className="eyebrow">Idea training / iOS</p>
+            <p className="eyebrow">Idea training / iPhone + iPad</p>
             <div className={styles.hirameTitleRow}>
               <Image src="/brand/hirame/app-icon.jpg" width={72} height={72} alt="Hirame アプリアイコン" />
               <h1 id="hirame-title">{hirame.name}</h1>
@@ -62,7 +62,7 @@ export default function HiramePage() {
               <Button href={hirame.appStoreUrl ?? undefined} external={Boolean(hirame.appStoreUrl)} disabled={!hirame.appStoreUrl}>
                 {hirame.appStoreUrl ? "App Storeで見る" : "Coming Soon"}
               </Button>
-              <span className={styles.platformNote}>Designed for iPhone · 公開準備中</span>
+              <span className={styles.platformNote}>Designed for iPhone &amp; iPad · 公開準備中</span>
             </div>
           </div>
           <div className={styles.hiramePreview}>
@@ -75,7 +75,7 @@ export default function HiramePage() {
       <Section
         eyebrow="Core features / 04"
         title="制約を、思考のきっかけに。"
-        intro="Hirameは、ランダムな組み合わせ、離れた概念の接続、限られた条件や時間をあえて設け、自分で考えることを繰り返す発想トレーニングアプリです。AIに答えを考えてもらうのではなく、自分で考える。ひらめきを待つのではなく、ひらめきを起こすために、考えるアプリです。"
+        intro="Hirameは、言葉の組み合わせ、テーマ、連想といった適度な制約の中で考えることを繰り返し、発想する力を日常的に鍛えるアプリです。アイデアを自分で生み出す体験を中心に、必要なときはApple Intelligenceが視点、問い、レビュー、次の一歩を補助します。"
       >
         <div className={styles.featureTimeline}>
           {features.map((feature, index) => (

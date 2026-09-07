@@ -89,7 +89,7 @@
   .screenshotGallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 520px) {
-  .hirameHero { min-height: 820px; }
+  .hirameHero { min-height: 880px; }
   .hirameCopy { min-height: 480px; padding-top: 72px; }
   .hirameTitleRow { gap: 14px; }
   .hirameTitleRow > img { width: 54px; height: 54px; border-radius: 11px; }
