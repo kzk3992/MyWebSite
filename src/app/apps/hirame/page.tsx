@@ -37,14 +37,12 @@ const features = [
 ];
 
 const screenshots = [
-  { src: "/brand/hirame/screens/home.jpg", label: "HOME", alt: "Hirameのホーム画面" },
-  { src: "/brand/hirame/screens/note.jpg", label: "IDEA NOTE", alt: "手書き添付を含むアイデアノート画面" },
-  { src: "/brand/hirame/screens/random-note.jpg", label: "PROMPT NOTE", alt: "発想ワードから作るアイデアノート画面" },
-  { src: "/brand/hirame/screens/methods.jpg", label: "METHODS", alt: "発想法の選択画面" },
-  { src: "/brand/hirame/screens/random.jpg", label: "RANDOM FUSION", alt: "Random Fusionの生成画面" },
-  { src: "/brand/hirame/screens/association.jpg", label: "ASSOCIATION", alt: "連想ゲームの難易度選択画面" },
-  { src: "/brand/hirame/screens/association-game.jpg", label: "PLAY", alt: "連想ゲームのプレイ画面" },
-  { src: "/brand/hirame/screens/association-clear.jpg", label: "CLEAR", alt: "連想ゲームのクリア画面" },
+  { src: "/brand/hirame/screens/01-concept.png", label: "CONCEPT", alt: "制約がひらめきを生むというコンセプトとHirameのホーム画面" },
+  { src: "/brand/hirame/screens/02-note.png", label: "IDEA NOTE", alt: "ひらめきをそのまま残すアイデアノート画面" },
+  { src: "/brand/hirame/screens/03-with-ai.png", label: "WITH AI", alt: "Apple Intelligenceを使った発想支援とレビュー画面" },
+  { src: "/brand/hirame/screens/04-random-fusion.png", label: "RANDOM FUSION", alt: "組み合わせから発想する発想法の選択画面" },
+  { src: "/brand/hirame/screens/05-library.png", label: "LIBRARY", alt: "蓄積したアイデアを検索できるライブラリ画面" },
+  { src: "/brand/hirame/screens/06-association.png", label: "ASSOCIATION", alt: "言葉をつないで考える連想ゲーム画面" },
 ] as const;
 
 export default function HiramePage() {
@@ -68,7 +66,7 @@ export default function HiramePage() {
             </div>
           </div>
           <div className={styles.hiramePreview}>
-            <Image className={styles.hirameScreen} src="/brand/hirame/screens/home.jpg" width={1179} height={2425} alt="Hirameのホーム画面。連想ゲーム、発想法、アイデアノートへ移動できます。" priority />
+            <Image className={styles.hirameScreen} src="/brand/hirame/screens/01-concept.png" width={1284} height={2778} alt="制約がひらめきを生むというコンセプトとHirameのホーム画面" priority />
             <Image className={styles.hirameMascot} src="/brand/hirame/mascot.png" width={210} height={210} alt="" aria-hidden="true" />
           </div>
         </Container>
@@ -93,12 +91,12 @@ export default function HiramePage() {
         tone="muted"
         eyebrow="Preview"
         title="Screenshots"
-        intro="開発中の実際の画面です。ホーム、アイデアノート、強制発想法、連想ゲームの順にご覧いただけます。"
+        intro="Hirameのコンセプトと主な機能を、実際の画面とともにご覧いただけます。"
       >
         <div className={styles.screenshotGallery} aria-label="Hirame アプリ画面">
           {screenshots.map((screenshot, index) => (
             <figure className={styles.screenshotExhibit} key={screenshot.src}>
-              <Image src={screenshot.src} width={1179} height={2425} alt={screenshot.alt} />
+              <Image src={screenshot.src} width={1284} height={2778} alt={screenshot.alt} />
               <figcaption><span>{String(index + 1).padStart(2, "0")}</span>{screenshot.label}</figcaption>
             </figure>
           ))}

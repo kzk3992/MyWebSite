@@ -115,6 +115,25 @@ if (!hirameHtml.includes("AIに答えを考えてもらうのではなく、自�
 if (!hirameHtml.includes("ひらめきを起こすために、考えるアプリです。")) failures.push("Hirame: 新しい中核説明がありません");
 if (hirameHtml.includes("ひらめきを、習慣に。")) failures.push("Hirame: 旧メインコピーが残っています");
 
+const hirameScreenshots = [
+  "/brand/hirame/screens/01-concept.png",
+  "/brand/hirame/screens/02-note.png",
+  "/brand/hirame/screens/03-with-ai.png",
+  "/brand/hirame/screens/04-random-fusion.png",
+  "/brand/hirame/screens/05-library.png",
+  "/brand/hirame/screens/06-association.png",
+];
+let previousScreenshotIndex = hirameHtml.indexOf('aria-label="Hirame アプリ画面"');
+if (previousScreenshotIndex === -1) failures.push("Hirame: スクリーンショット一覧がありません");
+for (const screenshot of hirameScreenshots) {
+  const screenshotIndex = hirameHtml.indexOf(`src="${screenshot}"`, previousScreenshotIndex + 1);
+  if (screenshotIndex === -1) {
+    failures.push(`Hirame: スクリーンショット ${screenshot} が番号順に表示されていません`);
+    break;
+  }
+  previousScreenshotIndex = screenshotIndex;
+}
+
 const configSource = readFileSync(join(process.cwd(), "src", "config", "site.ts"), "utf8");
 const supportMatch = configSource.match(/supportEmail:\s*"([^"]+)"/);
 if (!supportMatch) {

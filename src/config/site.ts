@@ -32,7 +32,14 @@ export const siteConfig = {
         "制約下で考えることで、発想力を鍛えるアイデアトレーニングアプリ。",
       href: "/apps/hirame/",
       appStoreUrl: null,
-      screenshots: [],
+      screenshots: [
+        "/brand/hirame/screens/01-concept.png",
+        "/brand/hirame/screens/02-note.png",
+        "/brand/hirame/screens/03-with-ai.png",
+        "/brand/hirame/screens/04-random-fusion.png",
+        "/brand/hirame/screens/05-library.png",
+        "/brand/hirame/screens/06-association.png",
+      ],
     },
   ] satisfies readonly Product[],
 } as const;
