@@ -3,12 +3,13 @@ import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
 import { Section } from "@/components/Section";
 import { siteConfig } from "@/config/site";
-import styles from "../../../content.module.css";
+import { localizedAlternates } from "@/i18n/site";
+import styles from "../../../../content.module.css";
 
 export const metadata: Metadata = {
   title: "Hirame Support",
   description: "iPhone・iPadアプリHirameのよくある質問、不具合、データ、プライバシー、お問い合わせについてご案内します。",
-  alternates: { canonical: "/apps/hirame/support/" },
+  alternates: localizedAlternates("/apps/hirame/support/", "/en/apps/hirame/support/"),
   openGraph: {
     title: "Hirame Support | Mika Spark Studio",
     description: "iPhone・iPadアプリHirameのサポート情報です。",

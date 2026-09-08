@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { LegalLayout } from "@/components/LegalLayout";
 import { OperatorInformation } from "@/components/OperatorInformation";
+import { localizedAlternates } from "@/i18n/site";
 
 export const metadata: Metadata = {
   title: "Hirame Terms of Use",
   description: "iPhone・iPadアプリHirameの利用規約です。利用条件、データ、AI、広告、課金等について定めます。",
-  alternates: { canonical: "/apps/hirame/terms/" },
+  alternates: localizedAlternates("/apps/hirame/terms/", "/en/apps/hirame/terms/"),
   openGraph: {
     title: "Hirame Terms of Use | Mika Spark Studio",
     description: "iPhone・iPadアプリHirameの利用条件について定めます。",

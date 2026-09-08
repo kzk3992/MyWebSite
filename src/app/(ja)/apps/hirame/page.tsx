@@ -4,12 +4,13 @@ import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
 import { Section } from "@/components/Section";
 import { hirame } from "@/config/site";
-import styles from "../../content.module.css";
+import { localizedAlternates } from "@/i18n/site";
+import styles from "../../../content.module.css";
 
 export const metadata: Metadata = {
   title: "Hirame",
   description: "言葉の組み合わせや連想などの制約から、発想する力を鍛えるiPhone・iPad向けアイデアトレーニングアプリ。",
-  alternates: { canonical: "/apps/hirame/" },
+  alternates: localizedAlternates("/apps/hirame/", "/en/apps/hirame/"),
   openGraph: {
     title: "Hirame | Mika Spark Studio",
     description: "制約が、ひらめきを生む。自分で考えることを通じて発想力を鍛えるiPhone・iPadアプリ。",

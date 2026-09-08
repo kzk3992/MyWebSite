@@ -12,6 +12,10 @@
 .nav a::after { content: ""; position: absolute; inset: auto 0 -1px; height: 1px; background: var(--color-spark); transform: scaleX(0); transition: transform 180ms ease; }
 .nav a:hover { color: var(--color-text); background: var(--color-panel); }
 .nav a:hover::after { transform: scaleX(1); box-shadow: var(--glow-small); }
+.nav .languageSwitch { min-width: 112px; gap: 7px; color: var(--color-text); }
+.languageSwitch span { color: var(--color-dim); font-weight: 650; }
+.languageSwitch i { color: var(--color-border-active); font-style: normal; }
+.languageSwitch b { color: var(--color-spark-soft); font-weight: 780; }
 .mobileMenu { display: none; position: relative; }
 .mobileMenu summary { list-style: none; cursor: pointer; }
 .mobileMenu summary::-webkit-details-marker { display: none; }

@@ -2,7 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { siteConfig } from "@/config/site";
-import "./globals.css";
+import { localizedAlternates, shellText } from "@/i18n/site";
+import "../globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.baseUrl),
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   applicationName: siteConfig.brandName,
-  alternates: { canonical: "/" },
+  alternates: localizedAlternates("/", "/en/"),
   openGraph: {
     type: "website",
     locale: "ja_JP",
@@ -44,11 +45,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="ja">
       <body>
         <a className="skip-link" href="#main-content">
-          本文へ移動
+          {shellText.ja.skipToContent}
         </a>
-        <Header />
+        <Header locale="ja" />
         <main id="main-content">{children}</main>
-        <Footer />
+        <Footer locale="ja" />
       </body>
     </html>
   );

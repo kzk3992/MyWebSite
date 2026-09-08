@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { legalDates } from "@/config/site";
+import type { Locale } from "@/i18n/site";
 import { Container } from "./Container";
 import styles from "./components.module.css";
 
@@ -8,14 +9,16 @@ type LegalLayoutProps = {
   label: string;
   intro: string;
   children: ReactNode;
+  locale?: Locale;
 };
 
-export function LegalLayout({ title, label, intro, children }: LegalLayoutProps) {
+export function LegalLayout({ title, label, intro, children, locale = "ja" }: LegalLayoutProps) {
+  const isJapanese = locale === "ja";
   return (
     <Container narrow>
       <article className={styles.legal}>
         <header className={styles.legalHeader}>
-          <a className={styles.backLink} href="/apps/hirame/">
+          <a className={styles.backLink} href={isJapanese ? "/apps/hirame/" : "/en/apps/hirame/"}>
             ← Hirame
           </a>
           <p className="eyebrow">{label}</p>
@@ -23,12 +26,12 @@ export function LegalLayout({ title, label, intro, children }: LegalLayoutProps)
           <p className={styles.legalIntro}>{intro}</p>
           <dl className={styles.legalDates}>
             <div>
-              <dt>制定日</dt>
-              <dd>{legalDates.established}</dd>
+              <dt>{isJapanese ? "制定日" : "Effective date"}</dt>
+              <dd>{isJapanese ? legalDates.established : legalDates.establishedEnglish}</dd>
             </div>
             <div>
-              <dt>最終更新日</dt>
-              <dd>{legalDates.updated}</dd>
+              <dt>{isJapanese ? "最終更新日" : "Last updated"}</dt>
+              <dd>{isJapanese ? legalDates.updated : legalDates.updatedEnglish}</dd>
             </div>
           </dl>
         </header>

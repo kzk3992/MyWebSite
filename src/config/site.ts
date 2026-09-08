@@ -46,6 +46,14 @@ export const siteConfig = {
 
 export const hirame = siteConfig.products[0];
 
+export const hirameEnglish: Product = {
+  ...hirame,
+  href: "/en/apps/hirame/",
+  tagline: "Turn constraints into ideas.",
+  description:
+    "An idea-training app that uses word combinations, associations, and other constraints to help you practice creative thinking.",
+};
+
 export const legalOperator = {
   name: siteConfig.brandName,
   responsiblePerson: "Miyashita Kazuki",
@@ -55,4 +63,6 @@ export const legalOperator = {
 export const legalDates = {
   established: "2026年9月1日",
   updated: "2026年9月8日",
+  establishedEnglish: "September 1, 2026",
+  updatedEnglish: "September 8, 2026",
 } as const;

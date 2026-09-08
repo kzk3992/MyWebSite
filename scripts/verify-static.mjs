@@ -13,6 +13,23 @@ const routes = [
   "/terms/",
   "/about/",
   "/support/",
+  "/en/",
+  "/en/apps/hirame/",
+  "/en/apps/hirame/privacy/",
+  "/en/apps/hirame/terms/",
+  "/en/apps/hirame/support/",
+  "/en/about/",
+  "/en/support/",
+];
+
+const localizedRoutePairs = [
+  ["/", "/en/"],
+  ["/apps/hirame/", "/en/apps/hirame/"],
+  ["/apps/hirame/privacy/", "/en/apps/hirame/privacy/"],
+  ["/apps/hirame/terms/", "/en/apps/hirame/terms/"],
+  ["/apps/hirame/support/", "/en/apps/hirame/support/"],
+  ["/about/", "/en/about/"],
+  ["/support/", "/en/support/"],
 ];
 
 const routeFile = (route) =>
@@ -33,6 +50,27 @@ for (const route of routes) {
   if (!html.includes("<title>")) failures.push(`${route}: title metadataがありません`);
   if (!html.includes('name="description"')) failures.push(`${route}: description metadataがありません`);
   if (!html.includes('property="og:title"')) failures.push(`${route}: OGP metadataがありません`);
+}
+
+for (const [japaneseRoute, englishRoute] of localizedRoutePairs) {
+  const japaneseHtml = readFileSync(routeFile(japaneseRoute), "utf8");
+  const englishHtml = readFileSync(routeFile(englishRoute), "utf8");
+  const japaneseUrl = `https://mikaspark.com${japaneseRoute}`;
+  const englishUrl = `https://mikaspark.com${englishRoute}`;
+
+  if (!japaneseHtml.includes('<html lang="ja">')) failures.push(`${japaneseRoute}: html langがjaではありません`);
+  if (!englishHtml.includes('<html lang="en">')) failures.push(`${englishRoute}: html langがenではありません`);
+  if (!japaneseHtml.includes(`rel="canonical" href="${japaneseUrl}"`)) failures.push(`${japaneseRoute}: canonicalが正しくありません`);
+  if (!englishHtml.includes(`rel="canonical" href="${englishUrl}"`)) failures.push(`${englishRoute}: canonicalが正しくありません`);
+
+  for (const html of [japaneseHtml, englishHtml]) {
+    if (!html.includes(`hrefLang="ja" href="${japaneseUrl}"`)) failures.push(`${japaneseRoute} / ${englishRoute}: ja hreflangがありません`);
+    if (!html.includes(`hrefLang="en" href="${englishUrl}"`)) failures.push(`${japaneseRoute} / ${englishRoute}: en hreflangがありません`);
+    if (!html.includes(`hrefLang="x-default" href="${japaneseUrl}"`)) failures.push(`${japaneseRoute} / ${englishRoute}: x-defaultがありません`);
+  }
+
+  if (!japaneseHtml.includes(`href="${englishRoute}" hrefLang="en"`)) failures.push(`${japaneseRoute}: 対応英語ページへの切替がありません`);
+  if (!englishHtml.includes(`href="${japaneseRoute}" hrefLang="ja"`)) failures.push(`${englishRoute}: 対応日本語ページへの切替がありません`);
 }
 
 for (const requiredFile of ["404.html", "robots.txt", "sitemap.xml"]) {
@@ -103,6 +141,12 @@ if (!rootHtml.includes('href="/#works"')) failures.push("Header: Worksリンク�
 if (!rootHtml.includes('href="/privacy/"')) failures.push("Footer: Privacy一覧リンクがありません");
 if (!rootHtml.includes('href="/terms/"')) failures.push("Footer: Terms一覧リンクがありません");
 
+const englishRootHtml = readFileSync(routeFile("/en/"), "utf8");
+if (!englishRootHtml.includes("Small ideas, built into useful products.")) failures.push("English Home: ブランドコピーがありません");
+if (!englishRootHtml.includes('href="/en/#works"')) failures.push("English Header: Worksリンクがありません");
+if (!englishRootHtml.includes('href="/en/apps/hirame/privacy/"')) failures.push("English Footer: Privacyリンクがありません");
+if (!englishRootHtml.includes('href="/en/apps/hirame/terms/"')) failures.push("English Footer: Termsリンクがありません");
+
 const hirameHtml = readFileSync(routeFile("/apps/hirame/"), "utf8");
 for (const href of ["/apps/hirame/privacy/", "/apps/hirame/terms/", "/apps/hirame/support/"]) {
   if (!hirameHtml.includes(`href="${href}"`)) failures.push(`Hirame: ${href} へのリンクがありません`);
@@ -149,6 +193,35 @@ for (const screenshot of hirameScreenshots) {
   }
   previousScreenshotIndex = screenshotIndex;
 }
+
+const englishHirameHtml = readFileSync(routeFile("/en/apps/hirame/"), "utf8");
+for (const text of ["Turn constraints into ideas.", "Idea Note", "Random Fusion", "BRIDGE", "Think with AI", "Reverse Thinking", "Constraint Ideation", "Analogy Thinking"]) {
+  if (!englishHirameHtml.includes(text)) failures.push(`English Hirame: ${text} がありません`);
+}
+for (const href of ["/en/apps/hirame/privacy/", "/en/apps/hirame/terms/", "/en/apps/hirame/support/"]) {
+  if (!englishHirameHtml.includes(`href="${href}"`)) failures.push(`English Hirame: ${href} へのリンクがありません`);
+}
+
+const englishPrivacyHtml = readFileSync(routeFile("/en/apps/hirame/privacy/"), "utf8");
+for (const text of ["Information Not Collected", "Firebase Analytics", "Google Mobile Ads SDK", "CloudKit private database", "Foundation Models", "Data Retention", "Data Deletion", "Responsible Operator", "support@mikaspark.com"]) {
+  if (!englishPrivacyHtml.includes(text)) failures.push(`English Privacy: ${text} がありません`);
+}
+
+const englishTermsHtml = readFileSync(routeFile("/en/apps/hirame/terms/"), "utf8");
+for (const text of ["Prohibited Conduct", "User-Created Content", "AI Assistance", "In-App Purchases", "Advertising", "Governing Law and Jurisdiction", "Responsible Operator", "support@mikaspark.com"]) {
+  if (!englishTermsHtml.includes(text)) failures.push(`English Terms: ${text} がありません`);
+}
+
+const englishSupportHtml = readFileSync(routeFile("/en/apps/hirame/support/"), "utf8");
+for (const text of ["Frequently asked questions", "Do I need to create an account?", "How do the AI features work?", "Contact support", "support@mikaspark.com"]) {
+  if (!englishSupportHtml.includes(text)) failures.push(`English Hirame Support: ${text} がありません`);
+}
+
+const sitemapXml = readFileSync(join(outputDirectory, "sitemap.xml"), "utf8");
+for (const [, englishRoute] of localizedRoutePairs) {
+  if (!sitemapXml.includes(`<loc>https://mikaspark.com${englishRoute}</loc>`)) failures.push(`sitemap: ${englishRoute} がありません`);
+}
+if (!sitemapXml.includes('hreflang="en"')) failures.push("sitemap: en hreflangがありません");
 
 const configSource = readFileSync(join(process.cwd(), "src", "config", "site.ts"), "utf8");
 const supportMatch = configSource.match(/supportEmail:\s*"([^"]+)"/);

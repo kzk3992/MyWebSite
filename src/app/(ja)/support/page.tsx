@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import { Container } from "@/components/Container";
 import { Section } from "@/components/Section";
 import { siteConfig } from "@/config/site";
-import styles from "../content.module.css";
+import { localizedAlternates } from "@/i18n/site";
+import styles from "../../content.module.css";
 
 export const metadata: Metadata = {
   title: "Support",
   description: "Mika Spark Studioのアプリ・ゲームに関するサポート窓口です。",
-  alternates: { canonical: "/support/" },
+  alternates: localizedAlternates("/support/", "/en/support/"),
   openGraph: {
     title: "Support | Mika Spark Studio",
     description: "Mika Spark Studioの各プロダクトのサポート情報をご案内します。",

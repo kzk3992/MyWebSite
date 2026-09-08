@@ -5,12 +5,13 @@ import { Container } from "@/components/Container";
 import { ProductCard } from "@/components/ProductCard";
 import { Section } from "@/components/Section";
 import { siteConfig } from "@/config/site";
-import styles from "./page.module.css";
+import { localizedAlternates } from "@/i18n/site";
+import styles from "../page.module.css";
 
 export const metadata: Metadata = {
   title: { absolute: "Mika Spark Studio | Independent Apps & Games" },
   description: "小さなアイデアを、使えるプロダクトへ。Mika Spark Studioの公式サイトです。",
-  alternates: { canonical: "/" },
+  alternates: localizedAlternates("/", "/en/"),
   openGraph: {
     title: "Mika Spark Studio | Independent Apps & Games",
     description: "小さなアイデアを、使えるプロダクトへ。",

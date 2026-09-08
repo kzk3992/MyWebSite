@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { LegalLayout } from "@/components/LegalLayout";
 import { OperatorInformation } from "@/components/OperatorInformation";
+import { localizedAlternates } from "@/i18n/site";
 
 export const metadata: Metadata = {
   title: "Hirame Privacy Policy",
   description: "iPhone・iPadアプリHirameのプライバシーポリシーです。情報の取扱い、保存、AI、広告、課金、削除について説明します。",
-  alternates: { canonical: "/apps/hirame/privacy/" },
+  alternates: localizedAlternates("/apps/hirame/privacy/", "/en/apps/hirame/privacy/"),
   openGraph: {
     title: "Hirame Privacy Policy | Mika Spark Studio",
     description: "iPhone・iPadアプリHirameにおける情報の取扱いについて説明します。",

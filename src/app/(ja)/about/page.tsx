@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/Container";
 import { Section } from "@/components/Section";
-import styles from "../content.module.css";
+import { localizedAlternates } from "@/i18n/site";
+import styles from "../../content.module.css";
 
 export const metadata: Metadata = {
   title: "About",
   description: "個人開発ブランドMika Spark Studioについて。アプリ、ゲーム、ツール、実験的なプロダクトを制作しています。",
-  alternates: { canonical: "/about/" },
+  alternates: localizedAlternates("/about/", "/en/about/"),
   openGraph: {
     title: "About | Mika Spark Studio",
     description: "Mika Spark Studioは、個人でアプリ・ゲームを開発・公開するインディーデベロップメントスタジオです。",

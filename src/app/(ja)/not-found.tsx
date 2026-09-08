@@ -1,6 +1,6 @@
 import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
-import styles from "./content.module.css";
+import styles from "../content.module.css";
 
 export default function NotFound() {
   return (
