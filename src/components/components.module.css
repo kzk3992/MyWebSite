@@ -16,6 +16,8 @@
 .languageSwitch span { color: var(--color-dim); font-weight: 650; }
 .languageSwitch i { color: var(--color-border-active); font-style: normal; }
 .languageSwitch b { color: var(--color-spark-soft); font-weight: 780; }
+.mobileHeaderActions { display: none; align-items: center; gap: 12px; }
+.mobileLanguageSwitch { min-height: 40px; padding: 0 10px; align-items: center; gap: 6px; border: 1px solid var(--color-border); font-size: .68rem; font-weight: 720; letter-spacing: .06em; text-decoration: none; }
 .mobileMenu { display: none; position: relative; }
 .mobileMenu summary { list-style: none; cursor: pointer; }
 .mobileMenu summary::-webkit-details-marker { display: none; }
@@ -86,6 +88,7 @@
   .brand { font-size: .75rem; }
   .brand img { width: 32px; height: 32px; }
   .nav { display: none; }
+  .mobileHeaderActions { display: flex; }
   .mobileMenu { display: block; }
   .mobileMenu[open] nav { position: absolute; top: 48px; right: 0; width: min(82vw, 290px); padding: 8px; border: 1px solid var(--color-border); background: #080b09; box-shadow: 0 18px 50px rgb(0 0 0 / 45%); }
   .mobileMenu nav a { min-height: 52px; padding: 0 14px; display: flex; align-items: center; gap: 18px; border-bottom: 1px solid var(--line-soft); color: var(--color-text); font-size: .8rem; text-decoration: none; }

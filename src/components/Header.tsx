@@ -25,25 +25,27 @@ export function Header({ locale }: { locale: Locale }) {
               {item.label}
             </a>
           ))}
-          <a className={styles.languageSwitch} href={languageHref} hrefLang={locale === "ja" ? "en" : "ja"}>
+          <a className={styles.languageSwitch} href={languageHref} hrefLang={locale === "ja" ? "en" : "ja"} aria-label={text.switchLanguage}>
             <span aria-current="page">{locale.toUpperCase()}</span><i>/</i><b>{otherLocale}</b>
           </a>
         </nav>
-        <details className={styles.mobileMenu}>
-          <summary aria-label={text.openMenu}>
-            <span className={styles.menuIcon} aria-hidden="true"><i /><i /><i /></span>
-          </summary>
-          <nav aria-label={text.mobileNavigation}>
-            {navigation[locale].map((item, index) => (
-              <a key={item.href} href={item.href}>
-                <span>0{index + 1}</span>{item.label}
-              </a>
-            ))}
-            <a href={languageHref} hrefLang={locale === "ja" ? "en" : "ja"}>
-              <span>04</span>{locale.toUpperCase()} / {otherLocale}
-            </a>
-          </nav>
-        </details>
+        <div className={styles.mobileHeaderActions}>
+          <a className={`${styles.languageSwitch} ${styles.mobileLanguageSwitch}`} href={languageHref} hrefLang={locale === "ja" ? "en" : "ja"} aria-label={text.switchLanguage}>
+            <span aria-current="page">{locale.toUpperCase()}</span><i>/</i><b>{otherLocale}</b>
+          </a>
+          <details className={styles.mobileMenu}>
+            <summary aria-label={text.openMenu}>
+              <span className={styles.menuIcon} aria-hidden="true"><i /><i /><i /></span>
+            </summary>
+            <nav aria-label={text.mobileNavigation}>
+              {navigation[locale].map((item, index) => (
+                <a key={item.href} href={item.href}>
+                  <span>0{index + 1}</span>{item.label}
+                </a>
+              ))}
+            </nav>
+          </details>
+        </div>
       </Container>
     </header>
   );
