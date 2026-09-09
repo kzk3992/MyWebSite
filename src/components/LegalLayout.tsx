@@ -19,7 +19,7 @@ export function LegalLayout({ title, label, intro, children, locale = "ja" }: Le
       <article className={styles.legal}>
         <header className={styles.legalHeader}>
           <a className={styles.backLink} href={isJapanese ? "/apps/hirame/" : "/en/apps/hirame/"}>
-            ← Hirame
+            ← {isJapanese ? "Hirame" : "Hirame: Idea Trainer"}
           </a>
           <p className="eyebrow">{label}</p>
           <h1>{title}</h1>

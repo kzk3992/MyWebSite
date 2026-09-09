@@ -5,7 +5,7 @@ import { localizedAlternates } from "@/i18n/site";
 
 export const metadata: Metadata = {
   title: "Hirame Privacy Policy",
-  description: "iPhone・iPadアプリHirameのプライバシーポリシーです。情報の取扱い、保存、AI、広告、課金、削除について説明します。",
+  description: "iPhone・iPadアプリHirameのプライバシーポリシーです。保存、AI、分析、広告、同意管理、課金、削除について説明します。",
   alternates: localizedAlternates("/apps/hirame/privacy/", "/en/apps/hirame/privacy/"),
   openGraph: {
     title: "Hirame Privacy Policy | Mika Spark Studio",
@@ -53,6 +53,12 @@ export default function HiramePrivacyPage() {
         <p>
           無料版の広告表示にはGoogle Mobile Ads SDK（AdMob）を利用します。同SDKにより、IPアドレスから推定されるおおよその位置、端末識別子、広告データ、利用状況、診断情報等がGoogleにより収集される場合があります。
         </p>
+        <p>
+          現在の配布ビルドに含まれるSDKのPrivacy ManifestをXcodeで集約したPrivacy Reportでは、Google Mobile Ads SDKについて、概算位置情報、端末ID、製品操作、広告データ、クラッシュデータ、性能データおよびその他の診断データの取扱いが申告されています。端末IDは、利用者に関連付けられ、トラッキングに使用されると申告されています。概算位置情報、製品操作および広告データは、トラッキングには使用されないものの、利用者に関連付けられると申告されています。クラッシュデータ、性能データおよびその他の診断データは、利用者に関連付けられず、トラッキングにも使用されないと申告されています。
+        </p>
+        <p>
+          Google User Messaging Platform（UMP）は、広告に関する同意状況の確認、必要なプライバシーメッセージの表示およびプライバシー選択の管理のため、概算位置情報、製品操作および性能データをアプリ機能目的で取り扱う場合があります。Privacy Reportでは、これらは利用者に関連付けられず、トラッキングにも使用されないと申告されています。また、Firebase Installationsは、分析目的でその他の診断データを取り扱う場合がありますが、Privacy Reportでは利用者に関連付けられず、トラッキングにも使用されないと申告されています。
+        </p>
       </section>
 
       <section>
@@ -61,6 +67,7 @@ export default function HiramePrivacyPage() {
           <li>アイデアの記録、発想トレーニング、AI支援、同期等、本アプリの機能提供</li>
           <li>利用状況の把握、不具合の調査、品質および機能の改善</li>
           <li>広告の表示、広告視聴による機能の一時解放</li>
+          <li>広告に関する同意状況の確認およびプライバシー選択の提供</li>
           <li>アプリ内課金の処理、購入権利の確認および復元</li>
           <li>お問い合わせへの回答、重要な変更やサポート上必要な事項の案内</li>
         </ul>
@@ -98,6 +105,12 @@ export default function HiramePrivacyPage() {
         <p>
           無料版では、文章量の上限拡張や画像・手書きの追加を一時的に解放するとき、利用者が選択した場合にリワード広告を表示します。Ad-Freeを購入した利用者には広告を表示しません。広告の配信および広告に関する情報の取扱いには、Googleの規約およびプライバシーポリシーが適用されます。
         </p>
+        <p>
+          本アプリは起動時にGoogle UMPを通じて同意情報を更新し、法令や地域、Google側の設定等に応じて必要なプライバシーメッセージを表示します。広告は、UMPが広告リクエストを許可している場合に限り要求します。プライバシー選択の再表示が必要な場合は、本アプリの設定画面から「プライバシー設定」を開くことができます。
+        </p>
+        <p>
+          本アプリでは、Google Mobile Ads SDKのパブリッシャー・ファーストパーティIDを無効にし、広告パーソナライズ状態を無効に設定しています。ただし、Google Mobile Ads SDKのPrivacy Manifestでは、端末IDがトラッキング目的で取り扱われる可能性が申告されています。実際の取扱いは、利用者の同意、地域、端末設定、Googleの広告配信設定および適用法令等により異なる場合があります。
+        </p>
       </section>
 
       <section>
@@ -116,6 +129,7 @@ export default function HiramePrivacyPage() {
           <li>Apple StoreKit：アプリ内課金と購入権利の確認</li>
           <li>Google Firebase Analytics：利用状況の分析</li>
           <li>Google AdMob：広告の配信</li>
+          <li>Google User Messaging Platform：広告に関する同意およびプライバシー選択の管理</li>
         </ul>
         <p>Crashlytics、運営者独自のWeb API、外部LLM APIは現在の実装では利用していません。</p>
       </section>

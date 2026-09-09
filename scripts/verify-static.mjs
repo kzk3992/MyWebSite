@@ -99,6 +99,12 @@ const brandFiles = [
   "brand/hirame/screens/random.jpg",
   "brand/hirame/screens/random-note.jpg",
   "brand/hirame/screens/note.jpg",
+  "brand/hirame/screens/en/01-concept.png",
+  "brand/hirame/screens/en/02-note.png",
+  "brand/hirame/screens/en/03-with-ai.png",
+  "brand/hirame/screens/en/04-random-fusion.png",
+  "brand/hirame/screens/en/05-library.png",
+  "brand/hirame/screens/en/06-bridge.png",
   "brand/hirame/mascot.png",
 ];
 
@@ -161,7 +167,7 @@ if (!hirameHtml.includes("Apple Intelligence")) failures.push("Hirame: AI支援�
 if (hirameHtml.includes("ひらめきを、習慣に。")) failures.push("Hirame: 旧メインコピーが残っています");
 
 const privacyHtml = readFileSync(routeFile("/apps/hirame/privacy/"), "utf8");
-for (const text of ["CloudKitプライベートデータベース", "Foundation Models", "Firebase Analytics", "Google Mobile Ads SDK", "買い切り型の「Ad-Free」"]) {
+for (const text of ["CloudKitプライベートデータベース", "Foundation Models", "Firebase Analytics", "Google Mobile Ads SDK", "Google User Messaging Platform", "端末ID", "トラッキング", "プライバシー設定", "買い切り型の「Ad-Free」"]) {
   if (!privacyHtml.includes(text)) failures.push(`Hirame Privacy: ${text} の説明がありません`);
 }
 
@@ -195,6 +201,7 @@ for (const screenshot of hirameScreenshots) {
 }
 
 const englishHirameHtml = readFileSync(routeFile("/en/apps/hirame/"), "utf8");
+if (!englishHirameHtml.includes("Hirame: Idea Trainer")) failures.push("English Hirame: 新しい英語アプリ名がありません");
 for (const text of ["Turn constraints into ideas.", "Idea Note", "Random Fusion", "BRIDGE", "Think with AI", "Reverse Thinking", "Constraint Ideation", "Analogy Thinking"]) {
   if (!englishHirameHtml.includes(text)) failures.push(`English Hirame: ${text} がありません`);
 }
@@ -202,8 +209,27 @@ for (const href of ["/en/apps/hirame/privacy/", "/en/apps/hirame/terms/", "/en/a
   if (!englishHirameHtml.includes(`href="${href}"`)) failures.push(`English Hirame: ${href} へのリンクがありません`);
 }
 
+const englishHirameScreenshots = [
+  "/brand/hirame/screens/en/01-concept.png",
+  "/brand/hirame/screens/en/02-note.png",
+  "/brand/hirame/screens/en/03-with-ai.png",
+  "/brand/hirame/screens/en/04-random-fusion.png",
+  "/brand/hirame/screens/en/05-library.png",
+  "/brand/hirame/screens/en/06-bridge.png",
+];
+let previousEnglishScreenshotIndex = englishHirameHtml.indexOf('aria-label="Hirame app screens"');
+if (previousEnglishScreenshotIndex === -1) failures.push("English Hirame: スクリーンショット一覧がありません");
+for (const screenshot of englishHirameScreenshots) {
+  const screenshotIndex = englishHirameHtml.indexOf(`src="${screenshot}"`, previousEnglishScreenshotIndex + 1);
+  if (screenshotIndex === -1) {
+    failures.push(`English Hirame: スクリーンショット ${screenshot} が対応順に表示されていません`);
+    break;
+  }
+  previousEnglishScreenshotIndex = screenshotIndex;
+}
+
 const englishPrivacyHtml = readFileSync(routeFile("/en/apps/hirame/privacy/"), "utf8");
-for (const text of ["Information Not Collected", "Firebase Analytics", "Google Mobile Ads SDK", "CloudKit private database", "Foundation Models", "Data Retention", "Data Deletion", "Responsible Operator", "support@mikaspark.com"]) {
+for (const text of ["Information Not Collected", "Firebase Analytics", "Google Mobile Ads SDK", "Google User Messaging Platform", "device ID", "tracking", "Privacy Choices", "CloudKit private database", "Foundation Models", "Data Retention", "Data Deletion", "Responsible Operator", "support@mikaspark.com"]) {
   if (!englishPrivacyHtml.includes(text)) failures.push(`English Privacy: ${text} がありません`);
 }
 

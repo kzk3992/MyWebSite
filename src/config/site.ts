@@ -48,10 +48,19 @@ export const hirame = siteConfig.products[0];
 
 export const hirameEnglish: Product = {
   ...hirame,
+  name: "Hirame: Idea Trainer",
   href: "/en/apps/hirame/",
   tagline: "Turn constraints into ideas.",
   description:
     "An idea-training app that uses word combinations, associations, and other constraints to help you practice creative thinking.",
+  screenshots: [
+    "/brand/hirame/screens/en/01-concept.png",
+    "/brand/hirame/screens/en/02-note.png",
+    "/brand/hirame/screens/en/03-with-ai.png",
+    "/brand/hirame/screens/en/04-random-fusion.png",
+    "/brand/hirame/screens/en/05-library.png",
+    "/brand/hirame/screens/en/06-bridge.png",
+  ],
 };
 
 export const legalOperator = {
@@ -62,7 +71,7 @@ export const legalOperator = {
 
 export const legalDates = {
   established: "2026年9月1日",
-  updated: "2026年9月8日",
+  updated: "2026年9月10日",
   establishedEnglish: "September 1, 2026",
-  updatedEnglish: "September 8, 2026",
+  updatedEnglish: "September 10, 2026",
 } as const;

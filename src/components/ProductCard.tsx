@@ -25,7 +25,7 @@ export function ProductCard({ product, index = 1, locale = "ja" }: ProductCardPr
         <Button href={product.href}>{locale === "ja" ? "詳しく見る" : "View product"}</Button>
       </div>
       <div className={styles.productVisual}>
-        <Image className={styles.productScreenshot} src="/brand/hirame/screens/01-concept.png" width={1284} height={2778} alt={locale === "ja" ? "Hirameのコンセプトとホーム画面" : "Hirame's concept and Home screen"} />
+        <Image className={styles.productScreenshot} src={locale === "ja" ? "/brand/hirame/screens/01-concept.png" : "/brand/hirame/screens/en/01-concept.png"} width={1284} height={2778} alt={locale === "ja" ? "Hirameのコンセプトとホーム画面" : "Hirame's concept and Home screen"} />
         <Image className={styles.productMascot} src="/brand/hirame/mascot.png" width={170} height={170} alt="" aria-hidden="true" />
       </div>
     </article>

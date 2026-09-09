@@ -8,25 +8,25 @@ import { englishAlternates } from "@/i18n/site";
 import styles from "../../../../content.module.css";
 
 export const metadata: Metadata = {
-  title: "Hirame Support",
+  title: "Hirame: Idea Trainer Support",
   description: englishContent.hirameSupport.description,
   alternates: englishAlternates("/apps/hirame/support/", "/en/apps/hirame/support/"),
   openGraph: {
-    title: "Hirame Support | Mika Spark Studio",
+    title: "Hirame: Idea Trainer Support | Mika Spark Studio",
     description: englishContent.hirameSupport.lead,
     url: "/en/apps/hirame/support/",
   },
 };
 
 export default function EnglishHirameSupportPage() {
-  const subject = encodeURIComponent("Hirame support inquiry");
+  const subject = encodeURIComponent("Hirame: Idea Trainer support inquiry");
   return (
     <>
       <section className={styles.pageHero}>
         <Container className={styles.pageHeroInner}>
           <div>
-            <p className="eyebrow">Hirame / Help center</p>
-            <h1>Hirame Support</h1>
+            <p className="eyebrow">Hirame: Idea Trainer / Help center</p>
+            <h1>Hirame: Idea Trainer Support</h1>
             <p className={styles.pageHeroLead}>{englishContent.hirameSupport.lead}</p>
           </div>
           <aside className={styles.pageHeroSide} aria-label="Hirame support details">
@@ -62,7 +62,7 @@ export default function EnglishHirameSupportPage() {
         <nav className={styles.legalLinks} aria-label="Hirame data and privacy">
           <a href="/en/apps/hirame/privacy/">Privacy Policy</a>
           <a href="/en/apps/hirame/terms/">Terms of Use</a>
-          <a href="/en/apps/hirame/">Hirame Overview</a>
+          <a href="/en/apps/hirame/">Hirame: Idea Trainer Overview</a>
         </nav>
       </Section>
     </>

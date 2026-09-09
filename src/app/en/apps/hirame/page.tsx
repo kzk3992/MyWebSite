@@ -9,11 +9,11 @@ import { englishAlternates } from "@/i18n/site";
 import styles from "../../../content.module.css";
 
 export const metadata: Metadata = {
-  title: "Hirame",
+  title: "Hirame: Idea Trainer",
   description: englishContent.hirame.description,
   alternates: englishAlternates("/apps/hirame/", "/en/apps/hirame/"),
   openGraph: {
-    title: "Hirame | Mika Spark Studio",
+    title: "Hirame: Idea Trainer | Mika Spark Studio",
     description: `${englishContent.hirame.tagline} Practice creative thinking through manageable constraints.`,
     url: "/en/apps/hirame/",
   },
@@ -27,7 +27,7 @@ export default function EnglishHiramePage() {
           <div className={styles.hirameCopy}>
             <p className="eyebrow">Idea training / iPhone + iPad</p>
             <div className={styles.hirameTitleRow}>
-              <Image src="/brand/hirame/app-icon.jpg" width={72} height={72} alt="Hirame app icon" />
+              <Image src="/brand/hirame/app-icon.jpg" width={72} height={72} alt="Hirame: Idea Trainer app icon" />
               <h1 id="hirame-title">{hirameEnglish.name}</h1>
             </div>
             <p className={styles.hirameTagline}>{englishContent.hirame.tagline}</p>
@@ -40,7 +40,7 @@ export default function EnglishHiramePage() {
             </div>
           </div>
           <div className={styles.hiramePreview}>
-            <Image className={styles.hirameScreen} src="/brand/hirame/screens/01-concept.png" width={1284} height={2778} alt="Hirame's constraint-driven concept and Home screen" priority />
+            <Image className={styles.hirameScreen} src="/brand/hirame/screens/en/01-concept.png" width={1284} height={2778} alt="Hirame's constraint-driven concept and Home screen" priority />
             <Image className={styles.hirameMascot} src="/brand/hirame/mascot.png" width={210} height={210} alt="" aria-hidden="true" />
           </div>
         </Container>
