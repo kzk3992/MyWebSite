@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 export default function EnglishHiramePage() {
   return (
     <>
-      <section className={styles.hirameHero} aria-labelledby="hirame-title">
+      <section className={`${styles.hirameHero} ${styles.hirameHeroEnglish}`} aria-labelledby="hirame-title">
         <Container className={styles.hirameHeroInner}>
           <div className={styles.hirameCopy}>
             <p className="eyebrow">Idea training / iPhone + iPad</p>

@@ -80,6 +80,9 @@
   .hirameHero { min-height: 900px; }
   .hirameHeroInner { display: block; }
   .hirameCopy { min-height: 540px; padding: 86px 0 220px; }
+  .hirameHeroEnglish { min-height: 1020px; }
+  .hirameHeroEnglish .hirameCopy { min-height: 0; padding-bottom: 540px; }
+  .hirameHeroEnglish h1 { min-width: 0; font-size: clamp(3.3rem, 11vw, 5.2rem); line-height: .9; }
   .hiramePreview { position: absolute; height: 470px; min-height: 0; inset: auto 0 0 18%; }
   .hirameScreen { width: min(54%, 310px); top: 42px; left: 12%; }
   .hirameMascot { width: 30%; }
@@ -91,9 +94,12 @@
 @media (max-width: 520px) {
   .hirameHero { min-height: 880px; }
   .hirameCopy { min-height: 480px; padding-top: 72px; }
+  .hirameHeroEnglish { min-height: 1010px; }
+  .hirameHeroEnglish .hirameCopy { min-height: 0; padding-bottom: 450px; }
   .hirameTitleRow { gap: 14px; }
   .hirameTitleRow > img { width: 54px; height: 54px; border-radius: 11px; }
   .hirameHero h1 { font-size: 4.8rem; }
+  .hirameHeroEnglish h1 { font-size: clamp(2.7rem, 13vw, 3.4rem); line-height: .94; }
   .hiramePreview { height: 390px; left: 10%; }
   .hirameScreen { width: 62%; top: 30px; left: 9%; }
   .featureItem { grid-template-columns: 48px 1fr; gap: 12px; }
