@@ -50,7 +50,7 @@ export default function Home() {
         id="works"
         eyebrow="Selected work / 01"
         title="Ideas in motion."
-        intro="日々の小さな着想を、手触りのあるアプリやゲームへ。現在公開準備中のプロダクトです。"
+        intro="日々の小さな着想を、手触りのあるアプリやゲームへ。Mika Spark Studioが公開しているプロダクトです。"
       >
         {siteConfig.products.map((product, index) => (
           <ProductCard key={product.slug} product={product} index={index + 1} />

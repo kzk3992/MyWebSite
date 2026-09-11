@@ -63,7 +63,7 @@ export default function HiramePage() {
               <Button href={hirame.appStoreUrl ?? undefined} external={Boolean(hirame.appStoreUrl)} disabled={!hirame.appStoreUrl}>
                 {hirame.appStoreUrl ? "App Storeで見る" : "Coming Soon"}
               </Button>
-              <span className={styles.platformNote}>Designed for iPhone &amp; iPad · 公開準備中</span>
+              <span className={styles.platformNote}>Designed for iPhone &amp; iPad · App Storeで配信中</span>
             </div>
           </div>
           <div className={styles.hiramePreview}>

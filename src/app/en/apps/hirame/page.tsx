@@ -36,7 +36,7 @@ export default function EnglishHiramePage() {
               <Button href={hirameEnglish.appStoreUrl ?? undefined} external={Boolean(hirameEnglish.appStoreUrl)} disabled={!hirameEnglish.appStoreUrl}>
                 {hirameEnglish.appStoreUrl ? "View on the App Store" : "Coming Soon"}
               </Button>
-              <span className={styles.platformNote}>Designed for iPhone &amp; iPad · In development</span>
+              <span className={styles.platformNote}>Designed for iPhone &amp; iPad · Available on the App Store</span>
             </div>
           </div>
           <div className={styles.hiramePreview}>

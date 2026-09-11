@@ -8,7 +8,7 @@ export const englishContent = {
   home: {
     description: "Small ideas, built into useful products. The official website of Mika Spark Studio.",
     heroLead: "Small ideas, built into useful products.",
-    worksIntro: "Turning everyday sparks into tangible apps and games. Here is what is currently in development.",
+    worksIntro: "Turning everyday sparks into tangible apps and games. Explore products released by Mika Spark Studio.",
     aboutParagraphs: [
       "Mika Spark Studio is an independent development studio where one developer designs, builds, and publishes apps and games.",
       "It creates small, useful, and playful experiences—one product at a time.",

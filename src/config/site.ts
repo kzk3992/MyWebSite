@@ -31,7 +31,7 @@ export const siteConfig = {
       description:
         "言葉の組み合わせや連想などの制約から、発想する力を日常的に鍛えるアイデアトレーニングアプリ。",
       href: "/apps/hirame/",
-      appStoreUrl: null,
+      appStoreUrl: "https://apps.apple.com/jp/app/hirame/id6808982302",
       screenshots: [
         "/brand/hirame/screens/01-concept.png",
         "/brand/hirame/screens/02-note.png",

@@ -73,7 +73,7 @@ for (const [japaneseRoute, englishRoute] of localizedRoutePairs) {
   if (!englishHtml.includes(`href="${japaneseRoute}" hrefLang="ja"`)) failures.push(`${englishRoute}: 対応日本語ページへの切替がありません`);
 }
 
-for (const requiredFile of ["404.html", "robots.txt", "sitemap.xml"]) {
+for (const requiredFile of ["404.html", "robots.txt", "sitemap.xml", "app-ads.txt", "apps/hirame/app-ads.txt"]) {
   if (!existsSync(join(outputDirectory, requiredFile))) {
     failures.push(`${requiredFile}: 出力されていません`);
   }
@@ -161,6 +161,7 @@ if (!hirameHtml.includes("BRIDGE")) failures.push("Hirame: BRIDGEの表記があ
 if (!hirameHtml.includes("Random Fusion")) failures.push("Hirame: Random Fusionの表記がありません");
 if (!hirameHtml.includes("AI Assist")) failures.push("Hirame: AI Assistの表記がありません");
 if (!hirameHtml.includes("制約が、ひらめきを生む。")) failures.push("Hirame: 新しいメインコピーがありません");
+if (!hirameHtml.includes('href="https://apps.apple.com/jp/app/hirame/id6808982302"')) failures.push("Hirame: App Storeへのリンクがありません");
 if (!hirameHtml.includes("発想する力を日常的に鍛える")) failures.push("Hirame: 発想トレーニングの説明がありません");
 if (!hirameHtml.includes("アイデアを自分で生み出す体験を中心に")) failures.push("Hirame: 自分で考えるという説明がありません");
 if (!hirameHtml.includes("Apple Intelligence")) failures.push("Hirame: AI支援の説明がありません");
@@ -202,6 +203,7 @@ for (const screenshot of hirameScreenshots) {
 
 const englishHirameHtml = readFileSync(routeFile("/en/apps/hirame/"), "utf8");
 if (!englishHirameHtml.includes("Hirame: Idea Trainer")) failures.push("English Hirame: 新しい英語アプリ名がありません");
+if (!englishHirameHtml.includes('href="https://apps.apple.com/jp/app/hirame/id6808982302"')) failures.push("English Hirame: App Storeへのリンクがありません");
 for (const text of ["Turn constraints into ideas.", "Idea Note", "Random Fusion", "BRIDGE", "Think with AI", "Reverse Thinking", "Constraint Ideation", "Analogy Thinking"]) {
   if (!englishHirameHtml.includes(text)) failures.push(`English Hirame: ${text} がありません`);
 }
