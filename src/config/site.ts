@@ -2,6 +2,7 @@ export type ProductCategory = "App" | "Game" | "Tool" | "Experiment";
 
 export type Product = {
   slug: string;
+  internal: boolean;
   name: string;
   category: ProductCategory;
   platform: string;
@@ -24,6 +25,7 @@ export const siteConfig = {
   products: [
     {
       slug: "hirame",
+      internal: true,
       name: "Hirame",
       category: "App",
       platform: "iPhone / iPad",
@@ -41,6 +43,19 @@ export const siteConfig = {
         "/brand/hirame/screens/06-association.png",
       ],
     },
+    {
+      slug: "uzmera",
+      internal: false,
+      name: "Uzmera",
+      category: "App",
+      platform: "iPhone / iPad",
+      tagline: "音と動きで、練習を楽しく。",
+      description:
+        "録音、メトロノーム、チューナー、楽譜の読み取りをひとつに。毎日の音楽練習を支えるアプリ。",
+      href: "https://uzmera.mikaspark.com/",
+      appStoreUrl: null,
+      screenshots: [],
+    },
   ] satisfies readonly Product[],
 } as const;
 
@@ -48,6 +63,7 @@ export const hirame = siteConfig.products[0];
 
 export const hirameEnglish: Product = {
   ...hirame,
+  internal: true,
   name: "Hirame: Idea Trainer",
   href: "/en/apps/hirame/",
   tagline: "Turn constraints into ideas.",
@@ -61,6 +77,13 @@ export const hirameEnglish: Product = {
     "/brand/hirame/screens/en/05-library.png",
     "/brand/hirame/screens/en/06-bridge.png",
   ],
+};
+
+export const uzmeraEnglish: Product = {
+  ...siteConfig.products[1],
+  tagline: "Make practice move with music.",
+  description:
+    "Recording, metronome, tuner, and score reading in one place—tools to support your everyday music practice.",
 };
 
 export const legalOperator = {

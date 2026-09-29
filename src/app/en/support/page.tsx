@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Container } from "@/components/Container";
 import { Section } from "@/components/Section";
 import { englishContent } from "@/content/en";
-import { hirameEnglish } from "@/config/site";
+import { hirameEnglish, uzmeraEnglish } from "@/config/site";
 import { englishAlternates } from "@/i18n/site";
 import styles from "../../content.module.css";
 
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 };
 
 export default function EnglishSupportPage() {
-  const products = [hirameEnglish];
+  const products = [hirameEnglish, uzmeraEnglish];
   return (
     <>
       <section className={styles.pageHero}>
@@ -39,7 +39,7 @@ export default function EnglishSupportPage() {
       <Section eyebrow="Choose a product" title={englishContent.support.heading}>
         <div className={styles.supportList}>
           {products.map((product) => (
-            <a className={styles.supportCard} href={`${product.href}support/`} key={product.slug}>
+            <a className={styles.supportCard} href={product.internal ? `${product.href}support/` : product.href} key={product.slug} target={product.internal ? undefined : "_blank"} rel={product.internal ? undefined : "noopener noreferrer"}>
               <div>
                 <h3>{product.name} Support</h3>
                 <p>{product.tagline} — {englishContent.support.productDescription.replace("{platform}", product.platform)}</p>

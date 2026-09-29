@@ -52,9 +52,10 @@ export default function Home() {
         title="Ideas in motion."
         intro="日々の小さな着想を、手触りのあるアプリやゲームへ。Mika Spark Studioが公開しているプロダクトです。"
       >
-        {siteConfig.products.map((product, index) => (
+        {siteConfig.products.filter((product) => product.internal).map((product, index) => (
           <ProductCard key={product.slug} product={product} index={index + 1} />
         ))}
+        <ProductCard product={siteConfig.products.find((product) => product.slug === "uzmera")!} index={2} />
       </Section>
 
       <Section tone="muted" eyebrow="02 / ABOUT" title="Built independently.">

@@ -40,7 +40,7 @@ export default function SupportPage() {
       <Section eyebrow="Choose a product" title="プロダクト別サポート">
         <div className={styles.supportList}>
           {siteConfig.products.map((product) => (
-            <a className={styles.supportCard} href={`${product.href}support/`} key={product.slug}>
+            <a className={styles.supportCard} href={product.internal ? `${product.href}support/` : product.href} key={product.slug} target={product.internal ? undefined : "_blank"} rel={product.internal ? undefined : "noopener noreferrer"}>
               <div>
                 <h3>{product.name} Support</h3>
                 <p>{product.tagline} — {product.platform}アプリのサポート情報</p>

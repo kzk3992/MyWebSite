@@ -11,23 +11,30 @@ type ProductCardProps = {
 };
 
 export function ProductCard({ product, index = 1, locale = "ja" }: ProductCardProps) {
+  const isUzmera = product.slug === "uzmera";
   return (
     <article className={styles.productCard}>
       <p className={styles.productIndex}>{String(index).padStart(2, "0")}</p>
       <div className={styles.productContent}>
-        <div className={styles.productMeta}>
-          <span>{product.category}</span>
-          <span>{product.platform}</span>
-        </div>
+        <div className={styles.productMeta}><span>{product.category}</span><span>{product.platform}</span></div>
         <h3>{product.name}</h3>
         <p className={styles.productTagline}>{product.tagline}</p>
         <p className={styles.productDescription}>{product.description}</p>
-        <Button href={product.href}>{locale === "ja" ? "詳しく見る" : "View product"}</Button>
+        <Button href={product.href} external={!product.internal}>{locale === "ja" ? "詳しく見る" : "View product"}</Button>
       </div>
-      <div className={styles.productVisual}>
-        <Image className={styles.productScreenshot} src={locale === "ja" ? "/brand/hirame/screens/01-concept.png" : "/brand/hirame/screens/en/01-concept.png"} width={1284} height={2778} alt={locale === "ja" ? "Hirameのコンセプトとホーム画面" : "Hirame's concept and Home screen"} />
-        <Image className={styles.productMascot} src="/brand/hirame/mascot.png" width={170} height={170} alt="" aria-hidden="true" />
-      </div>
+      {isUzmera ? (
+        <a className={`${styles.productVisual} ${styles.uzmeraVisual}`} href={product.href} target="_blank" rel="noopener noreferrer" aria-label="Uzmera website を開く">
+          <Image className={styles.uzmeraAppIcon} src="/brand/uzmera/app-icon.png" width={1024} height={1024} alt="Uzmera アプリアイコン" />
+          <span className={styles.uzmeraWordmark}>UZMERA<span>音楽練習を、もっと自由に。</span></span>
+          <Image className={styles.uzmeraMascot} src="/brand/uzmera/kemari_girl_idle.png" width={64} height={96} alt="" aria-hidden="true" />
+          <span className={styles.uzmeraPixelBall} aria-hidden="true">◆</span>
+        </a>
+      ) : (
+        <div className={styles.productVisual}>
+          <Image className={styles.productScreenshot} src={locale === "ja" ? "/brand/hirame/screens/01-concept.png" : "/brand/hirame/screens/en/01-concept.png"} width={1284} height={2778} alt={locale === "ja" ? "Hirameのコンセプトとホーム画面" : "Hirame's concept and Home screen"} />
+          <Image className={styles.productMascot} src="/brand/hirame/mascot.png" width={170} height={170} alt="" aria-hidden="true" />
+        </div>
+      )}
     </article>
   );
 }
