@@ -56,6 +56,7 @@ export default function Home() {
           <ProductCard key={product.slug} product={product} index={index + 1} />
         ))}
         <ProductCard product={siteConfig.products.find((product) => product.slug === "uzmera")!} index={2} />
+        <ProductCard product={siteConfig.products.find((product) => product.slug === "necosmos")!} index={3} />
       </Section>
 
       <Section tone="muted" eyebrow="02 / ABOUT" title="Built independently.">
