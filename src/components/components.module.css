@@ -60,6 +60,17 @@
 .uzmeraWordmark { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 18px; align-items: center; color: #ffe9c5; font: 700 clamp(3rem, 7vw, 6rem)/1 "DotGothic16", "Courier New", monospace; letter-spacing: .09em; text-shadow: 4px 4px 0 #763c50; }
 .uzmeraWordmark span { color: #edc9c0; font: 1rem/1.7 ui-sans-serif, sans-serif; letter-spacing: .06em; }
 .uzmeraPixelBall { position: absolute; top: 14%; left: 17%; color: #e8b957; font-size: 38px; text-shadow: 3px 3px #865139; }
+.necosmosVisual { display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 14px; color: #e7f1dc; background: radial-gradient(ellipse at 50% 44%, #345033 0, #1a2a1d 34%, #09100c 76%); text-align: center; text-decoration: none; }
+.necosmosVisual::before { content: "✦　·　✧　·　✦　·　✧　·　✦"; position: absolute; inset: 12% 0 auto; color: #c8e5b477; font-size: clamp(14px, 3vw, 28px); letter-spacing: .5em; white-space: nowrap; }
+.necosmosVisual::after { border-color: rgb(190 228 157 / 30%); }
+.necosmosEyebrow { color: #b6d29c; font-size: .62rem; font-weight: 750; letter-spacing: .28em; }
+.necosmosWorld { position: relative; width: clamp(180px, 43%, 310px); aspect-ratio: 1; display: grid; place-items: center; border: 1px solid #b6d29c66; border-radius: 50%; box-shadow: inset 0 0 46px #8eb76e20, 0 0 38px #8eb76e18; }
+.necosmosWorld::before, .necosmosWorld::after { content: ""; position: absolute; inset: 14%; border: 1px solid #c0dc9b55; border-radius: 50%; transform: rotate(-28deg) scaleY(.34); }
+.necosmosWorld::after { inset: 22%; transform: rotate(38deg) scaleY(.44); }
+.necosmosWorld span { font-size: clamp(72px, 11vw, 126px); filter: drop-shadow(0 8px 18px #0009); }
+.necosmosWordmark { color: #e6f3d1; font: 700 clamp(2.5rem, 6vw, 4.3rem)/1 "DotGothic16", "Courier New", monospace; letter-spacing: .04em; text-shadow: 0 0 24px #a9d78055; }
+.necosmosCaption { color: #b4c5a8; font-size: .8rem; letter-spacing: .06em; }
+.necosmosEnter { margin-top: 12px; padding: 11px 18px; border: 1px solid #a4ca7a88; color: #d8e9c4; font-size: .72rem; font-weight: 720; letter-spacing: .08em; }
 .footer { border-top: 1px solid var(--color-border); background: #020302; padding: 66px 0 28px; }
 .footerTop, .footerBottom { display: flex; justify-content: space-between; gap: 32px; }
 .footerIdentity { display: flex; align-items: center; gap: 16px; }
