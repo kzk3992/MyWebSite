@@ -12,6 +12,7 @@ type ProductCardProps = {
 
 export function ProductCard({ product, index = 1, locale = "ja" }: ProductCardProps) {
   const isUzmera = product.slug === "uzmera";
+  const isNeCosmos = product.slug === "necosmos";
   return (
     <article className={styles.productCard}>
       <p className={styles.productIndex}>{String(index).padStart(2, "0")}</p>
@@ -28,6 +29,14 @@ export function ProductCard({ product, index = 1, locale = "ja" }: ProductCardPr
           <span className={styles.uzmeraWordmark}>UZMERA<span>音楽練習を、もっと自由に。</span></span>
           <Image className={styles.uzmeraMascot} src="/brand/uzmera/kemari_girl_idle.png" width={64} height={96} alt="" aria-hidden="true" />
           <span className={styles.uzmeraPixelBall} aria-hidden="true">◆</span>
+        </a>
+      ) : isNeCosmos ? (
+        <a className={`${styles.productVisual} ${styles.necosmosVisual}`} href={product.href} target="_blank" rel="noopener noreferrer" aria-label={locale === "ja" ? "NeCosmosを開く" : "Open NeCosmos"}>
+          <span className={styles.necosmosEyebrow}>A TINY ECOSYSTEM</span>
+          <span className={styles.necosmosWorld} aria-hidden="true"><span>🐈</span></span>
+          <span className={styles.necosmosWordmark}>NeCosmos</span>
+          <span className={styles.necosmosCaption}>{locale === "ja" ? "猫たちの小さな宇宙を観察する" : "Watch a tiny world shaped by cats"}</span>
+          <span className={styles.necosmosEnter}>{locale === "ja" ? "世界をのぞく ↗" : "Enter the world ↗"}</span>
         </a>
       ) : (
         <div className={styles.productVisual}>
