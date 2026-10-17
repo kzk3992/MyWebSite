@@ -245,6 +245,11 @@ for (const text of ["Frequently asked questions", "Do I need to create an accoun
   if (!englishSupportHtml.includes(text)) failures.push(`English Hirame Support: ${text} がありません`);
 }
 
+for (const route of ["/", "/en/"]) {
+  const homeHtml = readFileSync(routeFile(route), "utf8");
+  if (!homeHtml.includes("https://necosmos.mikaspark.com/")) failures.push(`${route}: NeCosmosへの導線がありません`);
+}
+
 const sitemapXml = readFileSync(join(outputDirectory, "sitemap.xml"), "utf8");
 for (const [, englishRoute] of localizedRoutePairs) {
   if (!sitemapXml.includes(`<loc>https://mikaspark.com${englishRoute}</loc>`)) failures.push(`sitemap: ${englishRoute} がありません`);
