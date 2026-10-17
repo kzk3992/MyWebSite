@@ -56,6 +56,19 @@ export const siteConfig = {
       appStoreUrl: null,
       screenshots: [],
     },
+    {
+      slug: "necosmos",
+      internal: false,
+      name: "NeCosmos",
+      category: "Game",
+      platform: "Web browser",
+      tagline: "猫たちがつくる、小さな生態圏。",
+      description:
+        "猫たちの暮らしと環境の変化を見守り、手を加えながら小さな生態系を育てるブラウザゲーム。",
+      href: "https://necosmos.mikaspark.com/",
+      appStoreUrl: null,
+      screenshots: [],
+    },
   ] satisfies readonly Product[],
 } as const;
 
