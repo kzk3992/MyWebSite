@@ -5,7 +5,7 @@ import { Container } from "@/components/Container";
 import { ProductCard } from "@/components/ProductCard";
 import { Section } from "@/components/Section";
 import { englishContent } from "@/content/en";
-import { hirameEnglish, siteConfig, uzmeraEnglish } from "@/config/site";
+import { hirameEnglish, necosmosEnglish, siteConfig, uzmeraEnglish } from "@/config/site";
 import { englishAlternates } from "@/i18n/site";
 import styles from "../page.module.css";
 
@@ -47,6 +47,7 @@ export default function EnglishHomePage() {
       <Section id="works" eyebrow="Selected work / 02" title="Ideas in motion." intro={englishContent.home.worksIntro}>
         <ProductCard product={hirameEnglish} locale="en" />
         <ProductCard product={uzmeraEnglish} locale="en" index={2} />
+        <ProductCard product={necosmosEnglish} locale="en" index={3} />
       </Section>
 
       <Section tone="muted" eyebrow="02 / ABOUT" title="Built independently.">
