@@ -99,6 +99,13 @@ export const uzmeraEnglish: Product = {
     "Recording, metronome, tuner, and score reading in one place—tools to support your everyday music practice.",
 };
 
+export const necosmosEnglish: Product = {
+  ...siteConfig.products[2],
+  tagline: "A tiny ecosystem shaped by cats.",
+  description:
+    "Watch cats and their changing habitat, then make small interventions in a browser-based ecosystem simulation.",
+};
+
 export const legalOperator = {
   name: siteConfig.brandName,
   responsiblePerson: "Miyashita Kazuki",
