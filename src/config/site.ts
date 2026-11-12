@@ -98,29 +98,27 @@ export const uzmeraEnglish: Product = {
     "Recording, metronome, tuner, and score reading in one place—tools to support your everyday music practice.",
 };
 
-// LINEスタンプショップのURLは販売開始後に発行される。発行されたらここに入れるだけで販促セクションのボタンが有効になる。
+// LINEスタンプショップのURLは販売開始後に発行される。発行されたらここに入れるだけでグッズのリンクが有効になる。
 export const lineStickersStoreUrl = "";
 
-export const lineStickerItems = [
-  { src: "/brand/line-stickers/01_ohayou.svg", ja: "おはよう", en: "Good morning" },
-  { src: "/brand/line-stickers/02_arigatou.svg", ja: "ありがとう", en: "Thank you" },
-  { src: "/brand/line-stickers/03_otsukaresama.svg", ja: "おつかれさま", en: "Good work today" },
-  { src: "/brand/line-stickers/04_ryoukai.svg", ja: "りょうかい！", en: "Got it!" },
-  { src: "/brand/line-stickers/05_gomenne.svg", ja: "ごめんね", en: "Sorry" },
-  { src: "/brand/line-stickers/06_yatta.svg", ja: "やったー！", en: "Yay!" },
-  { src: "/brand/line-stickers/07_eh.svg", ja: "えっ！？", en: "What!?" },
-  { src: "/brand/line-stickers/08_oyasumi.svg", ja: "おやすみ", en: "Good night" },
-  { src: "/brand/line-stickers/09_sugoi.svg", ja: "すごい！", en: "Amazing!" },
-  { src: "/brand/line-stickers/10_ganbaru.svg", ja: "がんばる！", en: "I'll do my best!" },
-  { src: "/brand/line-stickers/11_onegai.svg", ja: "おねがい", en: "Please" },
-  { src: "/brand/line-stickers/12_matte.svg", ja: "まってー", en: "Wait for me!" },
-  { src: "/brand/line-stickers/13_renshuu.svg", ja: "練習する！", en: "I'll practice!" },
-  { src: "/brand/line-stickers/14_renshuushinasai.svg", ja: "練習しなさい！", en: "Practice!" },
-  { src: "/brand/line-stickers/15_otohazushita.svg", ja: "音はずした…", en: "Missed that note..." },
-  { src: "/brand/line-stickers/16_ato1kai.svg", ja: "あと1回！", en: "One more time!" },
-] as const;
+export type GoodsItem = {
+  id: string;
+  image: string;
+  ja: string;
+  en: string;
+  href: string;
+};
 
-export const lineStickersThumbnail = lineStickerItems[13];
+// グッズは「画像1枚＋テキスト1行」の共通形式。新しいグッズはここに1件足すだけで棚に追加される。
+export const goodsItems: readonly GoodsItem[] = [
+  {
+    id: "uzume-line-stickers",
+    image: "/brand/line-stickers/14_renshuushinasai.svg",
+    ja: "ウズメちゃん LINEスタンプ（全16種）¥120",
+    en: "Uzume-chan LINE Stickers (16) — ¥120",
+    href: lineStickersStoreUrl,
+  },
+];
 
 export const legalOperator = {
   name: siteConfig.brandName,
