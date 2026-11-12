@@ -60,6 +60,22 @@
 .uzmeraWordmark { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 18px; align-items: center; color: #ffe9c5; font: 700 clamp(3rem, 7vw, 6rem)/1 "DotGothic16", "Courier New", monospace; letter-spacing: .09em; text-shadow: 4px 4px 0 #763c50; }
 .uzmeraWordmark span { color: #edc9c0; font: 1rem/1.7 ui-sans-serif, sans-serif; letter-spacing: .06em; }
 .uzmeraPixelBall { position: absolute; top: 14%; left: 17%; color: #e8b957; font-size: 38px; text-shadow: 3px 3px #865139; }
+.lineStickersVisual { display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 20px; color: #eaf7ec; background-color: #0d2013; background-image: radial-gradient(#7fce8e 1px, transparent 1px), linear-gradient(150deg, #0d2013, #17452a 68%, #06c755 160%); background-size: 24px 24px, auto; }
+.lineStickersVisual::after { border-color: rgb(140 255 170 / 22%); }
+.lineStickersWordmark { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 14px; align-items: center; color: #eaffea; font: 700 clamp(2rem, 4.6vw, 3.6rem)/1 "DotGothic16", "Courier New", monospace; letter-spacing: .08em; text-shadow: 3px 3px 0 #0a3d1e; text-align: center; }
+.lineStickersWordmark span { color: #b8e6c2; font: .78rem/1.6 ui-sans-serif, sans-serif; letter-spacing: .22em; }
+.lineStickersMascot { position: absolute; width: clamp(120px, 26%, 220px); height: auto; right: 6%; bottom: 4%; image-rendering: pixelated; filter: drop-shadow(0 12px 24px rgb(0 0 0 / 40%)); }
+.lineStickersPhrases { position: absolute; left: 7%; bottom: 7%; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.lineStickersPhrases span { padding: 7px 13px; border-radius: 999px; background: #f4fff6; color: #14532d; font-size: .74rem; font-weight: 700; letter-spacing: .04em; box-shadow: 3px 3px 0 rgb(0 0 0 / 30%); }
+.lineStickersPhrases span:nth-child(2) { margin-left: 26px; }
+.lineStickersPhrases span:nth-child(3) { margin-left: 8px; }
+.lineStickersPhrases span:nth-child(4) { margin-left: 34px; background: #06c755; color: #fff; }
+.lineStickersPhrases span:nth-child(5) { margin-left: 14px; }
+.footerNavGroup { display: flex; flex-direction: column; align-items: flex-end; gap: 20px; }
+.footerSocials { display: flex; align-items: flex-start; flex-wrap: wrap; gap: 26px; }
+.footerSocials a { color: var(--color-muted); font-size: .72rem; font-weight: 680; text-decoration: none; }
+.footerSocials a span { color: var(--color-dim); font-weight: 500; }
+.footerSocials a:hover { color: var(--color-spark-soft); }
 .necosmosVisual { display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 14px; color: #e7f1dc; background: radial-gradient(ellipse at 50% 44%, #345033 0, #1a2a1d 34%, #09100c 76%); text-align: center; text-decoration: none; }
 .necosmosVisual::before { content: "✦　·　✧　·　✦　·　✧　·　✦"; position: absolute; inset: 12% 0 auto; color: #c8e5b477; font-size: clamp(14px, 3vw, 28px); letter-spacing: .5em; white-space: nowrap; }
 .necosmosVisual::after { border-color: rgb(190 228 157 / 30%); }
@@ -117,6 +133,7 @@
   .productIndex { padding: 28px 0; }
   .productVisual { grid-column: 1 / -1; min-height: 490px; border-top: 1px solid var(--color-border); border-left: 0; }
   .footerTop, .footerBottom { flex-direction: column; }
+  .footerNavGroup { align-items: flex-start; }
   .footerNav { display: grid; grid-template-columns: 1fr 1fr; }
   .footerBottom { gap: 8px; }
 }

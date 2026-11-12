@@ -1,4 +1,4 @@
-export type ProductCategory = "App" | "Game" | "Tool" | "Experiment";
+export type ProductCategory = "App" | "Game" | "Tool" | "Experiment" | "Sticker";
 
 export type Product = {
   slug: string;
@@ -20,6 +20,18 @@ export const siteConfig = {
   description:
     "Mika Spark Studioは、個人でアプリやゲームを企画・開発・公開するインディーデベロップメントスタジオです。",
   baseUrl: "https://mikaspark.com",
+  socials: [
+    {
+      label: "Instagram",
+      handle: "@mika_spark_studio",
+      href: "https://www.instagram.com/mika_spark_studio/",
+    },
+    {
+      label: "X",
+      handle: "@MIKA_StReIn",
+      href: "https://x.com/MIKA_StReIn",
+    },
+  ],
   supportEmail: "support@mikaspark.com",
   copyrightYear: 2026,
   products: [
@@ -56,19 +68,6 @@ export const siteConfig = {
       appStoreUrl: null,
       screenshots: [],
     },
-    {
-      slug: "necosmos",
-      internal: false,
-      name: "NeCosmos",
-      category: "Game",
-      platform: "Web browser",
-      tagline: "猫たちがつくる、小さな生態圏。",
-      description:
-        "猫たちの暮らしと環境の変化を見守り、手を加えながら小さな生態系を育てるブラウザゲーム。",
-      href: "https://necosmos.mikaspark.com/",
-      appStoreUrl: null,
-      screenshots: [],
-    },
   ] satisfies readonly Product[],
 } as const;
 
@@ -99,11 +98,27 @@ export const uzmeraEnglish: Product = {
     "Recording, metronome, tuner, and score reading in one place—tools to support your everyday music practice.",
 };
 
-export const necosmosEnglish: Product = {
-  ...siteConfig.products[2],
-  tagline: "A tiny ecosystem shaped by cats.",
+export const lineStickers: Product = {
+  slug: "line-stickers",
+  internal: false,
+  name: "ウズメちゃん LINEスタンプ",
+  category: "Sticker",
+  platform: "LINE",
+  tagline: "ドット絵で、練習も連絡も。",
   description:
-    "Watch cats and their changing habitat, then make small interventions in a browser-based ecosystem simulation.",
+    "篠笛を吹く着物の女の子「ウズメちゃん」のドット絵スタンプ16種。あいさつなどの日常使いから、「練習する！」「練習しなさい！」といった音楽の練習あるあるまで。LINEスタンプショップで近日公開（審査中）。",
+  // LINEスタンプショップのURLは販売開始後に発行される。発行されたらここに入れるだけで導線が有効になる。
+  href: "",
+  appStoreUrl: null,
+  screenshots: [],
+};
+
+export const lineStickersEnglish: Product = {
+  ...lineStickers,
+  name: "Uzume-chan LINE Stickers",
+  tagline: "Pixel art for practice and everyday chats.",
+  description:
+    "Sixteen pixel-art stickers of Uzume-chan, a kimono girl who plays the shinobue flute. Everyday greetings plus music-practice moments like \"I'll practice!\" and \"Practice!\". Coming soon to the LINE Sticker Shop (in review).",
 };
 
 export const legalOperator = {

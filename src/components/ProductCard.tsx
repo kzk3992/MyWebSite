@@ -12,7 +12,10 @@ type ProductCardProps = {
 
 export function ProductCard({ product, index = 1, locale = "ja" }: ProductCardProps) {
   const isUzmera = product.slug === "uzmera";
-  const isNeCosmos = product.slug === "necosmos";
+  const isLineStickers = product.slug === "line-stickers";
+  const buttonLabel = isLineStickers && !product.href
+    ? (locale === "ja" ? "近日公開" : "Coming soon")
+    : (locale === "ja" ? "詳しく見る" : "View product");
   return (
     <article className={styles.productCard}>
       <p className={styles.productIndex}>{String(index).padStart(2, "0")}</p>
@@ -21,7 +24,7 @@ export function ProductCard({ product, index = 1, locale = "ja" }: ProductCardPr
         <h3>{product.name}</h3>
         <p className={styles.productTagline}>{product.tagline}</p>
         <p className={styles.productDescription}>{product.description}</p>
-        <Button href={product.href} external={!product.internal}>{locale === "ja" ? "詳しく見る" : "View product"}</Button>
+        <Button href={product.href || undefined} external={!product.internal}>{buttonLabel}</Button>
       </div>
       {isUzmera ? (
         <a className={`${styles.productVisual} ${styles.uzmeraVisual}`} href={product.href} target="_blank" rel="noopener noreferrer" aria-label="Uzmera website を開く">
@@ -30,14 +33,16 @@ export function ProductCard({ product, index = 1, locale = "ja" }: ProductCardPr
           <Image className={styles.uzmeraMascot} src="/brand/uzmera/kemari_girl_idle.png" width={64} height={96} alt="" aria-hidden="true" />
           <span className={styles.uzmeraPixelBall} aria-hidden="true">◆</span>
         </a>
-      ) : isNeCosmos ? (
-        <a className={`${styles.productVisual} ${styles.necosmosVisual}`} href={product.href} target="_blank" rel="noopener noreferrer" aria-label={locale === "ja" ? "NeCosmosを開く" : "Open NeCosmos"}>
-          <span className={styles.necosmosEyebrow}>A TINY ECOSYSTEM</span>
-          <span className={styles.necosmosWorld} aria-hidden="true"><span>🐈</span></span>
-          <span className={styles.necosmosWordmark}>NeCosmos</span>
-          <span className={styles.necosmosCaption}>{locale === "ja" ? "猫たちの小さな宇宙を観察する" : "Watch a tiny world shaped by cats"}</span>
-          <span className={styles.necosmosEnter}>{locale === "ja" ? "世界をのぞく ↗" : "Enter the world ↗"}</span>
-        </a>
+      ) : isLineStickers ? (
+        <div className={`${styles.productVisual} ${styles.lineStickersVisual}`}>
+          <span className={styles.lineStickersWordmark}>UZUME-CHAN<span>{locale === "ja" ? "ドット絵LINEスタンプ" : "PIXEL LINE STICKERS"}</span></span>
+          <Image className={styles.lineStickersMascot} src="/brand/uzmera/kemari_girl_idle.png" width={64} height={96} alt="" aria-hidden="true" />
+          <span className={styles.lineStickersPhrases} aria-hidden="true">
+            {(locale === "ja" ? ["おはよう", "ありがとう", "練習する！", "練習しなさい！", "あと1回！"] : ["Hello", "Thank you", "I'll practice!", "Practice!", "One more time!"]).map((phrase) => (
+              <span key={phrase}>{phrase}</span>
+            ))}
+          </span>
+        </div>
       ) : (
         <div className={styles.productVisual}>
           <Image className={styles.productScreenshot} src={locale === "ja" ? "/brand/hirame/screens/01-concept.png" : "/brand/hirame/screens/en/01-concept.png"} width={1284} height={2778} alt={locale === "ja" ? "Hirameのコンセプトとホーム画面" : "Hirame's concept and Home screen"} />

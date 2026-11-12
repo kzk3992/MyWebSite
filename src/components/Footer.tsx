@@ -17,13 +17,22 @@ export function Footer({ locale }: { locale: Locale }) {
             <p className={styles.footerTagline}>{siteConfig.tagline}</p>
             </div>
           </div>
-          <nav className={styles.footerNav} aria-label={shellText[locale].footerNavigation}>
-            {footerLinks[locale].map((item) => (
-              <a key={item.href} href={item.href}>
-                {item.label}
-              </a>
-            ))}
-          </nav>
+          <div className={styles.footerNavGroup}>
+            <nav className={styles.footerNav} aria-label={shellText[locale].footerNavigation}>
+              {footerLinks[locale].map((item) => (
+                <a key={item.href} href={item.href}>
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+            <nav className={styles.footerSocials} aria-label="Social links">
+              {siteConfig.socials.map((social) => (
+                <a key={social.href} href={social.href} target="_blank" rel="noopener noreferrer">
+                  {social.label} <span>{social.handle}</span> ↗
+                </a>
+              ))}
+            </nav>
+          </div>
         </div>
         <div className={styles.footerBottom}>
           <p>
