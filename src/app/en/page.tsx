@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { BrandIcon } from "@/components/BrandIcon";
 import { Container } from "@/components/Container";
+import { GoodsSection } from "@/components/GoodsSection";
 import { ProductCard } from "@/components/ProductCard";
 import { Section } from "@/components/Section";
 import { englishContent } from "@/content/en";
-import { hirameEnglish, lineStickersEnglish, siteConfig, uzmeraEnglish } from "@/config/site";
+import { hirameEnglish, siteConfig, uzmeraEnglish } from "@/config/site";
 import { englishAlternates } from "@/i18n/site";
 import styles from "../page.module.css";
 
@@ -47,7 +48,7 @@ export default function EnglishHomePage() {
       <Section id="works" eyebrow="Selected work / 02" title="Ideas in motion." intro={englishContent.home.worksIntro}>
         <ProductCard product={hirameEnglish} locale="en" />
         <ProductCard product={uzmeraEnglish} locale="en" index={2} />
-        <ProductCard product={lineStickersEnglish} locale="en" index={3} />
+
       </Section>
 
       <Section tone="muted" eyebrow="02 / ABOUT" title="Built independently.">
@@ -63,6 +64,8 @@ export default function EnglishHomePage() {
           </div>
         </div>
       </Section>
+
+      <GoodsSection locale="en" />
     </>
   );
 }

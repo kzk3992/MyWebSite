@@ -1,4 +1,4 @@
-export type ProductCategory = "App" | "Game" | "Tool" | "Experiment" | "Sticker";
+export type ProductCategory = "App" | "Game" | "Tool" | "Experiment";
 
 export type Product = {
   slug: string;
@@ -98,28 +98,29 @@ export const uzmeraEnglish: Product = {
     "Recording, metronome, tuner, and score reading in one place—tools to support your everyday music practice.",
 };
 
-export const lineStickers: Product = {
-  slug: "line-stickers",
-  internal: false,
-  name: "ウズメちゃん LINEスタンプ",
-  category: "Sticker",
-  platform: "LINE",
-  tagline: "ドット絵で、練習も連絡も。",
-  description:
-    "篠笛を吹く着物の女の子「ウズメちゃん」のドット絵スタンプ16種。あいさつなどの日常使いから、「練習する！」「練習しなさい！」といった音楽の練習あるあるまで。LINEスタンプショップで近日公開（審査中）。",
-  // LINEスタンプショップのURLは販売開始後に発行される。発行されたらここに入れるだけで導線が有効になる。
-  href: "",
-  appStoreUrl: null,
-  screenshots: [],
-};
+// LINEスタンプショップのURLは販売開始後に発行される。発行されたらここに入れるだけで販促セクションのボタンが有効になる。
+export const lineStickersStoreUrl = "";
 
-export const lineStickersEnglish: Product = {
-  ...lineStickers,
-  name: "Uzume-chan LINE Stickers",
-  tagline: "Pixel art for practice and everyday chats.",
-  description:
-    "Sixteen pixel-art stickers of Uzume-chan, a kimono girl who plays the shinobue flute. Everyday greetings plus music-practice moments like \"I'll practice!\" and \"Practice!\". Coming soon to the LINE Sticker Shop (in review).",
-};
+export const lineStickerItems = [
+  { src: "/brand/line-stickers/01_ohayou.svg", ja: "おはよう", en: "Good morning" },
+  { src: "/brand/line-stickers/02_arigatou.svg", ja: "ありがとう", en: "Thank you" },
+  { src: "/brand/line-stickers/03_otsukaresama.svg", ja: "おつかれさま", en: "Good work today" },
+  { src: "/brand/line-stickers/04_ryoukai.svg", ja: "りょうかい！", en: "Got it!" },
+  { src: "/brand/line-stickers/05_gomenne.svg", ja: "ごめんね", en: "Sorry" },
+  { src: "/brand/line-stickers/06_yatta.svg", ja: "やったー！", en: "Yay!" },
+  { src: "/brand/line-stickers/07_eh.svg", ja: "えっ！？", en: "What!?" },
+  { src: "/brand/line-stickers/08_oyasumi.svg", ja: "おやすみ", en: "Good night" },
+  { src: "/brand/line-stickers/09_sugoi.svg", ja: "すごい！", en: "Amazing!" },
+  { src: "/brand/line-stickers/10_ganbaru.svg", ja: "がんばる！", en: "I'll do my best!" },
+  { src: "/brand/line-stickers/11_onegai.svg", ja: "おねがい", en: "Please" },
+  { src: "/brand/line-stickers/12_matte.svg", ja: "まってー", en: "Wait for me!" },
+  { src: "/brand/line-stickers/13_renshuu.svg", ja: "練習する！", en: "I'll practice!" },
+  { src: "/brand/line-stickers/14_renshuushinasai.svg", ja: "練習しなさい！", en: "Practice!" },
+  { src: "/brand/line-stickers/15_otohazushita.svg", ja: "音はずした…", en: "Missed that note..." },
+  { src: "/brand/line-stickers/16_ato1kai.svg", ja: "あと1回！", en: "One more time!" },
+] as const;
+
+export const lineStickersThumbnail = lineStickerItems[13];
 
 export const legalOperator = {
   name: siteConfig.brandName,

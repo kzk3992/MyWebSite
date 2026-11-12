@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { BrandIcon } from "@/components/BrandIcon";
 import { Container } from "@/components/Container";
+import { GoodsSection } from "@/components/GoodsSection";
 import { ProductCard } from "@/components/ProductCard";
 import { Section } from "@/components/Section";
-import { lineStickers, siteConfig } from "@/config/site";
+import { siteConfig } from "@/config/site";
 import { localizedAlternates } from "@/i18n/site";
 import styles from "../page.module.css";
 
@@ -56,7 +57,6 @@ export default function Home() {
           <ProductCard key={product.slug} product={product} index={index + 1} />
         ))}
         <ProductCard product={siteConfig.products.find((product) => product.slug === "uzmera")!} index={2} />
-        <ProductCard product={lineStickers} index={3} />
       </Section>
 
       <Section tone="muted" eyebrow="02 / ABOUT" title="Built independently.">
@@ -79,6 +79,8 @@ export default function Home() {
           </div>
         </div>
       </Section>
+
+      <GoodsSection locale="ja" />
     </>
   );
 }

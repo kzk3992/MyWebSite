@@ -248,7 +248,8 @@ for (const text of ["Frequently asked questions", "Do I need to create an accoun
 for (const route of ["/", "/en/"]) {
   const homeHtml = readFileSync(routeFile(route), "utf8");
   if (homeHtml.includes("https://necosmos.mikaspark.com/")) failures.push(`${route}: NeCosmosへの導線が残っています`);
-  if (!homeHtml.includes(route === "/" ? "ウズメちゃん LINEスタンプ" : "Uzume-chan LINE Stickers")) failures.push(`${route}: LINEスタンプへの導線がありません`);
+  if (!homeHtml.includes("/brand/line-stickers/14_renshuushinasai.svg")) failures.push(`${route}: LINEスタンプ販促セクション（サムネ）がありません`);
+  if (!homeHtml.includes("/brand/line-stickers/01_ohayou.svg")) failures.push(`${route}: LINEスタンプのカルーセルがありません`);
   if (!homeHtml.includes("https://www.instagram.com/mika_spark_studio/")) failures.push(`${route}: Instagramへの導線がありません`);
   if (!homeHtml.includes("https://x.com/MIKA_StReIn")) failures.push(`${route}: Xへの導線がありません`);
 }
