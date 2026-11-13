@@ -39,21 +39,27 @@ export default function EnglishHomePage() {
             </div>
           </div>
           <div className={styles.heroArtwork} aria-hidden="true">
-            <Image src="/brand/hero-wolf.jpg" width={943} height={793} alt="" priority sizes="(max-width: 900px) 100vw, 55vw" />
+            <div className={styles.heroArtworkInner}>
+              <Image src="/brand/hero-wolf.jpg" width={943} height={793} alt="" priority sizes="(max-width: 900px) 100vw, 55vw" />
+            </div>
           </div>
-          <a className={styles.heroAside} href="#works"><BrandIcon name="paw" size={30} />Explore works</a>
+          <div className={styles.heroRail}>
+            <span className={styles.heroRailTicks} aria-hidden="true" />
+            <a className={styles.heroAside} href="#works"><BrandIcon name="paw" size={30} />Explore works<i aria-hidden="true" /></a>
+          </div>
         </Container>
       </section>
 
-      <Section id="works" eyebrow="Selected work / 02" title="Ideas in motion." intro={englishContent.home.worksIntro}>
-        <ProductCard product={hirameEnglish} locale="en" />
-        <ProductCard product={uzmeraEnglish} locale="en" index={2} />
-        <ProductCard product={mahouEnglish} locale="en" index={3} />
-
+      <Section id="works" eyebrow="01 / Selected work" title="Ideas in motion." intro={englishContent.home.worksIntro}>
+        <div className={styles.worksList}>
+          <ProductCard product={hirameEnglish} locale="en" />
+          <ProductCard product={uzmeraEnglish} locale="en" index={2} />
+          <ProductCard product={mahouEnglish} locale="en" index={3} />
+        </div>
       </Section>
 
       <Section tone="muted" eyebrow="02 / ABOUT" title="Built independently.">
-        <div className={styles.aboutGrid}>
+        <div className={styles.aboutGrid} data-reveal>
           <div className={styles.aboutCopy}>
             {englishContent.home.aboutParagraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
             <a className={styles.aboutLink} href="/en/about/">{englishContent.home.aboutLink} →</a>

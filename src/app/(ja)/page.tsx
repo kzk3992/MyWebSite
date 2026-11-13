@@ -41,27 +41,34 @@ export default function Home() {
             </div>
           </div>
           <div className={styles.heroArtwork} aria-hidden="true">
-            <Image src="/brand/hero-wolf.jpg" width={943} height={793} alt="" priority sizes="(max-width: 900px) 100vw, 55vw" />
+            <div className={styles.heroArtworkInner}>
+              <Image src="/brand/hero-wolf.jpg" width={943} height={793} alt="" priority sizes="(max-width: 900px) 100vw, 55vw" />
+            </div>
           </div>
-          <a className={styles.heroAside} href="#works"><BrandIcon name="paw" size={30} />Explore works</a>
+          <div className={styles.heroRail}>
+            <span className={styles.heroRailTicks} aria-hidden="true" />
+            <a className={styles.heroAside} href="#works"><BrandIcon name="paw" size={30} />Explore works<i aria-hidden="true" /></a>
+          </div>
         </Container>
       </section>
 
       <Section
         id="works"
-        eyebrow="Selected work / 01"
+        eyebrow="01 / Selected work"
         title="Ideas in motion."
         intro="日々の小さな着想を、手触りのあるアプリやゲームへ。Mika Spark Studioが公開しているプロダクトです。"
       >
-        {siteConfig.products.filter((product) => product.internal).map((product, index) => (
-          <ProductCard key={product.slug} product={product} index={index + 1} />
-        ))}
-        <ProductCard product={siteConfig.products.find((product) => product.slug === "uzmera")!} index={2} />
-        <ProductCard product={siteConfig.products.find((product) => product.slug === "mahou")!} index={3} />
+        <div className={styles.worksList}>
+          {siteConfig.products.filter((product) => product.internal).map((product, index) => (
+            <ProductCard key={product.slug} product={product} index={index + 1} />
+          ))}
+          <ProductCard product={siteConfig.products.find((product) => product.slug === "uzmera")!} index={2} />
+          <ProductCard product={siteConfig.products.find((product) => product.slug === "mahou")!} index={3} />
+        </div>
       </Section>
 
       <Section tone="muted" eyebrow="02 / ABOUT" title="Built independently.">
-        <div className={styles.aboutGrid}>
+        <div className={styles.aboutGrid} data-reveal>
           <div className={styles.aboutCopy}>
             <p>
               Mika Spark Studioは、個人でアプリやゲームを企画・開発・公開するインディーデベロップメントスタジオです。

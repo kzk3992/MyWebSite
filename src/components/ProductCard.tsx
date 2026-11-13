@@ -10,37 +10,62 @@ type ProductCardProps = {
   locale?: Locale;
 };
 
-export function ProductCard({ product, index = 1, locale = "ja" }: ProductCardProps) {
-  const isUzmera = product.slug === "uzmera";
-  const isMahou = product.slug === "mahou";
+// 長い作品名を不自然な位置で折り返さないための区切り位置（表示文字列は変えない）。
+const nameSegments: Record<string, readonly string[]> = {
+  "まほうのある暮らし": ["まほうのある", "暮らし"],
+};
+
+function ProductName({ name }: { name: string }) {
+  const segments = nameSegments[name];
+  if (!segments) return <>{name}</>;
   return (
-    <article className={styles.productCard}>
-      <p className={styles.productIndex}>{String(index).padStart(2, "0")}</p>
+    <>
+      {segments.map((segment, position) => (
+        <span key={segment}>
+          {position > 0 && <wbr />}
+          {segment}
+        </span>
+      ))}
+    </>
+  );
+}
+
+export function ProductCard({ product, index = 1, locale = "ja" }: ProductCardProps) {
+  const isJapanese = locale === "ja";
+  const theme = product.slug === "uzmera" ? styles.themeUzmera : product.slug === "mahou" ? styles.themeMahou : styles.themeHirame;
+  const nameSize = [...product.name].length > 7 ? styles.productNameLong : "";
+  const linkProps = product.internal ? {} : { target: "_blank", rel: "noopener noreferrer" };
+
+  return (
+    <article className={`${styles.productCard} ${theme}`} data-reveal>
+      <p className={styles.productIndex}><span>{String(index).padStart(2, "0")}</span></p>
       <div className={styles.productContent}>
         <div className={styles.productMeta}><span>{product.category}</span><span>{product.platform}</span></div>
-        <h3>{product.name}</h3>
+        <h3 className={nameSize}><ProductName name={product.name} /></h3>
         <p className={styles.productTagline}>{product.tagline}</p>
         <p className={styles.productDescription}>{product.description}</p>
-        <Button href={product.href} external={!product.internal}>{locale === "ja" ? "詳しく見る" : "View product"}</Button>
+        <Button href={product.href} external={!product.internal}>{isJapanese ? "詳しく見る" : "View product"}</Button>
       </div>
-      {isUzmera ? (
-        <a className={`${styles.productVisual} ${styles.uzmeraVisual}`} href={product.href} target="_blank" rel="noopener noreferrer" aria-label="Uzmera website を開く">
-          <Image className={styles.uzmeraAppIcon} src="/brand/uzmera/app-icon.png" width={1024} height={1024} alt="Uzmera アプリアイコン" />
+      {product.slug === "uzmera" ? (
+        <a className={`${styles.productVisual} ${styles.uzmeraVisual}`} href={product.href} {...linkProps} aria-label={isJapanese ? "Uzmera website を開く" : "Open the Uzmera website"}>
+          <Image className={styles.uzmeraGarden} src="/brand/uzmera/kemari_garden.png" width={320} height={180} alt="" aria-hidden="true" />
+          <Image className={styles.uzmeraAppIcon} src="/brand/uzmera/app-icon.png" width={1024} height={1024} sizes="140px" alt={isJapanese ? "Uzmera アプリアイコン" : "Uzmera app icon"} />
           <span className={styles.uzmeraWordmark}>UZMERA<span>音楽練習を、もっと自由に。</span></span>
           <Image className={styles.uzmeraMascot} src="/brand/uzmera/kemari_girl_idle.png" width={64} height={96} alt="" aria-hidden="true" />
-          <span className={styles.uzmeraPixelBall} aria-hidden="true">◆</span>
+          <Image className={styles.uzmeraBall} src="/brand/uzmera/kemari_ball.png" width={20} height={20} alt="" aria-hidden="true" />
         </a>
-      ) : isMahou ? (
-        <a className={`${styles.productVisual} ${styles.mahouVisual}`} href={product.href} target="_blank" rel="noopener noreferrer" aria-label={locale === "ja" ? "まほうのある暮らし を開く" : "Open Mahou no Aru Kurashi"}>
+      ) : product.slug === "mahou" ? (
+        <a className={`${styles.productVisual} ${styles.mahouVisual}`} href={product.href} {...linkProps} aria-label={isJapanese ? "まほうのある暮らし を開く" : "Open Mahou no Aru Kurashi"}>
+          <span className={styles.mahouCircle} aria-hidden="true"><i /><i /></span>
           <span className={styles.mahouSigil} aria-hidden="true">✦</span>
-          <span className={styles.mahouWordmark}>まほうのある暮らし<span>{locale === "ja" ? "魔法使いの人生シミュレーション" : "A wizard life simulation"}</span></span>
+          <span className={styles.mahouWordmark}>まほうのある暮らし<span>{isJapanese ? "魔法使いの人生シミュレーション" : "A wizard life simulation"}</span></span>
           <span className={styles.mahouSigilSub} aria-hidden="true">✧</span>
         </a>
       ) : (
-        <div className={styles.productVisual}>
-          <Image className={styles.productScreenshot} src={locale === "ja" ? "/brand/hirame/screens/01-concept.png" : "/brand/hirame/screens/en/01-concept.png"} width={1284} height={2778} alt={locale === "ja" ? "Hirameのコンセプトとホーム画面" : "Hirame's concept and Home screen"} />
+        <a className={`${styles.productVisual} ${styles.hirameVisual}`} href={product.href} {...linkProps} >
+          <Image className={styles.productScreenshot} src={isJapanese ? "/brand/hirame/screens/01-concept.png" : "/brand/hirame/screens/en/01-concept.png"} width={1284} height={2778} sizes="(max-width: 840px) 64vw, 350px" alt={isJapanese ? "Hirameのコンセプトとホーム画面" : "Hirame's concept and Home screen"} />
           <Image className={styles.productMascot} src="/brand/hirame/mascot.png" width={170} height={170} alt="" aria-hidden="true" />
-        </div>
+        </a>
       )}
     </article>
   );

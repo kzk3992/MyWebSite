@@ -1,47 +1,87 @@
-.hero { min-height: max(650px, calc(100svh - 72px)); position: relative; overflow: hidden; display: grid; align-items: stretch; border-bottom: 1px solid var(--color-border); }
+/* ---------- Hero ---------- */
+.hero { position: relative; isolation: isolate; overflow: hidden; min-height: max(640px, calc(100svh - 72px)); display: grid; align-items: stretch; border-bottom: 1px solid var(--color-border); }
+/* 方眼：ロゴの周囲だけ薄く見える。写真の黒はscreen合成で透過させる */
+.hero::before { content: ""; position: absolute; z-index: -2; inset: 0; background-image: linear-gradient(var(--line-soft) 1px, transparent 1px), linear-gradient(90deg, var(--line-soft) 1px, transparent 1px); background-size: 56px 56px; background-position: center top; mask-image: radial-gradient(ellipse 58% 70% at 74% 52%, #000 0, transparent 100%); opacity: .9; }
+.hero::after { content: ""; position: absolute; z-index: -1; top: 50%; right: -8%; width: min(900px, 72vw); aspect-ratio: 1; background: radial-gradient(closest-side, rgb(145 255 25 / 10%), rgb(145 255 25 / 3%) 55%, transparent); transform: translateY(-50%); animation: heroBreath 7s ease-in-out infinite alternate; pointer-events: none; }
 .heroInner { position: relative; display: grid; grid-template-columns: minmax(440px, .85fr) minmax(520px, 1.15fr); }
-.heroCopyBlock { position: relative; z-index: 2; padding: clamp(82px, 11vh, 132px) 0 96px; display: flex; align-items: flex-start; flex-direction: column; justify-content: center; }
-.heroSignal { position: absolute; top: 46px; left: 0; width: min(390px, 70%); display: flex; align-items: center; gap: 15px; color: var(--color-dim); font-size: .58rem; letter-spacing: .17em; text-transform: uppercase; }
-.heroSignal i { position: relative; flex: 1; height: 1px; background: var(--color-border); }
-.heroSignal i::after { content: ""; position: absolute; top: -2px; left: 56%; width: 5px; height: 5px; background: var(--color-spark); box-shadow: var(--glow-small); transform: rotate(45deg); }
-.heroKicker { color: var(--color-muted); font-size: .68rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
-.hero h1 { margin-top: 28px; font-size: clamp(4rem, 7.8vw, 7.8rem); letter-spacing: -.075em; }
-.hero h1 span { display: block; white-space: nowrap; }
-.hero h1 span:last-child { color: transparent; -webkit-text-stroke: 1px #758071; }
-.heroCopy { max-width: 570px; margin-top: 44px; display: grid; grid-template-columns: 38px 1fr; align-items: start; gap: 16px; }
-.heroLead { color: var(--color-text); font-size: clamp(1.04rem, 1.8vw, 1.35rem); font-weight: 620; letter-spacing: -.02em; line-height: 1.7; }
-.heroTagline { margin-top: 10px; color: var(--color-dim); font-size: .78rem; letter-spacing: .06em; }
-.heroArtwork { position: absolute; z-index: 1; width: 52%; inset: 32px -5% 32px auto; overflow: hidden; }
-.heroArtwork img { width: 100%; height: 100%; object-fit: contain; object-position: center; filter: saturate(1.06) contrast(1.05); }
-.heroAside { position: absolute; z-index: 3; right: 0; bottom: 28px; display: flex; align-items: center; gap: 10px; color: var(--color-muted); font-size: .61rem; font-weight: 700; letter-spacing: .13em; text-decoration: none; text-transform: uppercase; }
+.heroCopyBlock { position: relative; z-index: 2; padding: clamp(96px, 13vh, 140px) 0 clamp(104px, 14vh, 132px); display: flex; align-items: flex-start; flex-direction: column; justify-content: center; }
+.heroSignal { position: absolute; top: 44px; left: 0; width: min(390px, 70%); display: flex; align-items: center; gap: 15px; color: var(--color-dim); font-size: .6rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; font-variant-numeric: tabular-nums; animation: heroFade .9s .1s both; }
+.heroSignal i { position: relative; flex: 1; height: 1px; background: linear-gradient(90deg, var(--color-border), var(--color-border) 70%, transparent); transform-origin: left; animation: heroLine 1.1s .2s cubic-bezier(.2, .7, .2, 1) both; }
+.heroSignal i::after { content: ""; position: absolute; top: -2px; left: 56%; width: 5px; height: 5px; background: var(--color-spark); box-shadow: var(--glow-small); transform: rotate(45deg); animation: heroSignalPulse 3.6s 1.4s ease-in-out infinite; }
+.heroKicker { color: var(--color-muted); font-size: .68rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; animation: heroRise .8s .15s cubic-bezier(.2, .7, .2, 1) both; }
+.hero h1 { margin-top: 26px; font-size: clamp(4rem, 7.8vw, 7.8rem); font-weight: 740; letter-spacing: -.07em; line-height: .9; }
+.hero h1 span { display: block; white-space: nowrap; animation: heroRise .9s cubic-bezier(.2, .7, .2, 1) both; }
+.hero h1 span:first-child { animation-delay: .22s; }
+.hero h1 span:last-child { color: transparent; -webkit-text-stroke: 1px #7d8a78; animation-delay: .32s; }
+.heroCopy { max-width: 570px; margin-top: 46px; padding-top: 26px; display: grid; grid-template-columns: 38px 1fr; align-items: start; gap: 16px; border-top: 1px solid var(--line-soft); animation: heroRise .9s .46s cubic-bezier(.2, .7, .2, 1) both; }
+.heroLead { color: var(--color-text); font-size: clamp(1.08rem, 1.8vw, 1.4rem); font-weight: 640; letter-spacing: .01em; line-height: 1.6; font-feature-settings: "palt"; text-wrap: balance; word-break: auto-phrase; }
+.heroTagline { margin-top: 8px; color: var(--color-dim); font-size: .78rem; letter-spacing: .08em; }
+.heroArtwork { position: absolute; z-index: 1; width: 54%; inset: 24px -5% 56px auto; mix-blend-mode: screen; }
+.heroArtworkInner { width: 100%; height: 100%; animation: heroArt 1.4s .25s cubic-bezier(.2, .7, .2, 1) both; }
+.heroArtwork img { width: 100%; height: 100%; object-fit: contain; object-position: center; filter: saturate(1.08) contrast(1.06); }
+.heroRail { position: absolute; z-index: 3; inset: auto 0 0; height: 62px; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-top: 1px solid var(--line-soft); animation: heroFade 1s .7s both; }
+.heroRailTicks { width: min(240px, 30%); height: 7px; background: repeating-linear-gradient(90deg, var(--color-border) 0 1px, transparent 1px 12px); mask-image: linear-gradient(90deg, #000, transparent); }
+.heroAside { display: flex; align-items: center; gap: 10px; color: var(--color-muted); font-size: .62rem; font-weight: 700; letter-spacing: .16em; text-decoration: none; text-transform: uppercase; white-space: nowrap; transition: color 180ms ease; }
+.heroAside i { position: relative; width: 1px; height: 22px; margin-left: 6px; overflow: hidden; background: var(--color-border); }
+.heroAside i::after { content: ""; position: absolute; inset: 0; background: var(--color-spark); animation: heroScrollCue 2.4s 1.6s cubic-bezier(.6, 0, .2, 1) infinite; transform: translateY(-100%); }
+.heroAside img { transition: transform 220ms ease, filter 220ms ease; }
 .heroAside:hover { color: var(--color-spark-soft); }
+.heroAside:hover img { transform: translateY(2px); filter: drop-shadow(0 0 7px var(--color-spark)); }
+
+@keyframes heroRise { from { opacity: 0; transform: translate3d(0, 22px, 0); } to { opacity: 1; transform: none; } }
+@keyframes heroFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes heroLine { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes heroArt { from { opacity: 0; transform: translate3d(0, 14px, 0) scale(.975); } to { opacity: 1; transform: none; } }
+@keyframes heroBreath { from { opacity: .65; } to { opacity: 1; } }
+@keyframes heroSignalPulse { 0%, 100% { left: 56%; opacity: 1; } 50% { left: 78%; opacity: .55; } }
+@keyframes heroScrollCue { 0% { transform: translateY(-100%); } 55%, 100% { transform: translateY(100%); } }
+@keyframes heroDrift { to { transform: translate3d(0, 46px, 0); } }
+
+/* スクロール連動（対応ブラウザのみ・JSなし）：ロゴがわずかに遅れて流れる */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll()) {
+    .heroArtwork { animation: heroDrift linear both; animation-timeline: scroll(root); animation-range: 0 100vh; }
+  }
+}
+
+/* ---------- Works ---------- */
+.worksList { display: grid; gap: clamp(20px, 2.4vw, 32px); }
+
+/* ---------- About ---------- */
 .aboutGrid { display: grid; grid-template-columns: 1.25fr .75fr; gap: clamp(54px, 10vw, 140px); align-items: start; }
 .aboutCopy { max-width: 680px; }
-.aboutCopy p { color: var(--color-muted); font-size: clamp(1.06rem, 2vw, 1.3rem); line-height: 1.95; }
+.aboutCopy p { color: var(--color-muted); font-size: clamp(1.02rem, 1.7vw, 1.2rem); line-height: 2; }
 .aboutCopy p:first-child { color: var(--color-text); }
-.aboutCopy p + p { margin-top: 24px; }
-.aboutLink { display: inline-flex; margin-top: 34px; color: var(--color-spark-soft); font-size: .78rem; font-weight: 740; text-decoration: none; }
-.aboutLink:hover { text-decoration: underline; text-underline-offset: 6px; }
+.aboutCopy p + p { margin-top: 22px; }
+.aboutLink { display: inline-flex; margin-top: 34px; padding-bottom: 6px; color: var(--color-spark-soft); font-size: .8rem; font-weight: 740; letter-spacing: .04em; text-decoration: none; background: linear-gradient(currentColor, currentColor) left bottom / 100% 1px no-repeat; transition: background-size 260ms cubic-bezier(.2, .7, .2, 1), letter-spacing 260ms ease; }
+.aboutLink:hover { background-size: 0 1px; background-position: right bottom; letter-spacing: .07em; }
 .aboutFields { border-top: 1px solid var(--color-border); }
-.aboutFields p { min-height: 62px; display: flex; align-items: center; gap: 28px; border-bottom: 1px solid var(--color-border); color: var(--color-text); font-size: .88rem; letter-spacing: .06em; }
-.aboutFields span { color: var(--color-spark-soft); font-size: .6rem; }
+.aboutFields p { position: relative; min-height: 64px; display: flex; align-items: center; gap: 28px; border-bottom: 1px solid var(--color-border); color: var(--color-text); font-size: .9rem; font-weight: 600; letter-spacing: .08em; transition: padding-left 240ms cubic-bezier(.2, .7, .2, 1), color 200ms ease; }
+.aboutFields p::after { content: ""; position: absolute; inset: auto 0 -1px; height: 1px; background: var(--color-spark); transform: scaleX(0); transform-origin: left; transition: transform 320ms cubic-bezier(.2, .7, .2, 1); }
+.aboutFields p:hover { padding-left: 10px; color: var(--color-spark-soft); }
+.aboutFields p:hover::after { transform: scaleX(1); }
+.aboutFields span { color: var(--color-spark-soft); font-size: .62rem; font-weight: 700; letter-spacing: .14em; font-variant-numeric: tabular-nums; }
+
 @media (max-width: 900px) {
-  .hero { min-height: 860px; }
-  .heroInner { display: block; }
-  .heroCopyBlock { min-height: 470px; padding: 96px 0 390px; }
-  .heroArtwork { width: 100%; height: 400px; inset: auto 0 18px; }
-  .heroAside { display: none; }
+  .hero { min-height: 0; display: block; }
+  .hero::before { mask-image: radial-gradient(ellipse 90% 46% at 50% 76%, #000 0, transparent 100%); }
+  .hero::after { top: auto; right: 50%; bottom: -12%; width: min(760px, 130vw); transform: translateX(50%); }
+  .heroInner { display: block; padding-bottom: 62px; }
+  .heroCopyBlock { padding: 92px 0 0; }
+  .heroArtwork { position: relative; inset: auto; width: min(100%, 560px); margin: 26px auto 0; aspect-ratio: 943 / 793; animation: none; }
+  .heroRailTicks { width: 40%; }
 }
 @media (max-width: 700px) {
-  .hero { min-height: 820px; }
-  .hero h1 { font-size: clamp(3.5rem, 16vw, 5.2rem); }
-  .heroCopyBlock { min-height: 470px; padding: 82px 0 360px; }
-  .heroArtwork { height: 340px; width: 100%; right: 0; bottom: 8px; }
+  .hero h1 { font-size: clamp(3.3rem, 15.4vw, 5.2rem); }
+  .heroCopyBlock { padding-top: 84px; }
   .heroSignal { top: 30px; }
+  .heroCopy { margin-top: 34px; padding-top: 22px; }
+  .heroArtwork { margin-top: 10px; }
   .aboutGrid { grid-template-columns: 1fr; gap: 52px; }
 }
 @media (max-width: 375px) {
-  .hero h1 { font-size: 3.35rem; }
+  .hero h1 { font-size: 3.2rem; }
   .heroCopy { grid-template-columns: 30px 1fr; gap: 12px; }
   .heroCopy img { width: 30px; }
+  .heroLead { font-size: 1rem; }
 }

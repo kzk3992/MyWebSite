@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { RevealObserver } from "@/components/RevealObserver";
 import { siteConfig } from "@/config/site";
 import { localizedAlternates, shellText } from "@/i18n/site";
 import "../globals.css";
@@ -50,6 +51,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Header locale="ja" />
         <main id="main-content">{children}</main>
         <Footer locale="ja" />
+        <RevealObserver />
       </body>
     </html>
   );

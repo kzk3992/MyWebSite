@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { RevealObserver } from "@/components/RevealObserver";
 import { siteConfig } from "@/config/site";
 import { englishAlternates, shellText } from "@/i18n/site";
 import "../globals.css";
@@ -48,6 +49,7 @@ export default function EnglishRootLayout({ children }: Readonly<{ children: Rea
         <Header locale="en" />
         <main id="main-content">{children}</main>
         <Footer locale="en" />
+        <RevealObserver />
       </body>
     </html>
   );

@@ -29,7 +29,7 @@ function GoodsCard({ item, locale }: { item: GoodsItem; locale: Locale }) {
 export function GoodsSection({ locale }: { locale: Locale }) {
   return (
     <Section id="goods" eyebrow="03 / GOODS" title={locale === "ja" ? "グッズ" : "Goods"}>
-      <ul className={styles.goodsGrid}>
+      <ul className={styles.goodsGrid} data-reveal>
         {goodsItems.map((item) => (
           <li key={item.id}>
             <GoodsCard item={item} locale={locale} />

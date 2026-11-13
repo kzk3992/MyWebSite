@@ -38,7 +38,7 @@ export function Footer({ locale }: { locale: Locale }) {
           <p>
             Copyright © {siteConfig.copyrightYear} {siteConfig.brandName}
           </p>
-          <p>Made independently in Japan.</p>
+          <p className={styles.footerMade}>Made independently in Japan.</p>
           <a className={styles.toTop} href="#main-content" aria-label={shellText[locale].backToTop}>
             <BrandIcon name="power" size={34} />
           </a>

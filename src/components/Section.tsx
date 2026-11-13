@@ -27,7 +27,7 @@ export function Section({
     >
       <Container>
         {(eyebrow || title || intro) && (
-          <header className={styles.sectionHeader}>
+          <header className={`${styles.sectionHeader} ${intro ? styles.sectionHeaderSplit : ""}`} data-reveal>
             {eyebrow && <div className={styles.sectionEyebrow}><BrandIcon name="spark" size={28} /><p className="eyebrow">{eyebrow}</p></div>}
             {title && <h2>{title}</h2>}
             {intro && <p>{intro}</p>}

@@ -43,23 +43,37 @@ body {
   overflow-x: clip;
   color: var(--color-text);
   background: var(--color-bg);
-  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans JP", sans-serif;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic UI", Meiryo, sans-serif;
+  line-height: 1.7;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
 }
 ::selection { color: #071003; background: var(--color-spark); }
 :focus-visible { outline: 2px solid var(--color-spark); outline-offset: 4px; }
 h1, h2, h3, p, dl, dd, ul, ol { margin: 0; }
-h1, h2, h3 { color: var(--color-text); font-weight: 720; letter-spacing: -.045em; }
+h1, h2, h3 { color: var(--color-text); font-weight: 720; letter-spacing: -.045em; text-wrap: balance; }
+p { text-wrap: pretty; }
+/* 和文：禁則を厳密にし、見出しは文節単位で折り返す（対応ブラウザのみ） */
+:lang(ja) :is(h1, h2, h3) { line-break: strict; word-break: auto-phrase; }
+:lang(ja) p { line-break: strict; }
 h1 { font-size: clamp(3.1rem, 8vw, 7.4rem); line-height: .92; }
 h2 { font-size: clamp(2.2rem, 5vw, 4.6rem); line-height: 1; }
 h3 { font-size: 1.5rem; line-height: 1.2; }
 a { color: inherit; }
 img { max-width: 100%; height: auto; }
 main { min-height: 70vh; }
-.skip-link { position: fixed; z-index: 100; top: 12px; left: 12px; padding: 11px 16px; color: #071003; background: var(--color-spark); font-weight: 800; transform: translateY(-160%); }
+.skip-link { position: fixed; z-index: 100; top: 12px; left: 12px; padding: 11px 16px; color: #071003; background: var(--color-spark); font-weight: 800; line-height: 1.2; transform: translateY(-220%); }
 .skip-link:focus { transform: translateY(0); }
-.eyebrow { color: var(--color-spark-soft); font-size: .68rem; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
+.eyebrow { color: var(--color-spark-soft); font-size: .68rem; font-weight: 800; letter-spacing: .2em; line-height: 1.4; text-transform: uppercase; font-variant-numeric: tabular-nums; }
+
+/* スクロール出現：RevealObserver が html に .reveal-ready を付けた時だけ隠す（JSなしでは常に表示） */
+.reveal-ready [data-reveal] { opacity: 0; transform: translate3d(0, 24px, 0); transition: opacity 720ms cubic-bezier(.2, .7, .2, 1), transform 720ms cubic-bezier(.2, .7, .2, 1); }
+.reveal-ready [data-reveal][data-revealed="true"] { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-delay: 0s !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; transition-delay: 0s !important; }
+  [data-reveal] { opacity: 1 !important; transform: none !important; }
 }
