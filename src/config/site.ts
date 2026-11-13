@@ -98,8 +98,8 @@ export const uzmeraEnglish: Product = {
     "Recording, metronome, tuner, and score reading in one place—tools to support your everyday music practice.",
 };
 
-// LINEスタンプショップのURLは販売開始後に発行される。発行されたらここに入れるだけでグッズのリンクが有効になる。
-export const lineStickersStoreUrl = "";
+// LINEスタンプショップのURL（2026-11-13 販売開始）。
+export const lineStickersStoreUrl = "https://line.me/S/sticker/37956024";
 
 export type GoodsItem = {
   id: string;
