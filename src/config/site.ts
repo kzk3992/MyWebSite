@@ -68,6 +68,19 @@ export const siteConfig = {
       appStoreUrl: null,
       screenshots: [],
     },
+    {
+      slug: "mahou",
+      internal: false,
+      name: "まほうのある暮らし",
+      category: "Game",
+      platform: "Webブラウザ",
+      tagline: "魔法使いの一生を、静かに生きる。",
+      description:
+        "魔法のある世界に生まれ、学び、働き、老いていく。選択の積み重ねで紡ぐ人生シミュレーションゲーム。ブラウザですぐに遊べます。",
+      href: "https://mahou.mikaspark.com/",
+      appStoreUrl: null,
+      screenshots: [],
+    },
   ] satisfies readonly Product[],
 } as const;
 
@@ -96,6 +109,15 @@ export const uzmeraEnglish: Product = {
   tagline: "Make practice move with music.",
   description:
     "Recording, metronome, tuner, and score reading in one place—tools to support your everyday music practice.",
+};
+
+export const mahouEnglish: Product = {
+  ...siteConfig.products[2],
+  name: "Mahou no Aru Kurashi",
+  platform: "Web browser",
+  tagline: "Live a quiet life, as a wizard.",
+  description:
+    "A life-simulation game set in a world of magic: be born, learn, work, and grow old, one choice at a time. Play instantly in your browser.",
 };
 
 // LINEスタンプショップのURL（2026-11-13 販売開始）。

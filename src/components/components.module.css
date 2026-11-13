@@ -60,6 +60,12 @@
 .uzmeraWordmark { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 18px; align-items: center; color: #ffe9c5; font: 700 clamp(3rem, 7vw, 6rem)/1 "DotGothic16", "Courier New", monospace; letter-spacing: .09em; text-shadow: 4px 4px 0 #763c50; }
 .uzmeraWordmark span { color: #edc9c0; font: 1rem/1.7 ui-sans-serif, sans-serif; letter-spacing: .06em; }
 .uzmeraPixelBall { position: absolute; top: 14%; left: 17%; color: #e8b957; font-size: 38px; text-shadow: 3px 3px #865139; }
+.mahouVisual { display: grid; place-items: center; color: #efe6cf; text-decoration: none; background-color: #0e2018; background-image: radial-gradient(rgb(215 185 117 / 30%) 1px, transparent 1.5px), linear-gradient(160deg, #0a1a12, #14382a 65%, #0a1a12); background-size: 26px 26px, auto; }
+.mahouVisual::after { border-color: rgb(215 185 117 / 25%); }
+.mahouSigil { position: absolute; top: 11%; right: 13%; color: #d7b975; font-size: 42px; text-shadow: 0 0 18px rgb(215 185 117 / 65%); }
+.mahouSigilSub { position: absolute; bottom: 13%; left: 11%; color: #d7b975; font-size: 24px; opacity: .8; text-shadow: 0 0 12px rgb(215 185 117 / 55%); }
+.mahouWordmark { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 22px; align-items: center; padding: 0 8%; color: #f3ead2; font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif; font-size: clamp(1.9rem, 4vw, 3.2rem); font-weight: 600; letter-spacing: .12em; line-height: 1.5; text-align: center; text-shadow: 0 2px 22px rgb(0 0 0 / 45%); }
+.mahouWordmark span { color: #cbbd93; font-family: ui-sans-serif, sans-serif; font-size: 1rem; font-weight: 500; letter-spacing: .08em; }
 .goodsGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 20px; margin: 0; padding: 0; list-style: none; }
 .goodsCard { display: block; color: inherit; text-decoration: none; }
 a.goodsCard:hover .goodsCardText { color: var(--color-spark-soft); }

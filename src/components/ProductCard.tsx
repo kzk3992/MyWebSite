@@ -12,6 +12,7 @@ type ProductCardProps = {
 
 export function ProductCard({ product, index = 1, locale = "ja" }: ProductCardProps) {
   const isUzmera = product.slug === "uzmera";
+  const isMahou = product.slug === "mahou";
   return (
     <article className={styles.productCard}>
       <p className={styles.productIndex}>{String(index).padStart(2, "0")}</p>
@@ -28,6 +29,12 @@ export function ProductCard({ product, index = 1, locale = "ja" }: ProductCardPr
           <span className={styles.uzmeraWordmark}>UZMERA<span>音楽練習を、もっと自由に。</span></span>
           <Image className={styles.uzmeraMascot} src="/brand/uzmera/kemari_girl_idle.png" width={64} height={96} alt="" aria-hidden="true" />
           <span className={styles.uzmeraPixelBall} aria-hidden="true">◆</span>
+        </a>
+      ) : isMahou ? (
+        <a className={`${styles.productVisual} ${styles.mahouVisual}`} href={product.href} target="_blank" rel="noopener noreferrer" aria-label={locale === "ja" ? "まほうのある暮らし を開く" : "Open Mahou no Aru Kurashi"}>
+          <span className={styles.mahouSigil} aria-hidden="true">✦</span>
+          <span className={styles.mahouWordmark}>まほうのある暮らし<span>{locale === "ja" ? "魔法使いの人生シミュレーション" : "A wizard life simulation"}</span></span>
+          <span className={styles.mahouSigilSub} aria-hidden="true">✧</span>
         </a>
       ) : (
         <div className={styles.productVisual}>

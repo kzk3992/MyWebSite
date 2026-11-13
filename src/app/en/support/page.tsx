@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Container } from "@/components/Container";
 import { Section } from "@/components/Section";
 import { englishContent } from "@/content/en";
-import { hirameEnglish, uzmeraEnglish } from "@/config/site";
+import { hirameEnglish, mahouEnglish, uzmeraEnglish } from "@/config/site";
 import { englishAlternates } from "@/i18n/site";
 import styles from "../../content.module.css";
 
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 };
 
 export default function EnglishSupportPage() {
-  const products = [hirameEnglish, uzmeraEnglish];
+  const products = [hirameEnglish, uzmeraEnglish, mahouEnglish];
   return (
     <>
       <section className={styles.pageHero}>
