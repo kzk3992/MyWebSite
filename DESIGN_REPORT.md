@@ -56,6 +56,7 @@ uzmera 375: height=4116 scrollWidth=375 clientWidth=375
 uzmera 320: height=4367 scrollWidth=320 clientWidth=320
 ```
 注意：ヘッドレス Chromium のみで確認。Safari / 実機は未確認。
+モバイル幅の *-full.png の左上に「本文へ移動 / Skip to content」が写っているのは全ページ撮影時の描画上の現象で、実際の位置は画面外（実測 top: -78px）。*-fold.png が実際の見え方。
 
 ## 残した課題・次に効くこと
 - **不足素材**：Uzmera カードのワードマーク用ドットフォント。DotGothic16 は 2MB あるため公式サイトでは読み込ませていない（等幅フォントで代替）。「UZMERA」6字だけのサブセット woff2（数KB）があれば本来の表情になる。
