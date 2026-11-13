@@ -16,14 +16,14 @@
 - ヒーロー：ロゴ画像を screen 合成にして背景の方眼と淡い発光の上に置き、写真の矩形感を消した。見出し・コピー・ロゴが順に立ち上がる CSS アニメーション、スクロールでロゴがわずかに遅れて流れる（animation-timeline 対応ブラウザのみ、JS なし）。下端に Explore works のレール。ロゴ画像とコピー「小さなアイデアを、使えるプロダクトへ。」は不変。モバイルは絶対配置をやめ通常フローに。
 - Works カード：3作で枠・余白・番号列・ホバー挙動を統一し、違いは作品色（--card-accent）と右側ビジュアルだけに。
   - Hirame：実画面を紙色の背景に。ホバーで画面とマスコットが少し動く。
-  - Uzmera：既存のドット絵の庭（kemari_garden.png）・けまり娘・毬を使った舞台に。ホバーで毬が跳ねる。
-  - まほうのある暮らし：深緑に CSS だけで描いた金の魔法陣（ゆっくり回転）。
+  - Uzmera：既存のドット絵の庭（kemari_garden.png）・けまり娘・毬を使った舞台に。ホバーで毬が跳ねる。ワードマークは追補のサブセットフォントでドット文字になった。
+  - まほうのある暮らし：**ゲーム本体の素材で作り直し**（下の「追補」参照）。夕暮れの空、町並み、魔法使い・老賢者・スライム・おばけ・本のドット絵、ゲームと同じ3段組みのロゴ。
   - 長い作品名は小さめの段に切り替え、「まほうのある／暮らし」で折り返す（以前は「まほうの／ある暮ら／し」）。
   - Hirame のビジュアルも他2作と同じくリンク化（宛先は既存の /apps/hirame/、/en/apps/hirame/。新しい宛先は増えていない）。
 
 ## 変えなかったこと・不変条件チェック
 - npm run check（lint / typecheck / build / test:static）：**成功**。「静的出力を検証しました: 16ルート、19 HTML、リンク切れなし」
-- 生成ファイル一覧（out/、_next 除く）の変更前後 diff：差分なし（_next を除く116ファイルすべて一致）
+- 生成ファイル一覧（out/、_next 除く）の変更前後 diff（追補後は brand/mahou/ の9ファイルが増えただけで、既存116ファイルは全て残っている）。追補前の結果：差分なし（_next を除く116ファイルすべて一致）
 - href 一覧（全HTMLの a[href] と canonical/alternate）の変更前後 diff：
 ```
 差分なし（246行すべて一致）
@@ -36,7 +36,7 @@ dde0003889bdafaff944345d1cb85efdb6a8f7e8  public/apps/hirame/app-ads.txt
 dde0003889bdafaff944345d1cb85efdb6a8f7e8  out/ads.txt
 dde0003889bdafaff944345d1cb85efdb6a8f7e8  out/app-ads.txt
 ```
-- 依存追加なし（package.json 未変更）。新規画像なし。push なし。作業開始時に他者の未コミット変更なし。
+- 依存追加なし（package.json 未変更）。新規に描いた画像なし（追補の SVG はゲームのデータからの書き出し）。push なし。作業開始時に他者の未コミット変更なし。
 
 ## 文言の微調整（全件）
 1. Works セクションの小見出し：日 "Selected work / 01"、英 "Selected work / 02"（英は番号の誤り）→ 日英とも "01 / Selected work"（"02 / ABOUT" "03 / GOODS" と書式を統一）。
@@ -59,7 +59,18 @@ uzmera 320: height=4367 scrollWidth=320 clientWidth=320
 モバイル幅の *-full.png の左上に「本文へ移動 / Skip to content」が写っているのは全ページ撮影時の描画上の現象で、実際の位置は画面外（実測 top: -78px）。*-fold.png が実際の見え方。
 
 ## 残した課題・次に効くこと
-- **不足素材**：Uzmera カードのワードマーク用ドットフォント。DotGothic16 は 2MB あるため公式サイトでは読み込ませていない（等幅フォントで代替）。「UZMERA」6字だけのサブセット woff2（数KB）があれば本来の表情になる。
 - public/brand/icons/spark.png が 724KB、uzmera/app-icon.png が 1.2MB（表示は数十px）。縮小版を用意すると初期表示が軽くなる。
 - フッターの logo-white.png は背景がグレーの矩形で見える。透過版があると締まる。
 - components.module.css に未使用の necosmos 系スタイルが残っている（今回は削除していない）。
+
+## 追補：まほうのある暮らしカードをゲーム素材で作り直し（追加依頼）
+- **前提の相違**：当初の依頼文は「まほうの深緑＋金」だったが、現在のゲーム本体（Wizard-Simulator/dist）は紺地に黄・水色・ピンクのドット絵。カードは現在のゲームの見た目に合わせた。カードのアクセント色も金 → ゲームの黄色（#ffd43b）に変更。
+- **素材の出どころ**（新しく描いた絵はない）：
+  - スプライト（wizard / elder / slime / ghost / books）：game.js の SPR・END_SPR・PAL を、ゲーム自身の描画関数 px() でそのまま SVG に書き出したもの。
+  - 町並み（skyline.svg）：ゲーム内「サハルナ」の sky 配列（共有カード・PV と同じ）。星（stars.svg）：dist/index.html の .scene::before の星タイル。
+  - 空の4段の色、地面の市松、ロゴの3段組み・傾き・影の色、タグの枠：dist/index.html の CSS と同じ値。
+  - 置き場所：public/brand/mahou/。ゲーム側のリポジトリは変更していない。
+- **Webフォント（表示速度への影響）**：DotGothic16 のサブセットを追加（public/brand/mahou/DotGothic16-subset.woff、**5.9KB**）。既存の public/brand/uzmera/DotGothic16-Regular.ttf（2MB、OFL、Reserved Font Name なし）から、カードで使う文字（ASCII と「まほうのある暮らし魔法使いの人生シミュレーション」）だけを fonttools で抜き出したもの。ライセンス文を同じフォルダに同梱。font-display: swap なので描画は止めず、読み込みは1リクエスト・約6KB。外部（Google Fonts 等）への通信はない。README の「外部フォントは使用していません」は引き続き正しい（自サイト内のファイル）。
+- 動き：スプライトはゲームと同じ2コマの上下動、星は2コマの瞬き。ホバーでスライムが跳ねる。prefers-reduced-motion では停止。
+- 追補後の再検証：npm run check 成功（16ルート、19 HTML、リンク切れなし）／ href 一覧 diff 差分なし（246行一致）／ ads.txt・app-ads.txt の sha1 一致／ 1280・375・320 で横スクロールなし。カード単体の画像は ~/fable-design-shots/mahou-card-1280.png、mahou-card-en-375.png。
+- 文言：カード内の表記は従来どおり「まほうのある暮らし」「魔法使いの人生シミュレーション」／「A wizard life simulation」。変更なし。

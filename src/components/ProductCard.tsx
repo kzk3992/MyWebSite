@@ -56,10 +56,20 @@ export function ProductCard({ product, index = 1, locale = "ja" }: ProductCardPr
         </a>
       ) : product.slug === "mahou" ? (
         <a className={`${styles.productVisual} ${styles.mahouVisual}`} href={product.href} {...linkProps} aria-label={isJapanese ? "まほうのある暮らし を開く" : "Open Mahou no Aru Kurashi"}>
-          <span className={styles.mahouCircle} aria-hidden="true"><i /><i /></span>
-          <span className={styles.mahouSigil} aria-hidden="true">✦</span>
-          <span className={styles.mahouWordmark}>まほうのある暮らし<span>{isJapanese ? "魔法使いの人生シミュレーション" : "A wizard life simulation"}</span></span>
-          <span className={styles.mahouSigilSub} aria-hidden="true">✧</span>
+          <span className={styles.mahouStars} aria-hidden="true" />
+          <span className={styles.mahouLogo} aria-hidden="true">
+            <span>まほう</span><span>のある</span><span>暮らし</span><i>✦</i><i>✧</i>
+          </span>
+          <span className={styles.mahouTag}>{isJapanese ? "魔法使いの人生シミュレーション" : "A wizard life simulation"}</span>
+          <span className={styles.mahouScene} aria-hidden="true">
+            <Image className={styles.mahouSkyline} src="/brand/mahou/skyline.svg" width={32} height={10} alt="" />
+            <Image className={styles.mahouGhost} src="/brand/mahou/ghost.svg" width={16} height={18} alt="" />
+            <Image className={styles.mahouElder} src="/brand/mahou/elder.svg" width={16} height={18} alt="" />
+            <Image className={styles.mahouWizard} src="/brand/mahou/wizard.svg" width={16} height={18} alt="" />
+            <Image className={styles.mahouBooks} src="/brand/mahou/books.svg" width={16} height={18} alt="" />
+            <Image className={styles.mahouSlime} src="/brand/mahou/slime.svg" width={16} height={18} alt="" />
+            <span className={styles.mahouGround} />
+          </span>
         </a>
       ) : (
         <a className={`${styles.productVisual} ${styles.hirameVisual}`} href={product.href} {...linkProps} >

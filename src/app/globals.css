@@ -36,6 +36,9 @@
   --accent-shadow: rgb(145 255 25 / 14%);
 }
 
+/* ゲームと同じドット文字。Works カードで使う文字だけに絞った約6KBのサブセット（元: public/brand/uzmera/DotGothic16-Regular.ttf, OFL） */
+@font-face { font-family: "DotGothic16"; src: url("/brand/mahou/DotGothic16-subset.woff") format("woff"); font-display: swap; }
+
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 76px; background: var(--color-bg); }
 body {

@@ -50,7 +50,7 @@
 .productCard:hover, .productCard:focus-within { border-color: color-mix(in srgb, var(--card-accent) 46%, var(--color-border)); background: #0c110d; }
 .themeHirame { --card-accent: #f2c14a; }
 .themeUzmera { --card-accent: #edacac; }
-.themeMahou { --card-accent: #d7b975; }
+.themeMahou { --card-accent: #ffd43b; }
 .productIndex { position: relative; padding: 34px 0; display: flex; justify-content: center; color: var(--color-dim); border-right: 1px solid var(--color-border); font-size: .72rem; font-weight: 700; letter-spacing: .18em; font-variant-numeric: tabular-nums; transition: color 320ms ease; }
 .productIndex::after { content: ""; position: absolute; top: 0; right: -1px; width: 1px; height: 100%; background: var(--card-accent); transform: scaleY(0); transform-origin: top; transition: transform 520ms cubic-bezier(.2, .7, .2, 1); }
 .productCard:hover .productIndex, .productCard:focus-within .productIndex { color: var(--card-accent); }
@@ -88,19 +88,33 @@
 .productCard:hover .uzmeraAppIcon { transform: rotate(-7deg) translate3d(-2px, -4px, 0); }
 @keyframes uzmeraKick { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(34px, -150px, 0); } }
 
-/* まほうのある暮らし：深緑と金の魔法陣 */
-.mahouVisual { display: grid; place-items: center; color: #efe6cf; background-color: #0e2018; background-image: radial-gradient(rgb(215 185 117 / 26%) 1px, transparent 1.5px), radial-gradient(ellipse 60% 55% at 50% 50%, #1b4634 0, transparent 100%), linear-gradient(160deg, #0a1a12, #123124 65%, #0a1a12); background-size: 26px 26px, auto, auto; }
-.mahouCircle { position: absolute; top: 50%; left: 50%; width: min(78%, 430px); aspect-ratio: 1; border: 1px solid rgb(215 185 117 / 30%); border-radius: 50%; transform: translate(-50%, -50%); box-shadow: 0 0 60px rgb(215 185 117 / 8%), inset 0 0 60px rgb(215 185 117 / 6%); }
-.mahouCircle i { position: absolute; border-radius: 50%; }
-.mahouCircle i:first-child { inset: 5%; border: 1px dashed rgb(215 185 117 / 34%); animation: mahouTurn 90s linear infinite; }
-.mahouCircle i:last-child { inset: 15%; border: 1px solid rgb(215 185 117 / 16%); background: conic-gradient(from 0deg, transparent 0 24.6%, rgb(215 185 117 / 50%) 24.6% 25%, transparent 25% 49.6%, rgb(215 185 117 / 50%) 49.6% 50%, transparent 50% 74.6%, rgb(215 185 117 / 50%) 74.6% 75%, transparent 75% 99.6%, rgb(215 185 117 / 50%) 99.6%); mask-image: radial-gradient(closest-side, transparent 92%, #000 92.5%); animation: mahouTurn 140s linear infinite reverse; }
-.productCard:hover .mahouCircle i:first-child { animation-duration: 28s; }
-.mahouSigil { position: absolute; top: 11%; right: 12%; color: #d7b975; font-size: 40px; line-height: 1; text-shadow: 0 0 18px rgb(215 185 117 / 65%); animation: mahouTwinkle 4.2s ease-in-out infinite alternate; }
-.mahouSigilSub { position: absolute; bottom: 12%; left: 11%; color: #d7b975; font-size: 24px; line-height: 1; text-shadow: 0 0 12px rgb(215 185 117 / 55%); animation: mahouTwinkle 3.4s 1.2s ease-in-out infinite alternate; }
-.mahouWordmark { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 20px; align-items: center; padding: 0 8%; color: #f3ead2; font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif; font-size: clamp(1.7rem, 3.3vw, 2.7rem); font-weight: 600; letter-spacing: .14em; line-height: 1.5; text-align: center; text-shadow: 0 2px 22px rgb(0 0 0 / 55%); word-break: keep-all; }
-.mahouWordmark span { padding-top: 18px; border-top: 1px solid rgb(215 185 117 / 40%); color: #cbbd93; font-family: ui-sans-serif, -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif; font-size: .82rem; font-weight: 500; letter-spacing: .16em; }
-@keyframes mahouTurn { to { transform: rotate(360deg); } }
-@keyframes mahouTwinkle { from { opacity: .45; transform: scale(.9); } to { opacity: 1; transform: scale(1.06); } }
+/* まほうのある暮らし：ゲーム本体のドット絵・夕暮れの空・ロゴの組み方をそのまま使う */
+.mahouVisual { color: #f4f7ff; background: linear-gradient(#1b1456 0 22%, #4a2a8c 22% 46%, #b84a7a 46% 68%, #ff9a4a 68% 100%); font-family: "DotGothic16", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, monospace; }
+.mahouStars { position: absolute; inset: 0 0 46% 0; background: url("/brand/mahou/stars.svg") 0 0 / 192px 128px; image-rendering: pixelated; animation: mahouTwinkle 2.4s steps(2) infinite; }
+.mahouLogo { position: absolute; z-index: 2; top: 11%; left: 9%; display: inline-grid; justify-items: start; color: #ffd43b; font-size: clamp(2.6rem, 5.4vw, 4.2rem); line-height: 1; letter-spacing: .02em; text-shadow: 3px 3px 0 #04061a, 6px 6px 0 #2a48d8; }
+.mahouLogo span { display: block; white-space: nowrap; }
+.mahouLogo span:nth-child(1) { transform: rotate(-3deg); transform-origin: left bottom; }
+.mahouLogo span:nth-child(2) { margin: .05em 0 .2em 5.3em; color: #f4f7ff; font-size: .4em; letter-spacing: .1em; text-shadow: 2px 2px 0 #04061a, 4px 4px 0 #2a48d8; }
+.mahouLogo span:nth-child(3) { margin-left: .72em; color: #ff6fae; font-size: 1.14em; text-shadow: 3px 3px 0 #04061a, 6px 6px 0 #7a2a6a; }
+.mahouLogo i { position: absolute; top: -.12em; right: -.1em; color: #5fe6ff; font-size: .36em; font-style: normal; text-shadow: 0 0 6px #5fe6ff; animation: mahouBreathe 4s ease-in-out infinite; }
+.mahouLogo i:last-child { top: auto; right: auto; bottom: .5em; left: -.5em; color: #ffd43b; font-size: .26em; text-shadow: 0 0 6px #ffd43b; animation-delay: -2s; }
+.mahouTag { position: absolute; z-index: 2; top: calc(11% + clamp(2.6rem, 5.4vw, 4.2rem) * 2.95); left: 9%; padding: 6px 9px 5px; border: 2px solid #5fe6ff; color: #5fe6ff; background: #04061a; font-size: .78rem; line-height: 1; letter-spacing: .06em; }
+.mahouScene { position: absolute; inset: auto 0 0; height: 46%; }
+.mahouScene img { position: absolute; height: auto; }
+.mahouSkyline { left: 0; bottom: 40px; width: 100%; height: calc(100% - 40px) !important; opacity: .92; }
+.mahouGround { position: absolute; inset: auto 0 0; height: 44px; border-top: 4px solid #04061a; background: repeating-linear-gradient(90deg, #1f8a4c 0 28px, #26a35a 28px 56px); }
+.mahouElder, .mahouWizard, .mahouBooks, .mahouSlime, .mahouGhost { z-index: 1; animation: mahouBob 1s steps(2) infinite; }
+.mahouElder { left: 8%; bottom: 36px; width: clamp(64px, 14%, 92px); animation-delay: .25s; }
+.mahouWizard { left: 30%; bottom: 36px; width: clamp(84px, 19%, 124px); }
+.mahouBooks { left: 56%; bottom: 36px; width: clamp(56px, 12%, 80px); animation: none; }
+.mahouSlime { right: 8%; bottom: 36px; width: clamp(64px, 14%, 92px); animation-delay: .5s; }
+.mahouGhost { right: 12%; bottom: 82%; width: clamp(48px, 10%, 68px); opacity: .9; animation-duration: 1.6s; }
+.productCard:hover .mahouSlime { animation: mahouHop .5s steps(3) infinite alternate; }
+.productCard:hover .mahouWizard { animation-duration: .5s; }
+@keyframes mahouBob { 50% { transform: translateY(-4px); } }
+@keyframes mahouHop { to { transform: translateY(-22px); } }
+@keyframes mahouTwinkle { 50% { opacity: .5; } }
+@keyframes mahouBreathe { 50% { opacity: .55; transform: scale(.86); } }
 
 /* ---------- Goods ---------- */
 .goodsGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 216px)); gap: 24px; margin: 0; padding: 0; list-style: none; }
@@ -195,7 +209,11 @@ a.goodsCard:hover .goodsCardImage { transform: translate3d(0, -4px, 0); box-shad
   .uzmeraWordmark span { font-size: .7rem; }
   .uzmeraMascot { left: 22%; }
   .uzmeraBall { left: calc(22% + clamp(92px, 19%, 148px)); }
-  .mahouCircle { width: 86%; }
+  .mahouLogo { top: 9%; }
+  .mahouTag { top: calc(9% + 2.6rem * 2.95); font-size: .72rem; }
+  .mahouGround { height: 36px; }
+  .mahouSkyline { bottom: 32px; height: calc(100% - 32px) !important; }
+  .mahouElder, .mahouWizard, .mahouBooks, .mahouSlime { bottom: 29px; }
   .legal { padding: 50px 0 88px; }
   .legalBody section { padding-left: 34px; }
   .legalDates, .legalDates div { align-items: flex-start; flex-direction: column; gap: 8px; }
