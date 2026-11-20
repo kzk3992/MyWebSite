@@ -139,19 +139,43 @@ export function RoomHero({ content }: { content: RoomHeroContent }) {
       }
     };
 
-    const place = (element: HTMLElement, x: number, yBottom: number, widthUnits: number, z: number, alpha: number) => {
+    // オブジェの文字の中心が、上から何割の位置にあるか（拡大縮小しても変わらないので幅が変わるまで使い回す）
+    const textRatios = new Map<HTMLElement, number | null>();
+    const textRatio = (element: HTMLElement) => {
+      if (textRatios.has(element)) return textRatios.get(element)!;
+      let ratio: number | null = null;
+      const fixed = element.dataset.textRatio;
+      const mark = element.querySelector<HTMLElement>(`.${styles.wordmark}`);
+      if (fixed) ratio = Number(fixed);
+      else if (mark) {
+        const box = element.getBoundingClientRect();
+        const text = mark.getBoundingClientRect();
+        if (box.height > 0) ratio = (text.top + text.height / 2 - box.top) / box.height;
+      }
+      textRatios.set(element, ratio);
+      return ratio;
+    };
+
+    const place = (element: HTMLElement, x: number, yBottom: number | "text", widthUnits: number, z: number, alpha: number) => {
       const scale = focal / z / BASE;
       const baseWidth = widthUnits * BASE;
       if (element.style.width !== `${baseWidth}px`) {
         element.style.width = `${baseWidth}px`;
         heights.delete(element);
+        textRatios.delete(element);
       }
       let elementHeight = heights.get(element);
       if (elementHeight === undefined) {
         elementHeight = element.offsetHeight;
         heights.set(element, elementHeight);
       }
-      element.style.transform = `translate(${(screenX(x, z) - baseWidth / 2).toFixed(1)}px, ${(screenY(yBottom, z) - elementHeight).toFixed(1)}px) scale(${scale.toFixed(4)})`;
+      // "text"：文字の中心を目の高さ（＝消失点・地平線の高さ）に置く。どの距離でも文字は地平線の上を流れてくる
+      let bottom = 0;
+      if (yBottom === "text") {
+        const ratio = textRatio(element);
+        bottom = ratio === null ? 0 : EYE - ((1 - ratio) * elementHeight) / BASE;
+      } else bottom = yBottom;
+      element.style.transform = `translate(${(screenX(x, z) - baseWidth / 2).toFixed(1)}px, ${(screenY(bottom, z) - elementHeight).toFixed(1)}px) scale(${scale.toFixed(4)})`;
       element.style.zIndex = String(Math.round(4000 - z * 40));
       element.style.opacity = alpha.toFixed(3);
       element.style.pointerEvents = alpha > 0.6 ? "" : "none";
@@ -170,6 +194,7 @@ export function RoomHero({ content }: { content: RoomHeroContent }) {
       markZ = (narrow ? 5.4 : 7) + CELL * 2; // 床の線2本分だけ奥に置く
       markWidth = narrow ? 1.7 : 2.2;
       heights.clear();
+      textRatios.clear();
       request();
     };
 
@@ -205,7 +230,7 @@ export function RoomHero({ content }: { content: RoomHeroContent }) {
         const [x, widthUnits] = narrow ? spot.phone : spot.pc;
         const z = (((spot.z0 - camera) % LOOP) + LOOP) % LOOP;
         const alpha = smooth((z - 1.3) / 1.4) * (1 - smooth((z - (LOOP - 7)) / 6));
-        place(element, x, spot.y, widthUnits, Math.max(0.9, z), alpha);
+        place(element, x, spot.key === "sign" ? spot.y : "text", widthUnits, Math.max(0.9, z), alpha);
       });
       scene.dataset.ready = "true";
     };
@@ -288,6 +313,15 @@ export function RoomHero({ content }: { content: RoomHeroContent }) {
     };
     const resizeObserver = new ResizeObserver(resize);
     resizeObserver.observe(scene);
+    // 画像の読み込みなどでオブジェの高さが変わったら、測り直す（古い高さのままだと文字の高さがずれる）
+    const objectObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        heights.delete(entry.target as HTMLElement);
+        textRatios.delete(entry.target as HTMLElement);
+      }
+      request();
+    });
+    [markElement, ...Object.values(objectRefs.current)].forEach((element) => { if (element) objectObserver.observe(element); });
     document.addEventListener("visibilitychange", onVisibility);
     scene.addEventListener("wheel", onWheel, { passive: false });
     scene.addEventListener("pointerdown", onPointerDown);
@@ -302,6 +336,7 @@ export function RoomHero({ content }: { content: RoomHeroContent }) {
       window.cancelAnimationFrame(raf);
       observer.disconnect();
       resizeObserver.disconnect();
+      objectObserver.disconnect();
       document.removeEventListener("visibilitychange", onVisibility);
       scene.removeEventListener("wheel", onWheel);
       scene.removeEventListener("pointerdown", onPointerDown);
@@ -342,7 +377,7 @@ export function RoomHero({ content }: { content: RoomHeroContent }) {
         <Wordmark text="WORKS" />
         <span className={styles.fan}><span className={styles.spin}><i /><i /><i /><i /><i /><i /></span></span>
       </a>
-      <a ref={(element) => { objectRefs.current.support = element; }} className={`${styles.obj} ${styles.support}`} href={content.support.href} tabIndex={-1} aria-hidden="true">
+      <a ref={(element) => { objectRefs.current.support = element; }} className={`${styles.obj} ${styles.support}`} href={content.support.href} tabIndex={-1} aria-hidden="true" data-text-ratio="0.43">
         <Image src="/brand/room/support-hands.png" width={720} height={339} alt="" />
       </a>
       <a ref={(element) => { objectRefs.current.privacy = element; }} className={`${styles.obj} ${styles.privacy}`} href={content.privacy.href} tabIndex={-1} aria-hidden="true">
