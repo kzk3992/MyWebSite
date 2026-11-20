@@ -125,6 +125,9 @@ export function WorksCarousel({ items, locale }: { items: CarouselItem[]; locale
   const wrapRefs = useRef<(HTMLDivElement | null)[]>([]);
   const cardRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const shadeRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  // 奥のカードの「透け」は opacity ではなく白い霧で表す。カードを半透明にすると中央のロゴが透けて見え、
+  // iOS Safari では opacity/filter 付きの要素の前後判定が崩れてロゴが手前に描かれることがあるため。
+  const fogRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const controller = useRef<Controller | null>(null);
   const suppressClick = useRef(false);
 
@@ -283,7 +286,8 @@ export function WorksCarousel({ items, locale }: { items: CarouselItem[]; locale
         if (key !== depthKeys[index]) {
           depthKeys[index] = key;
           card.style.filter = depth.filter;
-          card.style.opacity = depth.opacity.toFixed(2);
+          const fog = fogRefs.current[index];
+          if (fog) fog.style.opacity = (1 - depth.opacity).toFixed(2);
         }
         // 裏向きのカードはタップ・タブ順・支援技術から外す
         if (depth.hidden !== hiddenFlags[index]) {
@@ -349,6 +353,26 @@ export function WorksCarousel({ items, locale }: { items: CarouselItem[]; locale
             <div className={`${styles.wallSide} ${styles.wallSideRight}`} aria-hidden="true" />
             <div className={styles.floor} aria-hidden="true" />
             <div className={styles.ground} aria-hidden="true" />
+            <div className={styles.hub} aria-hidden="true">
+              <div className={styles.hubBob}>
+                <div className={styles.hubModel}>
+                  {Array.from({ length: HUB_LAYERS }, (_, layer) => (
+                    <Image
+                      key={layer}
+                      className={layer === HUB_LAYERS - 1 ? "" : layer === 0 ? styles.hubBack : styles.hubSide}
+                      src="/brand/logo-mark.png"
+                      width={640}
+                      height={573}
+                      alt=""
+                      style={{ transform: `translateZ(${((layer - (HUB_LAYERS - 1) / 2) * 1.55).toFixed(2)}px)` }}
+                    />
+                  ))}
+                </div>
+                <div className={styles.hubDisc} />
+              </div>
+            </div>
+
+            {/* 中央モデルはカードより先に置く：前後判定が崩れても DOM 順でカードの後ろに描かれる */}
             <div className={styles.ring}>
               {items.map((item, index) => {
                 const angle = relativeSlot(index, 0, total) * SLOT_DEG;
@@ -370,7 +394,7 @@ export function WorksCarousel({ items, locale }: { items: CarouselItem[]; locale
                         ref={(element) => { cardRefs.current[index] = element; }}
                         type="button"
                         className={styles.card}
-                        style={{ "--ac": item.accent, filter: depth.filter, opacity: depth.opacity } as CSSProperties}
+                        style={{ "--ac": item.accent, filter: depth.filter } as CSSProperties}
                         tabIndex={depth.hidden ? -1 : 0}
                         aria-label={copy.bringFront(item.title)}
                         onClick={() => {
@@ -387,6 +411,7 @@ export function WorksCarousel({ items, locale }: { items: CarouselItem[]; locale
                           <span className={styles.cardTitle}>{item.title}</span>
                           <span className={styles.summary}>{item.summary}</span>
                         </span>
+                        <span ref={(element) => { fogRefs.current[index] = element; }} className={styles.fog} style={{ opacity: 1 - depth.opacity }} />
                       </button>
                     </div>
                   </div>
@@ -394,24 +419,6 @@ export function WorksCarousel({ items, locale }: { items: CarouselItem[]; locale
               })}
             </div>
 
-            <div className={styles.hub} aria-hidden="true">
-              <div className={styles.hubBob}>
-                <div className={styles.hubModel}>
-                  {Array.from({ length: HUB_LAYERS }, (_, layer) => (
-                    <Image
-                      key={layer}
-                      className={layer === HUB_LAYERS - 1 ? "" : layer === 0 ? styles.hubBack : styles.hubSide}
-                      src="/brand/logo-mark.png"
-                      width={640}
-                      height={573}
-                      alt=""
-                      style={{ transform: `translateZ(${((layer - (HUB_LAYERS - 1) / 2) * 1.55).toFixed(2)}px)` }}
-                    />
-                  ))}
-                </div>
-                <div className={styles.hubDisc} />
-              </div>
-            </div>
           </div>
         </div>
 

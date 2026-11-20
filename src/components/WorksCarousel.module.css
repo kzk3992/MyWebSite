@@ -128,6 +128,7 @@
 .artContain .artFrame { inset: 14%; }
 .artIcon img { border-radius: 22%; box-shadow: 0 10px 28px rgb(0 0 0 / 35%); }
 .shade { position: absolute; inset: 0; background: #ffffff; opacity: 0; pointer-events: none; }
+.fog { position: absolute; z-index: 2; inset: 0; border-radius: inherit; background: #f6f6f3; opacity: 0; pointer-events: none; }
 .body { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 5px; padding: 16px 20px 18px; background: linear-gradient(180deg, #fcfcfa, #ffffff); }
 .meta { display: flex; align-items: center; gap: 8px; color: var(--color-dim); font-size: 10.5px; font-weight: 700; letter-spacing: .16em; white-space: nowrap; }
 .dot { flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--ac, #cccccc); }
