@@ -45,6 +45,10 @@
 .stage[data-dragging] { cursor: grabbing; }
 .stage img { -webkit-user-drag: none; }
 .tilt { position: absolute; inset: 0; transform: rotateX(3.2deg); transform-style: preserve-3d; will-change: transform; }
+/* 3枚のレイヤーは別々の3D空間。親の .stage は preserve-3d にしないこと（したら1つの空間に戻り、Safari で貫通が再発する） */
+.layerRoom { z-index: 0; }
+.layerHub { z-index: 1; pointer-events: none; }
+.layerCards { z-index: 2; }
 .ring { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
 
 /* 部屋：奥の壁・左右の壁・床。リングと同じ3D空間の奥に置くので、視差ではカードより小さく動く */

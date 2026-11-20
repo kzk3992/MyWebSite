@@ -120,7 +120,10 @@ export function WorksCarousel({ items, locale }: { items: CarouselItem[]; locale
   const [front, setFront] = useState(0);
   const rootRef = useRef<HTMLElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
-  const tiltRef = useRef<HTMLDivElement>(null);
+  // 部屋・中央モデル・カードは別々の3D空間（レイヤー）に分ける。同じ空間に置くと iOS Safari が
+  // 前後判定を誤り、中央モデルがカードを貫通して描かれる。レイヤーは z-index の順に重ねるだけなので、
+  // 「中央モデルは常にカードの後ろ」が描画エンジンに依存せず保証される。傾き（視差）は3枚に同じ値を入れる。
+  const tiltRefs = useRef<(HTMLDivElement | null)[]>([]);
   const detailRef = useRef<HTMLDivElement>(null);
   const wrapRefs = useRef<(HTMLDivElement | null)[]>([]);
   const cardRefs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -134,9 +137,9 @@ export function WorksCarousel({ items, locale }: { items: CarouselItem[]; locale
   useEffect(() => {
     const root = rootRef.current;
     const stage = stageRef.current;
-    const tilt = tiltRef.current;
+    const tilts = tiltRefs.current.filter((element): element is HTMLDivElement => element !== null);
     const detail = detailRef.current;
-    if (!root || !stage || !tilt || !detail) return;
+    if (!root || !stage || tilts.length === 0 || !detail) return;
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let position = 0; // 正面にある作品の番号（連続値）
@@ -270,7 +273,8 @@ export function WorksCarousel({ items, locale }: { items: CarouselItem[]; locale
         if (Math.abs(target - position) < 0.00002) position = target;
         tiltX += (tiltTargetX - tiltX) * 0.05;
         tiltY += (tiltTargetY - tiltY) * 0.05;
-        tilt.style.transform = `rotateX(${tiltX.toFixed(3)}deg) rotateY(${tiltY.toFixed(3)}deg)`;
+        const tiltTransform = `rotateX(${tiltX.toFixed(3)}deg) rotateY(${tiltY.toFixed(3)}deg)`;
+        for (const layer of tilts) layer.style.transform = tiltTransform;
       }
 
       for (let index = 0; index < total; index += 1) {
@@ -347,12 +351,14 @@ export function WorksCarousel({ items, locale }: { items: CarouselItem[]; locale
         </header>
 
         <div ref={stageRef} className={styles.stage}>
-          <div ref={tiltRef} className={styles.tilt}>
+          <div ref={(element) => { tiltRefs.current[0] = element; }} className={`${styles.tilt} ${styles.layerRoom}`} aria-hidden="true">
             <div className={styles.wall} aria-hidden="true" />
             <div className={`${styles.wallSide} ${styles.wallSideLeft}`} aria-hidden="true" />
             <div className={`${styles.wallSide} ${styles.wallSideRight}`} aria-hidden="true" />
             <div className={styles.floor} aria-hidden="true" />
             <div className={styles.ground} aria-hidden="true" />
+          </div>
+          <div ref={(element) => { tiltRefs.current[1] = element; }} className={`${styles.tilt} ${styles.layerHub}`} aria-hidden="true">
             <div className={styles.hub} aria-hidden="true">
               <div className={styles.hubBob}>
                 <div className={styles.hubModel}>
@@ -371,8 +377,8 @@ export function WorksCarousel({ items, locale }: { items: CarouselItem[]; locale
                 <div className={styles.hubDisc} />
               </div>
             </div>
-
-            {/* 中央モデルはカードより先に置く：前後判定が崩れても DOM 順でカードの後ろに描かれる */}
+          </div>
+          <div ref={(element) => { tiltRefs.current[2] = element; }} className={`${styles.tilt} ${styles.layerCards}`}>
             <div className={styles.ring}>
               {items.map((item, index) => {
                 const angle = relativeSlot(index, 0, total) * SLOT_DEG;
