@@ -408,7 +408,8 @@ export function RoomHero({ content }: { content: RoomHeroContent }) {
       </a>
 
       <a ref={(element) => { objectRefs.current.goods = element; }} className={`${styles.obj} ${styles.goods}`} href={content.goods.href} tabIndex={-1} aria-hidden="true">
-        <Wordmark text="GOODS" />
+        <Image src="/brand/room/goods-box.png" width={720} height={658} alt="" />
+        <span className={styles.overBox}><Wordmark text="GOODS" size={64} /></span>
       </a>
 
       <nav className={styles.nav} aria-label={content.navLabel}>

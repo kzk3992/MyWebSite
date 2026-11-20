@@ -53,6 +53,7 @@
 
 .support { width: 360px; }
 .goods { width: 288px; }
+.overBox { position: absolute; left: 0; right: 0; top: 46%; }
 
 .privacy { width: 312px; }
 .shield { display: block; width: 74%; height: auto; margin: 0 auto; filter: drop-shadow(0 16px 18px rgb(30 32 28 / 18%)); }
