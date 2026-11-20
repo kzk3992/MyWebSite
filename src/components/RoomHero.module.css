@@ -51,7 +51,7 @@
 .spin i:nth-child(6) { transform: rotateY(300deg) translateZ(118px); }
 @keyframes spin { to { transform: rotateY(-360deg); } }
 
-.support { width: 252px; }
+.support { width: 360px; }
 .goods { width: 288px; }
 
 .privacy { width: 312px; }

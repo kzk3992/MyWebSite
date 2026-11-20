@@ -216,7 +216,7 @@ for (const [route, links] of [["/", ["/about/", "/works/", "/support/", "/privac
   const homeHtml = readFileSync(routeFile(route), "utf8");
   if (!homeHtml.includes('aria-labelledby="room-title"')) failures.push(`${route}: トップの部屋がありません`);
   for (const href of links) if (!homeHtml.includes(`href="${href}"`)) failures.push(`${route}: 部屋から ${href} へのリンクがありません`);
-  for (const image of ["/brand/logo-mark.png", "/brand/logo-mark-green.png", "/brand/room/support-hand.png"]) {
+  for (const image of ["/brand/logo-mark.png", "/brand/logo-mark-green.png", "/brand/room/support-hands.png"]) {
     if (!homeHtml.includes(image)) failures.push(`${route}: 部屋の画像 ${image} がありません`);
   }
 }

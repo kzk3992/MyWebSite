@@ -46,7 +46,7 @@ const spots: Spot[] = [
   { key: "sign", y: 2.35, z0: 4, pc: [-2.5, 2.4], phone: [-1.55, 1.7] },
   { key: "about", y: 0, z0: 12, pc: [2.6, 2.3], phone: [1.7, 1.7] },
   { key: "works", y: 0, z0: 20, pc: [-2.6, 2.6], phone: [-1.75, 1.9] },
-  { key: "support", y: 0, z0: 28, pc: [2.6, 2.1], phone: [1.7, 1.55] },
+  { key: "support", y: 0.5, z0: 28, pc: [2.5, 3.0], phone: [1.6, 2.1] },
   { key: "privacy", y: 0, z0: 36, pc: [-2.6, 2.6], phone: [-1.75, 1.9] },
   { key: "goods", y: 0, z0: 44, pc: [2.6, 2.4], phone: [1.7, 1.8] },
 ];
@@ -343,7 +343,7 @@ export function RoomHero({ content }: { content: RoomHeroContent }) {
         <span className={styles.fan}><span className={styles.spin}><i /><i /><i /><i /><i /><i /></span></span>
       </a>
       <a ref={(element) => { objectRefs.current.support = element; }} className={`${styles.obj} ${styles.support}`} href={content.support.href} tabIndex={-1} aria-hidden="true">
-        <Image src="/brand/room/support-hand.png" width={560} height={707} alt="" />
+        <Image src="/brand/room/support-hands.png" width={720} height={339} alt="" />
       </a>
       <a ref={(element) => { objectRefs.current.privacy = element; }} className={`${styles.obj} ${styles.privacy}`} href={content.privacy.href} tabIndex={-1} aria-hidden="true">
         <svg className={styles.shield} viewBox="0 0 216 250" aria-hidden="true">
