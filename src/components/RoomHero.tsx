@@ -371,8 +371,13 @@ export function RoomHero({ content }: { content: RoomHeroContent }) {
 
       {/* 奥から近づいてくるオブジェクト。タブ移動と読み上げは下の nav のリンクで行う */}
       <div ref={(element) => { objectRefs.current.sign = element; }} className={`${styles.obj} ${styles.sign}`} aria-hidden="true">
-        <Image src="/brand/room/sign.png" width={1000} height={516} alt="" priority />
-        <span className={styles.board}><b>Mika Spark</b><span>Studio</span></span>
+        <span className={styles.signInner}>
+          <Image src="/brand/room/sign.png" width={1000} height={516} alt="" priority />
+          <span className={styles.board}><b>Mika Spark</b><span>Studio</span></span>
+          {/* 「ジジ…」：ときどき一瞬だけ、揺れ・ノイズ・横線・文字のちらつきが走る */}
+          <span className={styles.noise} />
+          <span className={styles.glitchBar} />
+        </span>
       </div>
       <a ref={(element) => { objectRefs.current.about = element; }} className={`${styles.obj} ${styles.about}`} href={content.about.href} tabIndex={-1} aria-hidden="true">
         <Mark src="/brand/logo-mark-green.png" />

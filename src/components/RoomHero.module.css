@@ -25,9 +25,63 @@
 
 /* 看板：鎖で吊るした板の画像に、文字を重ねる（板の中央は画像の 49% / 63.5%） */
 .sign { width: 288px; }
-.board { position: absolute; left: 49%; top: 63.5%; transform: translate(-50%, -50%); display: grid; place-content: center; text-align: center; white-space: nowrap; color: var(--color-text); }
+.signInner { position: relative; display: block; animation: signShake 5.6s infinite; }
+.board { position: absolute; left: 49%; top: 63.5%; transform: translate(-50%, -50%); display: grid; place-content: center; text-align: center; white-space: nowrap; color: var(--color-text); animation: signText 5.6s infinite; }
 .board b { font-size: 34px; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
 .board span { margin-top: 4px; font-size: 13px; font-weight: 700; letter-spacing: .32em; text-transform: uppercase; }
+
+/* ノイズ：板の面にだけ載せる。普段は透明、バースト中だけ出てざらつく */
+.noise { position: absolute; left: 3%; right: 5%; top: 35%; bottom: 7%; pointer-events: none; opacity: 0; mix-blend-mode: multiply; animation: signNoise 5.6s infinite steps(1, end);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='110'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 2.2 -.7'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); background-size: 90px 55px; }
+.glitchBar { position: absolute; left: 3%; right: 5%; top: 40%; height: 5px; pointer-events: none; opacity: 0; background: var(--color-text); animation: signBar 5.6s infinite steps(1, end); }
+
+/* 5.6 秒に 2 回、ほんの一瞬（約 0.2 秒）だけ「ジジッ」。残りは静止 */
+@keyframes signShake {
+  0%, 57%, 63.5%, 85%, 90%, 100% { transform: none; }
+  58% { transform: translate(3px, 0) skewX(-3deg); }
+  59% { transform: translate(-4px, 1px) skewX(2deg); }
+  60% { transform: translate(2px, -1px); }
+  61% { transform: translate(-2px, 0) skewX(3deg); }
+  62% { transform: translate(1px, 1px); }
+  86% { transform: translate(-3px, 0) skewX(2deg); }
+  87% { transform: translate(3px, -1px); }
+  88% { transform: translate(-1px, 0) skewX(-2deg); }
+  89% { transform: translate(1px, 1px); }
+}
+@keyframes signText {
+  0%, 57%, 63.5%, 85%, 90%, 100% { opacity: 1; text-shadow: none; }
+  58% { opacity: .15; text-shadow: 3px 0 #8c8e87, -3px 0 #12140f; }
+  59% { opacity: 1; text-shadow: -4px 0 #8c8e87, 4px 0 #12140f; }
+  60% { opacity: .3; text-shadow: 2px 0 #8c8e87; }
+  61% { opacity: 1; text-shadow: -3px 0 #8c8e87, 3px 0 #12140f; }
+  62% { opacity: .5; text-shadow: none; }
+  86% { opacity: .2; text-shadow: 4px 0 #8c8e87, -4px 0 #12140f; }
+  87% { opacity: 1; text-shadow: -3px 0 #8c8e87; }
+  88% { opacity: .4; text-shadow: 3px 0 #12140f; }
+  89% { opacity: 1; text-shadow: none; }
+}
+@keyframes signNoise {
+  0%, 57%, 63.5%, 85%, 90%, 100% { opacity: 0; background-position: 0 0; }
+  58% { opacity: .55; background-position: 20px 10px; }
+  59% { opacity: .7; background-position: -30px 25px; }
+  60% { opacity: .4; background-position: 10px -20px; }
+  61% { opacity: .65; background-position: -15px 5px; }
+  62% { opacity: .35; background-position: 25px 30px; }
+  86% { opacity: .7; background-position: -20px 15px; }
+  87% { opacity: .5; background-position: 30px -10px; }
+  88% { opacity: .6; background-position: -5px 25px; }
+  89% { opacity: .3; background-position: 15px 5px; }
+}
+@keyframes signBar {
+  0%, 57%, 63.5%, 85%, 90%, 100% { opacity: 0; top: 40%; }
+  59% { opacity: .55; top: 52%; }
+  60% { opacity: 0; }
+  61% { opacity: .45; top: 74%; }
+  62% { opacity: 0; }
+  87% { opacity: .5; top: 46%; }
+  88% { opacity: 0; }
+  89% { opacity: .4; top: 68%; }
+}
 
 /* 立体文字（WORKS / ABOUT MIKA / PRIVACY 共通） */
 .wordmark { --fs: 66px; position: relative; display: block; height: calc(var(--lines, 1) * var(--fs) * .96 + 4px); font-size: var(--fs); font-weight: 900; letter-spacing: -.04em; line-height: .96; text-align: center; white-space: pre-line; }
@@ -71,4 +125,5 @@
 @media (prefers-reduced-motion: reduce) {
   .model img { animation: none; transform: translateZ(var(--z, 0)); }
   .spin { animation: none; }
+  .signInner, .board, .noise, .glitchBar { animation: none; }
 }
