@@ -65,6 +65,7 @@ export default function Home() {
           <ProductCard product={siteConfig.products.find((product) => product.slug === "uzmera")!} index={2} />
           <ProductCard product={siteConfig.products.find((product) => product.slug === "mahou")!} index={3} />
         </div>
+        <a className={styles.worksMore} href="/works/">すべての作品を見る →</a>
       </Section>
 
       <Section tone="muted" eyebrow="02 / ABOUT" title="Built independently.">

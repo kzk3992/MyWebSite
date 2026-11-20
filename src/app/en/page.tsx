@@ -56,6 +56,7 @@ export default function EnglishHomePage() {
           <ProductCard product={uzmeraEnglish} locale="en" index={2} />
           <ProductCard product={mahouEnglish} locale="en" index={3} />
         </div>
+        <a className={styles.worksMore} href="/en/works/">Explore all works →</a>
       </Section>
 
       <Section tone="muted" eyebrow="02 / ABOUT" title="Built independently.">

@@ -1,0 +1,246 @@
+/* ---------- Works ページ：浮遊カードの3Dカルーセル（試作 Floating Works Cards の最終版を移植）----------
+   カード幅はステージの高さに連動（上限300px）。リング半径は CSS だけで算出する：
+   60°間隔の正六角形の内接半径 (w/2)/tan30° ≒ 0.866w に余白 0.16w（＋広い画面は30px）、
+   狭い画面では ±60° のカードが画面内に収まる上限 (100vw/2 − 0.3w)/0.866 で頭打ちにする。 */
+.root {
+  --ink: var(--color-text);
+  --ink-2: #454a44;
+  --hairline: rgb(18 20 15 / 16%);
+  --hairline-soft: rgb(18 20 15 / 8%);
+  /* 正面カードは translateZ で約1.3倍に見えるので、見かけの高さがステージの8割に収まる幅にする */
+  --card-w: clamp(170px, min(66vw, calc((100svh - 330px) * .4)), 300px);
+  --card-h: calc(var(--card-w) * 1.44);
+  --orbit: max(120px, min(calc(var(--card-w) * 1.026 + 30px), calc((100vw / 2 - var(--card-w) * .3) / .866)));
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  height: calc(100svh - 73px);
+  min-height: 620px;
+  max-height: 1100px;
+  overflow: hidden;
+  color: var(--ink);
+  background:
+    radial-gradient(90% 62% at 50% 34%, rgb(0 0 0 / 3.5%) 0%, rgb(0 0 0 / 1.2%) 38%, transparent 68%),
+    radial-gradient(135% 105% at 50% 36%, #ffffff 0%, #f8f8f6 52%, #efefec 100%);
+}
+/* ビネット：部屋の端を少し落として中央を明るく見せる */
+.root::after { content: ""; position: absolute; inset: 0; z-index: 4; background: radial-gradient(105% 88% at 50% 42%, transparent 52%, rgb(30 32 28 / 10%) 100%); pointer-events: none; }
+
+/* ---------- 上部バー ---------- */
+.topbar { position: relative; z-index: 5; display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 16px clamp(20px, 4vw, 44px) 0; }
+.heading { margin: 0; color: var(--ink); font-size: 12px; font-weight: 700; line-height: 1.4; letter-spacing: .22em; text-transform: uppercase; }
+.heading { white-space: nowrap; }
+.heading span { font-weight: 700; }
+.counter { flex: none; white-space: nowrap; color: var(--color-dim); font-size: 12px; letter-spacing: .18em; font-variant-numeric: tabular-nums; }
+.counter b { color: var(--ink); font-size: 15px; font-weight: 900; }
+
+/* ---------- ほこり ---------- */
+.dust { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.dust i { position: absolute; border-radius: 50%; background: #8f938a; animation: drift linear infinite alternate; }
+@keyframes drift { from { transform: translateY(12px); } to { transform: translateY(-14px); } }
+
+/* ---------- 3D ステージ ---------- */
+.stage { position: relative; flex: 1; min-height: 0; overflow: hidden; perspective: 1350px; perspective-origin: 50% 42%; cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.stage[data-dragging] { cursor: grabbing; }
+.stage img { -webkit-user-drag: none; }
+.tilt { position: absolute; inset: 0; transform: rotateX(3.2deg); transform-style: preserve-3d; will-change: transform; }
+.ring { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+
+/* 部屋：奥の壁・左右の壁・床。リングと同じ3D空間の奥に置くので、視差ではカードより小さく動く */
+.wall {
+  position: absolute; top: 50%; left: 50%; width: 1900px; height: 1150px;
+  border: 1px solid rgb(18 20 15 / 12%);
+  background:
+    radial-gradient(52% 58% at 50% 46%, rgb(0 0 0 / 4.5%) 0%, rgb(0 0 0 / 1.2%) 46%, transparent 72%),
+    linear-gradient(rgb(18 20 15 / 5.5%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(18 20 15 / 5.5%) 1px, transparent 1px),
+    linear-gradient(180deg, #ffffff 0%, #f6f6f3 58%, #ececea 100%);
+  background-size: auto, 96px 96px, 96px 96px, auto;
+  box-shadow: inset 0 0 180px rgb(30 32 28 / 7%), inset 0 0 0 1px rgb(255 255 255 / 50%);
+  transform: translate(-50%, -54%) translateZ(-760px);
+  pointer-events: none;
+}
+.wall::before { content: ""; position: absolute; inset: 56px; border: 1px solid rgb(18 20 15 / 9%); box-shadow: inset 0 0 0 1px rgb(255 255 255 / 40%); }
+/* 壁と床の境目の光（モノクロ版は墨の細い線） */
+.wall::after { content: ""; position: absolute; right: 0; bottom: 0; left: 0; height: 3px; background: linear-gradient(90deg, transparent 6%, rgb(18 20 15 / 38%) 50%, transparent 94%); box-shadow: 0 -6px 34px rgb(30 32 28 / 10%); }
+.wallSide {
+  position: absolute; top: 50%; left: 50%; width: 1150px; height: 1150px;
+  border: 1px solid rgb(18 20 15 / 8%);
+  background:
+    linear-gradient(rgb(18 20 15 / 4.5%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(18 20 15 / 4.5%) 1px, transparent 1px),
+    linear-gradient(180deg, #f8f8f6 0%, #ededeb 100%);
+  background-size: 96px 96px, 96px 96px, auto;
+  pointer-events: none;
+}
+.wallSideLeft { transform: translate(-50%, -54%) translateX(-945px) translateZ(-390px) rotateY(64deg); }
+.wallSideRight { transform: translate(-50%, -54%) translateX(945px) translateZ(-390px) rotateY(-64deg); }
+.floor {
+  position: absolute; top: 50%; left: 50%; width: 1900px; height: 1140px;
+  background:
+    linear-gradient(180deg, rgb(18 20 15 / 32%) 0, transparent 5px),
+    linear-gradient(rgb(18 20 15 / 6%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(18 20 15 / 6%) 1px, transparent 1px),
+    radial-gradient(58% 58% at 50% 50%, rgb(0 0 0 / 5%) 0%, transparent 68%),
+    linear-gradient(180deg, #fdfdfb 0%, #f1f1ee 100%);
+  background-size: auto, 96px 96px, 96px 96px, auto, auto;
+  transform: translate(-50%, -50%) translateZ(-170px) translateY(calc(var(--card-h) * .62)) rotateX(90deg);
+  pointer-events: none;
+}
+/* リングの下の円盤 */
+.ground {
+  position: absolute; top: 50%; left: 50%;
+  width: calc(var(--orbit) * 2 + var(--card-w) * .72); aspect-ratio: 1;
+  border: 1px solid rgb(18 20 15 / 18%); border-radius: 50%;
+  background: radial-gradient(circle at center, rgb(0 0 0 / 7%) 0%, rgb(0 0 0 / 3.5%) 34%, rgb(0 0 0 / 1.2%) 58%, transparent 72%);
+  transform: translate(-50%, -50%) translateY(calc(var(--card-h) * .6)) rotateX(90deg);
+  pointer-events: none;
+}
+.ground::after { content: ""; position: absolute; inset: 13%; border: 1px solid rgb(18 20 15 / 10%); border-radius: 50%; }
+
+/* ---------- 中央モデル：ロゴマークを13層重ねた押し出し ---------- */
+.hub { position: absolute; top: 50%; left: 50%; width: calc(var(--card-w) * 1.04); transform: translate(-50%, -50%) translateY(calc(var(--card-h) * -.1)); transform-style: preserve-3d; pointer-events: none; }
+.hubBob { position: relative; transform-style: preserve-3d; animation: hubBob 6.6s ease-in-out infinite; }
+@keyframes hubBob { 0%, 100% { transform: translateY(-6px); } 50% { transform: translateY(7px); } }
+.hubModel { position: relative; width: 100%; aspect-ratio: 640 / 573; transform-style: preserve-3d; animation: hubSway 11s ease-in-out infinite; }
+@keyframes hubSway { 0%, 100% { transform: rotateY(-21deg) rotateX(3deg); } 50% { transform: rotateY(21deg) rotateX(3deg); } }
+.hubModel img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; pointer-events: none; }
+.hubModel img.hubSide { opacity: .62; }
+.hubModel img.hubBack { opacity: .38; }
+.hubDisc { position: absolute; top: 100%; left: 50%; width: 124%; aspect-ratio: 3.4; border: 1px solid rgb(18 20 15 / 14%); border-radius: 50%; background: radial-gradient(ellipse at center, rgb(0 0 0 / 16%) 0%, rgb(0 0 0 / 6%) 52%, transparent 72%); transform: translate(-50%, -46%) rotateX(72deg); }
+
+/* ---------- カード ---------- */
+.wrap { position: absolute; top: calc(var(--card-h) / -2); left: calc(var(--card-w) / -2); width: var(--card-w); height: var(--card-h); transform: rotateY(calc(var(--a, 0) * 1deg)) translateZ(var(--orbit)); transform-style: preserve-3d; }
+.bob { width: 100%; height: 100%; transform-style: preserve-3d; animation: bob 5.2s ease-in-out infinite; }
+@keyframes bob { 0%, 100% { transform: translateY(-7px); } 50% { transform: translateY(8px); } }
+.card {
+  position: relative; width: 100%; height: 100%; padding: 0;
+  display: flex; flex-direction: column; overflow: hidden;
+  border: 1px solid var(--hairline); border-radius: 20px;
+  color: inherit; background: #ffffff; font: inherit; text-align: left; cursor: pointer;
+  box-shadow: 0 28px 60px rgb(30 32 28 / 16%), 0 6px 20px rgb(30 32 28 / 10%), 0 0 0 1px rgb(255 255 255 / 60%);
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+}
+.card:focus-visible { outline-offset: 3px; }
+.art { position: relative; flex: 0 0 62%; overflow: hidden; border-bottom: 1px solid var(--hairline-soft); }
+.artImage, .artFrame { position: absolute; inset: 0; display: block; }
+.artContain .artFrame { inset: 14%; }
+.artIcon img { border-radius: 22%; box-shadow: 0 10px 28px rgb(0 0 0 / 35%); }
+.shade { position: absolute; inset: 0; background: #ffffff; opacity: 0; pointer-events: none; }
+.body { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 5px; padding: 16px 20px 18px; background: linear-gradient(180deg, #fcfcfa, #ffffff); }
+.meta { display: flex; align-items: center; gap: 8px; color: var(--color-dim); font-size: 10.5px; font-weight: 700; letter-spacing: .16em; white-space: nowrap; }
+.dot { flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--ac, #cccccc); }
+.cardTitle { overflow: hidden; color: var(--ink); font-size: clamp(16px, calc(var(--card-w) * .085), 23px); font-weight: 900; line-height: 1.25; letter-spacing: .02em; text-overflow: ellipsis; white-space: nowrap; }
+.summary { display: -webkit-box; overflow: hidden; color: var(--ink-2); font-size: 12.5px; font-weight: 500; line-height: 1.65; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+
+/* まほうのある暮らし：ゲームのドット絵・夕焼け・ロゴの組み方を小さく再現 */
+.mahou { position: absolute; inset: 0; display: block; color: #f4f7ff; background: linear-gradient(#1b1456 0 22%, #4a2a8c 22% 46%, #b84a7a 46% 68%, #ff9a4a 68% 100%); font-family: "DotGothic16", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, monospace; }
+.mahouStars { position: absolute; inset: 0 0 46% 0; background: url("/brand/mahou/stars.svg") 0 0 / 120px 80px; image-rendering: pixelated; }
+.mahouLogo { position: absolute; top: 12%; left: 10%; display: inline-grid; justify-items: start; color: #ffd43b; font-size: calc(var(--card-w) * .13); line-height: 1; text-shadow: 2px 2px 0 #04061a, 4px 4px 0 #2a48d8; }
+.mahouLogo span { display: block; white-space: nowrap; }
+.mahouLogo span:nth-child(1) { transform: rotate(-3deg); transform-origin: left bottom; }
+.mahouLogo span:nth-child(2) { margin: .05em 0 .2em 4.6em; color: #f4f7ff; font-size: .42em; text-shadow: 1px 1px 0 #04061a, 2px 2px 0 #2a48d8; }
+.mahouLogo span:nth-child(3) { margin-left: .7em; color: #ff6fae; font-size: 1.12em; text-shadow: 2px 2px 0 #04061a, 4px 4px 0 #7a2a6a; }
+.mahouLogo i { position: absolute; top: -.1em; right: -.3em; color: #5fe6ff; font-size: .4em; font-style: normal; text-shadow: 0 0 6px #5fe6ff; }
+.mahouScene { position: absolute; right: 0; bottom: 0; left: 0; height: 40%; }
+.mahouScene img { position: absolute; height: auto; image-rendering: pixelated; }
+.mahouGround { position: absolute; right: 0; bottom: 0; left: 0; height: 22%; border-top: 3px solid #04061a; background: repeating-linear-gradient(90deg, #1f8a4c 0 18px, #26a35a 18px 36px); }
+.mahouWizard { bottom: 20%; left: 14%; width: 24%; }
+.mahouBooks { bottom: 20%; left: 44%; width: 15%; }
+.mahouSlime { right: 12%; bottom: 20%; width: 18%; }
+.mahouGhost { top: -40%; right: 16%; width: 14%; opacity: .9; }
+
+/* ---------- 詳細パネル（高さ固定：作品を切り替えても下の要素が動かない） ---------- */
+.detail { position: relative; z-index: 5; flex: none; height: 132px; padding: 2px 20px 0; text-align: center; }
+.swap { animation: swap .45s ease both; }
+@keyframes swap { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.detailTitle { overflow: hidden; margin: 0 0 4px; color: var(--ink); font-size: clamp(22px, 3.4vw, 30px); font-weight: 900; line-height: 1.3; letter-spacing: .03em; text-overflow: ellipsis; white-space: nowrap; }
+.catch { overflow: hidden; margin: 0 0 10px; color: var(--ink-2); font-size: 13.5px; font-weight: 500; line-height: 1.6; text-overflow: ellipsis; white-space: nowrap; }
+.row { display: flex; flex-wrap: nowrap; align-items: center; justify-content: center; gap: 10px; }
+.actions { display: inline-flex; gap: 10px; }
+.chip { padding: 6px 12px; border: 1px solid var(--hairline); border-radius: 999px; color: var(--ink-2); background: rgb(255 255 255 / 92%); font-size: 11px; font-weight: 700; line-height: 1.4; letter-spacing: .1em; white-space: nowrap; }
+.status { color: var(--ink); }
+.status::before { content: ""; display: inline-block; width: 6px; height: 6px; margin-right: 7px; border-radius: 50%; background: var(--ac, #bbbbbb); vertical-align: 1px; }
+.cta { min-height: 2.75rem; padding: 9px 18px; display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--ink); border-radius: 999px; color: #ffffff; background: var(--ink); font-size: 12.5px; font-weight: 900; letter-spacing: .06em; text-decoration: none; white-space: nowrap; box-shadow: 0 8px 26px rgb(30 32 28 / 22%); transition: transform .2s ease, background .2s ease, box-shadow .2s ease; }
+.cta:hover { background: #000000; box-shadow: 0 12px 30px rgb(30 32 28 / 28%); transform: translateY(-1px); }
+.cta svg { flex: none; }
+.ctaStore { border-color: rgb(18 20 15 / 55%); color: var(--ink); background: #ffffff; box-shadow: 0 6px 18px rgb(30 32 28 / 10%); }
+.ctaStore:hover { border-color: #000000; background: #f4f4f1; box-shadow: 0 10px 24px rgb(30 32 28 / 16%); }
+
+/* ---------- 操作 ---------- */
+.controls { position: relative; z-index: 5; flex: none; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 10px 20px calc(16px + env(safe-area-inset-bottom)); }
+.navRow { display: flex; align-items: center; gap: 18px; }
+.navButton { width: 46px; height: 46px; display: grid; place-items: center; border: 1px solid var(--hairline); border-radius: 50%; color: var(--ink); background: #ffffff; cursor: pointer; box-shadow: 0 8px 22px rgb(30 32 28 / 12%); transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+.navButton:hover { border-color: rgb(18 20 15 / 42%); box-shadow: 0 12px 26px rgb(30 32 28 / 16%); transform: translateY(-2px); }
+.navButton:active { transform: none; }
+.dots { display: flex; gap: 4px; }
+.dots button { width: 36px; height: 36px; padding: 0; display: grid; place-items: center; border: 0; background: none; cursor: pointer; }
+.dots i { display: block; width: 7px; height: 7px; border-radius: 50%; background: #d6d6d1; transition: all .3s ease; }
+.dots .dotOn i { width: 22px; border-radius: 99px; background: var(--ink); box-shadow: 0 0 12px rgb(30 32 28 / 18%); }
+.hint { display: flex; align-items: center; gap: 8px; color: var(--color-dim); font-size: 11px; font-weight: 500; letter-spacing: .14em; }
+.hintArrow { display: inline-block; animation: nudge 2.6s ease-in-out infinite; }
+@keyframes nudge { 0%, 100% { transform: none; } 50% { transform: translateX(5px); } }
+
+/* ---------- 作品一覧（テキスト） ---------- */
+.index { width: calc(100% - 48px); max-width: var(--content-width); margin: 0 auto; padding: 56px 0 72px; }
+.indexTitle { margin: 0 0 18px; color: var(--color-dim); font-size: .68rem; font-weight: 800; line-height: 1.4; letter-spacing: .2em; text-transform: uppercase; }
+.indexList { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--color-border); }
+.indexList li { min-height: 58px; display: grid; grid-template-columns: 44px minmax(0, 1fr) minmax(0, 1.2fr) auto; align-items: center; gap: 16px; border-bottom: 1px solid var(--color-border); font-size: .82rem; }
+.indexNumber { color: var(--color-dim); font-size: .66rem; font-weight: 700; letter-spacing: .14em; font-variant-numeric: tabular-nums; }
+.indexName { font-weight: 720; }
+.indexKind { color: var(--color-muted); font-size: .74rem; }
+.indexLinks { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px 18px; }
+.indexList a { color: var(--ink); font-size: .74rem; font-weight: 720; text-underline-offset: 4px; }
+
+@media (max-width: 840px) {
+  .root { height: calc(100svh - 65px); }
+  .index { width: calc(100% - 34px); }
+  .indexList li { grid-template-columns: 34px 1fr auto; padding: 12px 0; }
+  .indexKind { grid-column: 2; grid-row: 2; }
+  .indexLinks { grid-column: 3; grid-row: 1 / span 2; flex-direction: column; align-items: flex-end; }
+}
+/* スマホ・狭い画面：チップは1段目、CTAは2段目に固定（作品で折り返しが変わって画面がブレないように） */
+@media (max-width: 760px) {
+  .detail { height: 168px; }
+  .catch { display: -webkit-box; min-height: 3.2em; margin-bottom: 8px; font-size: 12.5px; white-space: normal; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+  .row { flex-wrap: wrap; gap: 6px 8px; }
+  .actions { flex-basis: 100%; justify-content: center; gap: 8px; }
+  .cta { padding: 8px 13px; font-size: 11.5px; }
+}
+@media (max-width: 560px) {
+  .root {
+    --card-w: max(112px, min(160px, 44vw, calc((100svh - 400px) * .5)));
+    --card-h: calc(var(--card-w) * 1.6);
+    --orbit: max(120px, min(calc(var(--card-w) * 1.026), calc((100vw / 2 - var(--card-w) * .3) / .866)));
+    min-height: 560px;
+  }
+  .hub { width: min(216px, 58vw); }
+  .topbar { padding-top: 12px; }
+  .heading { font-size: 10.5px; letter-spacing: .18em; }
+  .art { flex-basis: 54%; }
+  .body { gap: 4px; padding: 11px 14px 12px; }
+  .meta { font-size: 9px; letter-spacing: .12em; }
+  .cardTitle { font-size: 14px; }
+  .summary { font-size: 11px; line-height: 1.55; }
+  .detailTitle { font-size: 22px; }
+  .chip { padding: 5px 10px; font-size: 10.5px; letter-spacing: .06em; }
+  .controls { padding-top: 6px; }
+}
+/* 背の低いスマホ（SE など）：カードが小さくなるので説明文は詳細パネルに任せ、絵を大きく見せる */
+@media (max-width: 560px) and (max-height: 700px) {
+  .art { flex-basis: 66%; }
+  .summary { display: none; }
+}
+@media (max-width: 360px) {
+  .heading span { display: none; }
+}
+@media (max-width: 340px) {
+  .detail { padding-inline: 12px; }
+  .chip { padding-inline: 8px; letter-spacing: .02em; }
+  .cta { padding-inline: 10px; letter-spacing: .02em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bob, .hubBob, .hubModel, .dust i, .hintArrow, .swap { animation: none; }
+}

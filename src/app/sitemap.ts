@@ -5,6 +5,7 @@ export const dynamic = "force-static";
 
 const localizedRoutes = [
   ["/", "/en/"],
+  ["/works/", "/en/works/"],
   ["/apps/hirame/", "/en/apps/hirame/"],
   ["/apps/hirame/privacy/", "/en/apps/hirame/privacy/"],
   ["/apps/hirame/terms/", "/en/apps/hirame/terms/"],
@@ -26,7 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: new URL(route, siteConfig.baseUrl).toString(),
       lastModified: new Date("2026-09-08"),
       changeFrequency: route === "/" || route === "/en/" ? "monthly" as const : "yearly" as const,
-      priority: route === "/" ? 1 : route === "/en/" ? 0.9 : route.endsWith("/apps/hirame/") ? 0.9 : 0.6,
+      priority: route === "/" ? 1 : route === "/en/" ? 0.9 : route.endsWith("/apps/hirame/") || route.endsWith("/works/") ? 0.9 : 0.6,
       alternates: { languages },
     }));
   });

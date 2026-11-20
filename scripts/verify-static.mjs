@@ -5,6 +5,7 @@ const outputDirectory = join(process.cwd(), "out");
 
 const routes = [
   "/",
+  "/works/",
   "/apps/hirame/",
   "/apps/hirame/privacy/",
   "/apps/hirame/terms/",
@@ -14,6 +15,7 @@ const routes = [
   "/about/",
   "/support/",
   "/en/",
+  "/en/works/",
   "/en/apps/hirame/",
   "/en/apps/hirame/privacy/",
   "/en/apps/hirame/terms/",
@@ -24,6 +26,7 @@ const routes = [
 
 const localizedRoutePairs = [
   ["/", "/en/"],
+  ["/works/", "/en/works/"],
   ["/apps/hirame/", "/en/apps/hirame/"],
   ["/apps/hirame/privacy/", "/en/apps/hirame/privacy/"],
   ["/apps/hirame/terms/", "/en/apps/hirame/terms/"],
@@ -84,6 +87,11 @@ const brandFiles = [
   "brand/hero-wolf.jpg",
   "brand/logo.png",
   "brand/logo-white.png",
+  "brand/logo-mark.png",
+  "brand/logo-mark-small.png",
+  "brand/logo-mono.png",
+  "brand/hero-mono.jpg",
+  "brand/header-mono.jpg",
   "brand/icons/wolf.png",
   "brand/icons/spark.png",
   "brand/icons/paw.png",
@@ -143,15 +151,35 @@ for (const file of htmlFiles) {
 
 const rootHtml = readFileSync(routeFile("/"), "utf8");
 if (!rootHtml.includes("<details")) failures.push("Header: モバイルメニューがありません");
-if (!rootHtml.includes('href="/#works"')) failures.push("Header: Worksリンクがありません");
+// 2026-11 刷新：ヘッダーの Works はトップ内アンカー（/#works）から Works ページ（/works/）へ付け替えた
+if (!rootHtml.includes('href="/works/"')) failures.push("Header: Works ページへのリンクがありません");
+if (!rootHtml.includes('id="works"')) failures.push("Home: Works セクションがありません");
 if (!rootHtml.includes('href="/privacy/"')) failures.push("Footer: Privacy一覧リンクがありません");
 if (!rootHtml.includes('href="/terms/"')) failures.push("Footer: Terms一覧リンクがありません");
 
 const englishRootHtml = readFileSync(routeFile("/en/"), "utf8");
 if (!englishRootHtml.includes("Small ideas, built into useful products.")) failures.push("English Home: ブランドコピーがありません");
-if (!englishRootHtml.includes('href="/en/#works"')) failures.push("English Header: Worksリンクがありません");
+if (!englishRootHtml.includes('href="/en/works/"')) failures.push("English Header: Works ページへのリンクがありません");
 if (!englishRootHtml.includes('href="/en/apps/hirame/privacy/"')) failures.push("English Footer: Privacyリンクがありません");
 if (!englishRootHtml.includes('href="/en/apps/hirame/terms/"')) failures.push("English Footer: Termsリンクがありません");
+
+// Works ページ：初期表示（Uzmera が正面）が静的HTMLに含まれ、4作品すべてへのリンクがあること
+const worksPages = [
+  ["/works/", "Uzmera", ["https://uzmera.mikaspark.com/", "/apps/hirame/", "https://apps.apple.com/jp/app/hirame/id6808982302", "https://mahou.mikaspark.com/", "https://line.me/S/sticker/37956024"], "ウズメちゃん"],
+  ["/en/works/", "Uzmera", ["https://uzmera.mikaspark.com/", "/en/apps/hirame/", "https://apps.apple.com/jp/app/hirame/id6808982302", "https://mahou.mikaspark.com/", "https://line.me/S/sticker/37956024"], "Uzume-chan"],
+];
+for (const [route, firstWork, links, stickerName] of worksPages) {
+  const worksHtml = readFileSync(routeFile(route), "utf8");
+  if (!worksHtml.includes("<title>Works | Mika Spark Studio</title>")) failures.push(`${route}: タイトルがありません`);
+  if (!worksHtml.includes('aria-roledescription="carousel"')) failures.push(`${route}: カルーセルがありません`);
+  const detailTitle = worksHtml.match(/<h2 class="[^"]*detailTitle[^"]*">([^<]+)<\/h2>/);
+  if (!detailTitle || detailTitle[1] !== firstWork) failures.push(`${route}: 初期表示の作品が ${firstWork} ではありません`);
+  for (const href of links) if (!worksHtml.includes(`href="${href}"`)) failures.push(`${route}: ${href} へのリンクがありません`);
+  if (!worksHtml.includes(stickerName)) failures.push(`${route}: LINEスタンプがありません`);
+  if (!worksHtml.includes("/brand/logo-mark.png")) failures.push(`${route}: 中央モデルのロゴがありません`);
+  for (const excluded of ["NeCosmos", "necosmos", "Revane"]) if (worksHtml.includes(excluded)) failures.push(`${route}: 掲載対象外の ${excluded} が含まれています`);
+}
+if (!rootHtml.includes('href="/works/"') || !englishRootHtml.includes('href="/en/works/"')) failures.push("Home: Works ページへの導線がありません");
 
 const hirameHtml = readFileSync(routeFile("/apps/hirame/"), "utf8");
 for (const href of ["/apps/hirame/privacy/", "/apps/hirame/terms/", "/apps/hirame/support/"]) {

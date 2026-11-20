@@ -2,6 +2,7 @@ export type Locale = "ja" | "en";
 
 export const localeRoutes = {
   "/": "/en/",
+  "/works/": "/en/works/",
   "/apps/hirame/": "/en/apps/hirame/",
   "/apps/hirame/privacy/": "/en/apps/hirame/privacy/",
   "/apps/hirame/terms/": "/en/apps/hirame/terms/",
@@ -49,12 +50,12 @@ export function englishAlternates(japanese: string, english: string) {
 
 export const navigation = {
   ja: [
-    { label: "Works", href: "/#works" },
+    { label: "Works", href: "/works/" },
     { label: "About", href: "/about/" },
     { label: "Support", href: "/support/" },
   ],
   en: [
-    { label: "Works", href: "/en/#works" },
+    { label: "Works", href: "/en/works/" },
     { label: "About", href: "/en/about/" },
     { label: "Support", href: "/en/support/" },
   ],
