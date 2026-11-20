@@ -16,7 +16,7 @@ export function Header({ locale }: { locale: Locale }) {
     <header className={styles.siteHeader}>
       <Container className={styles.headerInner}>
         <a className={styles.brand} href={locale === "ja" ? "/" : "/en/"} aria-label={text.brandHome}>
-          <Image src="/brand/logo.png" width={36} height={36} alt="" priority />
+          <Image src="/brand/logo-mark-small.png" width={36} height={32} alt="" priority />
           <span>Mika Spark <b>Studio</b></span>
         </a>
         <nav className={styles.nav} aria-label={text.mainNavigation}>

@@ -1,18 +1,19 @@
 :root {
-  color-scheme: dark;
-  --color-bg: #000000;
-  --color-bg-elevated: #0b0f0c;
-  --color-panel: #101511;
-  --color-panel-hover: #151c16;
-  --color-text: #eef2ec;
-  --color-muted: #a1aaa0;
-  --color-dim: #697269;
-  --color-spark: #91ff19;
-  --color-spark-soft: #b3ff65;
-  --color-border: #293129;
-  --color-border-active: #5c8e32;
-  --glow-small: 0 0 16px rgb(145 255 25 / 28%);
-  --glow-medium: 0 0 42px rgb(145 255 25 / 16%);
+  /* 2026-11 刷新：白＋黒のモノクロ。--color-spark はアクセント（＝墨）として残し、名前は互換のため据え置く */
+  color-scheme: light;
+  --color-bg: #ffffff;
+  --color-bg-elevated: #f6f6f3;
+  --color-panel: #ffffff;
+  --color-panel-hover: #f1f1ed;
+  --color-text: #12140f;
+  --color-muted: #4a4f47;
+  --color-dim: #6b7068;
+  --color-spark: #12140f;
+  --color-spark-soft: #000000;
+  --color-border: #dcddd7;
+  --color-border-active: #12140f;
+  --glow-small: 0 6px 16px rgb(18 20 15 / 14%);
+  --glow-medium: 0 18px 42px rgb(18 20 15 / 10%);
   --space-xs: 8px;
   --space-sm: 16px;
   --space-md: 28px;
@@ -28,12 +29,12 @@
   --text-muted: var(--color-muted);
   --text-dim: var(--color-dim);
   --line: var(--color-border);
-  --line-soft: #181e19;
+  --line-soft: #ebebe6;
   --accent: var(--color-spark);
-  --accent-bright: #b6ff64;
+  --accent-bright: #000000;
   --accent-text: var(--color-spark-soft);
-  --accent-glow: rgb(145 255 25 / 48%);
-  --accent-shadow: rgb(145 255 25 / 14%);
+  --accent-glow: rgb(18 20 15 / 24%);
+  --accent-shadow: rgb(18 20 15 / 10%);
 }
 
 /* ゲームと同じドット文字。Works カードで使う文字だけに絞った約6KBのサブセット（元: public/brand/uzmera/DotGothic16-Regular.ttf, OFL） */
@@ -54,7 +55,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
-::selection { color: #071003; background: var(--color-spark); }
+::selection { color: #ffffff; background: var(--color-spark); }
 :focus-visible { outline: 2px solid var(--color-spark); outline-offset: 4px; }
 h1, h2, h3, p, dl, dd, ul, ol { margin: 0; }
 h1, h2, h3 { color: var(--color-text); font-weight: 720; letter-spacing: -.045em; text-wrap: balance; }
@@ -68,7 +69,7 @@ h3 { font-size: 1.5rem; line-height: 1.2; }
 a { color: inherit; }
 img { max-width: 100%; height: auto; }
 main { min-height: 70vh; }
-.skip-link { position: fixed; z-index: 100; top: 12px; left: 12px; padding: 11px 16px; color: #071003; background: var(--color-spark); font-weight: 800; line-height: 1.2; transform: translateY(-220%); }
+.skip-link { position: fixed; z-index: 100; top: 12px; left: 12px; padding: 11px 16px; color: #ffffff; background: var(--color-spark); font-weight: 800; line-height: 1.2; transform: translateY(-220%); }
 .skip-link:focus { transform: translateY(0); }
 .eyebrow { color: var(--color-spark-soft); font-size: .68rem; font-weight: 800; letter-spacing: .2em; line-height: 1.4; text-transform: uppercase; font-variant-numeric: tabular-nums; }
 

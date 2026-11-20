@@ -42,7 +42,7 @@ export default function Home() {
           </div>
           <div className={styles.heroArtwork} aria-hidden="true">
             <div className={styles.heroArtworkInner}>
-              <Image src="/brand/hero-wolf.jpg" width={943} height={793} alt="" priority sizes="(max-width: 900px) 100vw, 55vw" />
+              <Image src="/brand/hero-mono.jpg" width={943} height={793} alt="" priority sizes="(max-width: 900px) 100vw, 55vw" />
             </div>
           </div>
           <div className={styles.heroRail}>

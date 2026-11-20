@@ -22,21 +22,21 @@ export const metadata: Metadata = {
     title: "Mika Spark Studio | Independent Apps & Games",
     description: "Mika Spark Studio is an independent studio creating apps and games.",
     siteName: siteConfig.brandName,
-    images: [{ url: "/brand/header.jpg", width: 1983, height: 793, alt: "Mika Spark Studio" }],
+    images: [{ url: "/brand/header-mono.jpg", width: 1983, height: 793, alt: "Mika Spark Studio" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Mika Spark Studio | Independent Apps & Games",
     description: "Mika Spark Studio is an independent studio creating apps and games.",
-    images: ["/brand/header.jpg"],
+    images: ["/brand/header-mono.jpg"],
   },
-  icons: { icon: "/brand/logo.png" },
+  icons: { icon: "/brand/logo-mono.png" },
   robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
-  colorScheme: "dark",
+  themeColor: "#ffffff",
+  colorScheme: "light",
   width: "device-width",
   initialScale: 1,
 };

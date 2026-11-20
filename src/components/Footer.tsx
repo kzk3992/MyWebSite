@@ -11,7 +11,7 @@ export function Footer({ locale }: { locale: Locale }) {
       <Container>
         <div className={styles.footerTop}>
           <div className={styles.footerIdentity}>
-            <Image src="/brand/logo-white.png" width={56} height={56} alt="" />
+            <Image src="/brand/logo-mark-small.png" width={56} height={50} alt="" />
             <div>
               <p className={styles.footerBrand}>{siteConfig.brandName}</p>
             <p className={styles.footerTagline}>{siteConfig.tagline}</p>
