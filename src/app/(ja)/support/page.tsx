@@ -16,6 +16,11 @@ export const metadata: Metadata = {
   },
 };
 
+// Hirame は自分のサイトにサポートページがあるので直接そこへ。ほかの作品は各サイトのトップへ。
+function supportHref(product: { slug: string; href: string; internal: boolean }) {
+  return product.internal || product.slug === "hirame" ? `${product.href}support/` : product.href;
+}
+
 export default function SupportPage() {
   return (
     <>
@@ -40,7 +45,7 @@ export default function SupportPage() {
       <Section eyebrow="Choose a product" title="プロダクト別サポート">
         <div className={styles.supportList}>
           {siteConfig.products.map((product) => (
-            <a className={styles.supportCard} href={product.internal ? `${product.href}support/` : product.href} key={product.slug} target={product.internal ? undefined : "_blank"} rel={product.internal ? undefined : "noopener noreferrer"}>
+            <a className={styles.supportCard} href={supportHref(product)} key={product.slug} target={product.internal ? undefined : "_blank"} rel={product.internal ? undefined : "noopener noreferrer"}>
               <div>
                 <h3>{product.name} Support</h3>
                 <p>{product.tagline} — {product.platform}アプリのサポート情報</p>

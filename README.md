@@ -1,6 +1,8 @@
 # Mika Spark Studio
 
-個人開発ブランド「Mika Spark Studio」の公式Webサイトです。iOSアプリ「Hirame」の紹介、法務文書、サポート情報を掲載します。
+個人開発ブランド「Mika Spark Studio」の公式Webサイトです。作品の紹介（トップと Works ページ）、スタジオ紹介、サポートの入口を掲載します。
+
+各作品の詳細ページは作品ごとのサブドメインにあります: Hirame（https://hirame.mikaspark.com/ 、リポジトリ kzk3992/Hirame-site）、Uzmera（https://uzmera.mikaspark.com/ ）、まほうのある暮らし（https://mahou.mikaspark.com/ ）。旧URL `/apps/hirame/...` は `public/_redirects` で Hirame サイトへ 301 転送しています（`/apps/hirame/app-ads.txt` は転送せずこのサイトに残しています）。
 
 Next.js App Router、TypeScript、CSS Modulesで実装し、`output: "export"` による完全静的出力を使用しています。バックエンド、データベース、Cookie、アクセス解析、外部フォントは使用していません。
 
@@ -78,24 +80,19 @@ Cloudflare Pagesの対象プロジェクトで Custom domains → Set up a custo
 - `baseUrl`: 取得済みの本番ドメインへ変更
 - `copyrightYear`: 必要に応じて更新
 - `products`: 新しいアプリ・ゲームの基本情報を追加
-- `appStoreUrl`: Hirame公開後にApp Store URLを設定。`null` の間はComing Soon表示
+- `appStoreUrl`: 作品のApp Store URL。設定すると Works ページに「App Storeで見る」ボタンが出ます
 - `legalDates`: Privacy Policy / Termsを変更したときに更新
 
-メールアドレスはサポートページと法務ページで設定値から参照されます。
 
-## Hirameスクリーンショットの追加
+## Hirame のページについて
 
-1. 画像を `public/images/hirame/` に配置します（例: `screen-01.webp`）。
-2. [src/config/site.ts](src/config/site.ts) のHirameの `screenshots` に `/images/hirame/screen-01.webp` を追加します。
-3. [src/app/apps/hirame/page.tsx](src/app/apps/hirame/page.tsx) のスクリーンショット表示は配列を参照します。必要に応じて端末モック用スタイルを調整します。
-
-画像が1枚もない場合は「Screenshots coming soon」を表示します。App Store用画像はWebPまたは最適化済みPNGを推奨し、内容を説明する適切な代替テキストも設定してください。
+Hirame の紹介・Privacy Policy・Terms・Support は kzk3992/Hirame-site へ移しました。スクリーンショットや法務文書の更新はそちらで行います。
 
 ## 新しいアプリ・ゲームの追加
 
 1. `src/config/site.ts` の `products` に、`category`（`App` / `Game` / `Tool` / `Experiment`）を含む作品情報を追加します。
 2. `src/app/apps/[slug]/page.tsx` 相当の紹介ページを作成します。ゲームの場合は必要に応じて `src/app/games/[slug]/` として構成できます。
-3. Privacy Policy、Terms、Supportが必要なら、Hirameと同じ構成で作品配下に追加します。
+3. 詳細ページや Privacy Policy・Terms・Support は、Hirame と同様に作品ごとのサブドメイン（別リポジトリ）に置く構成を基本とします。Works ページのカルーセルに載せる場合は `src/components/worksCarouselItems.ts` にも追加します。
 4. `src/app/sitemap.ts` と `scripts/verify-static.mjs` の対象ルートへ追加します。
 5. `npm run check` でリンク、metadata、静的出力を確認します。
 
@@ -105,9 +102,7 @@ Cloudflare Pagesの対象プロジェクトで Custom domains → Set up a custo
 
 - `supportEmail`が実在し受信できること
 - `baseUrl`が取得済みの本番ドメインと一致すること
-- Hirameの実装仕様とPrivacy Policy / Terms / FAQの記載が一致すること
 - App Store URLを公開後に設定すること
 - 制定日・最終更新日を確認すること
 - `npm run check` がすべて成功すること
 
-Privacy PolicyとTermsは、Hirameの現時点の想定仕様（端末内保存、ログインなし、iCloud・広告・課金なし）に基づくドラフトです。アプリ実装側の保存方式やSDK構成が変更された場合は、公開前に必ず内容を更新してください。

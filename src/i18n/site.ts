@@ -3,14 +3,11 @@ export type Locale = "ja" | "en";
 export const localeRoutes = {
   "/": "/en/",
   "/works/": "/en/works/",
-  "/apps/hirame/": "/en/apps/hirame/",
-  "/apps/hirame/privacy/": "/en/apps/hirame/privacy/",
-  "/apps/hirame/terms/": "/en/apps/hirame/terms/",
-  "/apps/hirame/support/": "/en/apps/hirame/support/",
   "/about/": "/en/about/",
   "/support/": "/en/support/",
-  "/privacy/": "/en/apps/hirame/privacy/",
-  "/terms/": "/en/apps/hirame/terms/",
+  // 一覧ページ（日本語のみ）の英語版はないので、英語トップへ
+  "/privacy/": "/en/",
+  "/terms/": "/en/",
 } as const;
 
 const englishToJapanese = Object.entries(localeRoutes).reduce<Record<string, string>>(
@@ -69,8 +66,8 @@ export const footerLinks = {
     { label: "About", href: "/about/" },
   ],
   en: [
-    { label: "Privacy", href: "/en/apps/hirame/privacy/" },
-    { label: "Terms", href: "/en/apps/hirame/terms/" },
+    { label: "Privacy", href: "https://hirame.mikaspark.com/en/privacy/" },
+    { label: "Terms", href: "https://hirame.mikaspark.com/en/terms/" },
     { label: "Support", href: "/en/support/" },
     { label: "About", href: "/en/about/" },
   ],

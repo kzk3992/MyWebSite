@@ -1,0 +1,19 @@
+# Hirame のページは hirame.mikaspark.com（kzk3992/Hirame-site）へ移転（2026-11）。
+# App Store Connect やアプリ内に登録済みの旧URLを生かすため 301 で転送する。
+# /apps/hirame/app-ads.txt は転送せずこのサイトに残す（パスを1つずつ書いているのはそのため）。
+/apps/hirame                  https://hirame.mikaspark.com/              301
+/apps/hirame/                 https://hirame.mikaspark.com/              301
+/apps/hirame/privacy          https://hirame.mikaspark.com/privacy/      301
+/apps/hirame/privacy/         https://hirame.mikaspark.com/privacy/      301
+/apps/hirame/terms            https://hirame.mikaspark.com/terms/        301
+/apps/hirame/terms/           https://hirame.mikaspark.com/terms/        301
+/apps/hirame/support          https://hirame.mikaspark.com/support/      301
+/apps/hirame/support/         https://hirame.mikaspark.com/support/      301
+/en/apps/hirame               https://hirame.mikaspark.com/en/           301
+/en/apps/hirame/              https://hirame.mikaspark.com/en/           301
+/en/apps/hirame/privacy       https://hirame.mikaspark.com/en/privacy/   301
+/en/apps/hirame/privacy/      https://hirame.mikaspark.com/en/privacy/   301
+/en/apps/hirame/terms         https://hirame.mikaspark.com/en/terms/     301
+/en/apps/hirame/terms/        https://hirame.mikaspark.com/en/terms/     301
+/en/apps/hirame/support       https://hirame.mikaspark.com/en/support/   301
+/en/apps/hirame/support/      https://hirame.mikaspark.com/en/support/   301

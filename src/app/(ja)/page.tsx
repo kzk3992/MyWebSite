@@ -59,11 +59,9 @@ export default function Home() {
         intro="日々の小さな着想を、手触りのあるアプリやゲームへ。Mika Spark Studioが公開しているプロダクトです。"
       >
         <div className={styles.worksList}>
-          {siteConfig.products.filter((product) => product.internal).map((product, index) => (
-            <ProductCard key={product.slug} product={product} index={index + 1} />
+          {["hirame", "uzmera", "mahou"].map((slug, index) => (
+            <ProductCard key={slug} product={siteConfig.products.find((product) => product.slug === slug)!} index={index + 1} />
           ))}
-          <ProductCard product={siteConfig.products.find((product) => product.slug === "uzmera")!} index={2} />
-          <ProductCard product={siteConfig.products.find((product) => product.slug === "mahou")!} index={3} />
         </div>
         <a className={styles.worksMore} href="/works/">すべての作品を見る →</a>
       </Section>

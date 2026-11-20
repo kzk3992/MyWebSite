@@ -37,14 +37,15 @@ export const siteConfig = {
   products: [
     {
       slug: "hirame",
-      internal: true,
+      // 2026-11: Hirame のページは hirame.mikaspark.com（リポジトリ kzk3992/Hirame-site）へ独立
+      internal: false,
       name: "Hirame",
       category: "App",
       platform: "iPhone / iPad",
       tagline: "制約が、ひらめきを生む。",
       description:
         "言葉の組み合わせや連想などの制約から、発想する力を日常的に鍛えるアイデアトレーニングアプリ。",
-      href: "/apps/hirame/",
+      href: "https://hirame.mikaspark.com/",
       appStoreUrl: "https://apps.apple.com/jp/app/hirame/id6808982302",
       screenshots: [
         "/brand/hirame/screens/01-concept.png",
@@ -88,9 +89,9 @@ export const hirame = siteConfig.products[0];
 
 export const hirameEnglish: Product = {
   ...hirame,
-  internal: true,
+  internal: false,
   name: "Hirame: Idea Trainer",
-  href: "/en/apps/hirame/",
+  href: "https://hirame.mikaspark.com/en/",
   tagline: "Turn constraints into ideas.",
   description:
     "An idea-training app that uses word combinations, associations, and other constraints to help you practice creative thinking.",

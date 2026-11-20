@@ -6,20 +6,12 @@ const outputDirectory = join(process.cwd(), "out");
 const routes = [
   "/",
   "/works/",
-  "/apps/hirame/",
-  "/apps/hirame/privacy/",
-  "/apps/hirame/terms/",
-  "/apps/hirame/support/",
   "/privacy/",
   "/terms/",
   "/about/",
   "/support/",
   "/en/",
   "/en/works/",
-  "/en/apps/hirame/",
-  "/en/apps/hirame/privacy/",
-  "/en/apps/hirame/terms/",
-  "/en/apps/hirame/support/",
   "/en/about/",
   "/en/support/",
 ];
@@ -27,10 +19,6 @@ const routes = [
 const localizedRoutePairs = [
   ["/", "/en/"],
   ["/works/", "/en/works/"],
-  ["/apps/hirame/", "/en/apps/hirame/"],
-  ["/apps/hirame/privacy/", "/en/apps/hirame/privacy/"],
-  ["/apps/hirame/terms/", "/en/apps/hirame/terms/"],
-  ["/apps/hirame/support/", "/en/apps/hirame/support/"],
   ["/about/", "/en/about/"],
   ["/support/", "/en/support/"],
 ];
@@ -160,13 +148,13 @@ if (!rootHtml.includes('href="/terms/"')) failures.push("Footer: Terms一覧リ�
 const englishRootHtml = readFileSync(routeFile("/en/"), "utf8");
 if (!englishRootHtml.includes("Small ideas, built into useful products.")) failures.push("English Home: ブランドコピーがありません");
 if (!englishRootHtml.includes('href="/en/works/"')) failures.push("English Header: Works ページへのリンクがありません");
-if (!englishRootHtml.includes('href="/en/apps/hirame/privacy/"')) failures.push("English Footer: Privacyリンクがありません");
-if (!englishRootHtml.includes('href="/en/apps/hirame/terms/"')) failures.push("English Footer: Termsリンクがありません");
+if (!englishRootHtml.includes('href="https://hirame.mikaspark.com/en/privacy/"')) failures.push("English Footer: Privacyリンクがありません");
+if (!englishRootHtml.includes('href="https://hirame.mikaspark.com/en/terms/"')) failures.push("English Footer: Termsリンクがありません");
 
 // Works ページ：初期表示（Uzmera が正面）が静的HTMLに含まれ、4作品すべてへのリンクがあること
 const worksPages = [
-  ["/works/", "Uzmera", ["https://uzmera.mikaspark.com/", "/apps/hirame/", "https://apps.apple.com/jp/app/hirame/id6808982302", "https://mahou.mikaspark.com/", "https://line.me/S/sticker/37956024"], "ウズメちゃん"],
-  ["/en/works/", "Uzmera", ["https://uzmera.mikaspark.com/", "/en/apps/hirame/", "https://apps.apple.com/jp/app/hirame/id6808982302", "https://mahou.mikaspark.com/", "https://line.me/S/sticker/37956024"], "Uzume-chan"],
+  ["/works/", "Uzmera", ["https://uzmera.mikaspark.com/", "https://hirame.mikaspark.com/", "https://apps.apple.com/jp/app/hirame/id6808982302", "https://mahou.mikaspark.com/", "https://line.me/S/sticker/37956024"], "ウズメちゃん"],
+  ["/en/works/", "Uzmera", ["https://uzmera.mikaspark.com/", "https://hirame.mikaspark.com/en/", "https://apps.apple.com/jp/app/hirame/id6808982302", "https://mahou.mikaspark.com/", "https://line.me/S/sticker/37956024"], "Uzume-chan"],
 ];
 for (const [route, firstWork, links, stickerName] of worksPages) {
   const worksHtml = readFileSync(routeFile(route), "utf8");
@@ -181,96 +169,33 @@ for (const [route, firstWork, links, stickerName] of worksPages) {
 }
 if (!rootHtml.includes('href="/works/"') || !englishRootHtml.includes('href="/en/works/"')) failures.push("Home: Works ページへの導線がありません");
 
-const hirameHtml = readFileSync(routeFile("/apps/hirame/"), "utf8");
-for (const href of ["/apps/hirame/privacy/", "/apps/hirame/terms/", "/apps/hirame/support/"]) {
-  if (!hirameHtml.includes(`href="${href}"`)) failures.push(`Hirame: ${href} へのリンクがありません`);
-}
-if (!hirameHtml.includes("BRIDGE")) failures.push("Hirame: BRIDGEの表記がありません");
-if (!hirameHtml.includes("Random Fusion")) failures.push("Hirame: Random Fusionの表記がありません");
-if (!hirameHtml.includes("AI Assist")) failures.push("Hirame: AI Assistの表記がありません");
-if (!hirameHtml.includes("制約が、ひらめきを生む。")) failures.push("Hirame: 新しいメインコピーがありません");
-if (!hirameHtml.includes('href="https://apps.apple.com/jp/app/hirame/id6808982302"')) failures.push("Hirame: App Storeへのリンクがありません");
-if (!hirameHtml.includes("発想する力を日常的に鍛える")) failures.push("Hirame: 発想トレーニングの説明がありません");
-if (!hirameHtml.includes("アイデアを自分で生み出す体験を中心に")) failures.push("Hirame: 自分で考えるという説明がありません");
-if (!hirameHtml.includes("Apple Intelligence")) failures.push("Hirame: AI支援の説明がありません");
-if (hirameHtml.includes("ひらめきを、習慣に。")) failures.push("Hirame: 旧メインコピーが残っています");
-
-const privacyHtml = readFileSync(routeFile("/apps/hirame/privacy/"), "utf8");
-for (const text of ["CloudKitプライベートデータベース", "Foundation Models", "Firebase Analytics", "Google Mobile Ads SDK", "Google User Messaging Platform", "端末ID", "トラッキング", "プライバシー設定", "買い切り型の「Ad-Free」"]) {
-  if (!privacyHtml.includes(text)) failures.push(`Hirame Privacy: ${text} の説明がありません`);
-}
-
-const termsHtml = readFileSync(routeFile("/apps/hirame/terms/"), "utf8");
-for (const text of ["AI支援機能", "買い切り型の「Ad-Free」", "Google AdMob"] ) {
-  if (!termsHtml.includes(text)) failures.push(`Hirame Terms: ${text} の説明がありません`);
-}
-
-const hirameSupportHtml = readFileSync(routeFile("/apps/hirame/support/"), "utf8");
-for (const text of ["iCloud同期を使わずに利用できますか？", "AI機能はどのように動作しますか？", "購入状態はどのように管理されますか？"]) {
-  if (!hirameSupportHtml.includes(text)) failures.push(`Hirame Support: ${text} がありません`);
-}
-
-const hirameScreenshots = [
-  "/brand/hirame/screens/01-concept.png",
-  "/brand/hirame/screens/02-note.png",
-  "/brand/hirame/screens/03-with-ai.png",
-  "/brand/hirame/screens/04-random-fusion.png",
-  "/brand/hirame/screens/05-library.png",
-  "/brand/hirame/screens/06-association.png",
-];
-let previousScreenshotIndex = hirameHtml.indexOf('aria-label="Hirame アプリ画面"');
-if (previousScreenshotIndex === -1) failures.push("Hirame: スクリーンショット一覧がありません");
-for (const screenshot of hirameScreenshots) {
-  const screenshotIndex = hirameHtml.indexOf(`src="${screenshot}"`, previousScreenshotIndex + 1);
-  if (screenshotIndex === -1) {
-    failures.push(`Hirame: スクリーンショット ${screenshot} が番号順に表示されていません`);
-    break;
+// Hirame のページは Hirame-site（hirame.mikaspark.com）へ移転。内容の検証はそちらの verify-static で行う。
+// ここでは旧URLからの 301 転送と、各ページからの導線を確認する。
+const redirects = readFileSync(join(outputDirectory, "_redirects"), "utf8");
+for (const [from, to] of [
+  ["/apps/hirame/", "https://hirame.mikaspark.com/"],
+  ["/apps/hirame/privacy/", "https://hirame.mikaspark.com/privacy/"],
+  ["/apps/hirame/terms/", "https://hirame.mikaspark.com/terms/"],
+  ["/apps/hirame/support/", "https://hirame.mikaspark.com/support/"],
+  ["/en/apps/hirame/", "https://hirame.mikaspark.com/en/"],
+  ["/en/apps/hirame/privacy/", "https://hirame.mikaspark.com/en/privacy/"],
+  ["/en/apps/hirame/terms/", "https://hirame.mikaspark.com/en/terms/"],
+  ["/en/apps/hirame/support/", "https://hirame.mikaspark.com/en/support/"],
+]) {
+  for (const source of [from, from.slice(0, -1)]) {
+    if (!new RegExp(`^${source.replace(/[/.]/g, "\\$&")}\\s+${to.replace(/[/.]/g, "\\$&")}\\s+301$`, "m").test(redirects)) failures.push(`_redirects: ${source} → ${to} の301がありません`);
   }
-  previousScreenshotIndex = screenshotIndex;
 }
-
-const englishHirameHtml = readFileSync(routeFile("/en/apps/hirame/"), "utf8");
-if (!englishHirameHtml.includes("Hirame: Idea Trainer")) failures.push("English Hirame: 新しい英語アプリ名がありません");
-if (!englishHirameHtml.includes('href="https://apps.apple.com/jp/app/hirame/id6808982302"')) failures.push("English Hirame: App Storeへのリンクがありません");
-for (const text of ["Turn constraints into ideas.", "Idea Note", "Random Fusion", "BRIDGE", "Think with AI", "Reverse Thinking", "Constraint Ideation", "Analogy Thinking"]) {
-  if (!englishHirameHtml.includes(text)) failures.push(`English Hirame: ${text} がありません`);
+if (/^\/apps\/hirame\/\*/m.test(redirects)) failures.push("_redirects: /apps/hirame/* のワイルドカードは app-ads.txt まで転送するので使わないこと");
+if (!existsSync(join(outputDirectory, "apps", "hirame", "app-ads.txt"))) failures.push("apps/hirame/app-ads.txt: 出力されていません");
+for (const route of ["/", "/en/"]) {
+  const homeHtml = readFileSync(routeFile(route), "utf8");
+  const hirameUrl = route === "/" ? "https://hirame.mikaspark.com/" : "https://hirame.mikaspark.com/en/";
+  if (!homeHtml.includes(`href="${hirameUrl}"`)) failures.push(`${route}: Hirame サイトへのリンクがありません`);
+  if (homeHtml.includes("/apps/hirame/")) failures.push(`${route}: 旧 Hirame URL へのリンクが残っています`);
 }
-for (const href of ["/en/apps/hirame/privacy/", "/en/apps/hirame/terms/", "/en/apps/hirame/support/"]) {
-  if (!englishHirameHtml.includes(`href="${href}"`)) failures.push(`English Hirame: ${href} へのリンクがありません`);
-}
-
-const englishHirameScreenshots = [
-  "/brand/hirame/screens/en/01-concept.png",
-  "/brand/hirame/screens/en/02-note.png",
-  "/brand/hirame/screens/en/03-with-ai.png",
-  "/brand/hirame/screens/en/04-random-fusion.png",
-  "/brand/hirame/screens/en/05-library.png",
-  "/brand/hirame/screens/en/06-bridge.png",
-];
-let previousEnglishScreenshotIndex = englishHirameHtml.indexOf('aria-label="Hirame app screens"');
-if (previousEnglishScreenshotIndex === -1) failures.push("English Hirame: スクリーンショット一覧がありません");
-for (const screenshot of englishHirameScreenshots) {
-  const screenshotIndex = englishHirameHtml.indexOf(`src="${screenshot}"`, previousEnglishScreenshotIndex + 1);
-  if (screenshotIndex === -1) {
-    failures.push(`English Hirame: スクリーンショット ${screenshot} が対応順に表示されていません`);
-    break;
-  }
-  previousEnglishScreenshotIndex = screenshotIndex;
-}
-
-const englishPrivacyHtml = readFileSync(routeFile("/en/apps/hirame/privacy/"), "utf8");
-for (const text of ["Information Not Collected", "Firebase Analytics", "Google Mobile Ads SDK", "Google User Messaging Platform", "device ID", "tracking", "Privacy Choices", "CloudKit private database", "Foundation Models", "Data Retention", "Data Deletion", "Responsible Operator", "support@mikaspark.com"]) {
-  if (!englishPrivacyHtml.includes(text)) failures.push(`English Privacy: ${text} がありません`);
-}
-
-const englishTermsHtml = readFileSync(routeFile("/en/apps/hirame/terms/"), "utf8");
-for (const text of ["Prohibited Conduct", "User-Created Content", "AI Assistance", "In-App Purchases", "Advertising", "Governing Law and Jurisdiction", "Responsible Operator", "support@mikaspark.com"]) {
-  if (!englishTermsHtml.includes(text)) failures.push(`English Terms: ${text} がありません`);
-}
-
-const englishSupportHtml = readFileSync(routeFile("/en/apps/hirame/support/"), "utf8");
-for (const text of ["Frequently asked questions", "Do I need to create an account?", "How do the AI features work?", "Contact support", "support@mikaspark.com"]) {
-  if (!englishSupportHtml.includes(text)) failures.push(`English Hirame Support: ${text} がありません`);
+for (const [route, href] of [["/privacy/", "https://hirame.mikaspark.com/privacy/"], ["/terms/", "https://hirame.mikaspark.com/terms/"], ["/support/", "https://hirame.mikaspark.com/support/"], ["/en/support/", "https://hirame.mikaspark.com/en/support/"]]) {
+  if (!readFileSync(routeFile(route), "utf8").includes(`href="${href}"`)) failures.push(`${route}: ${href} へのリンクがありません`);
 }
 
 for (const route of ["/", "/en/"]) {
@@ -287,17 +212,6 @@ for (const [, englishRoute] of localizedRoutePairs) {
   if (!sitemapXml.includes(`<loc>https://mikaspark.com${englishRoute}</loc>`)) failures.push(`sitemap: ${englishRoute} がありません`);
 }
 if (!sitemapXml.includes('hreflang="en"')) failures.push("sitemap: en hreflangがありません");
-
-const configSource = readFileSync(join(process.cwd(), "src", "config", "site.ts"), "utf8");
-const supportMatch = configSource.match(/supportEmail:\s*"([^"]+)"/);
-if (!supportMatch) {
-  failures.push("site.ts: supportEmailが設定されていません");
-} else {
-  const supportHtml = readFileSync(routeFile("/apps/hirame/support/"), "utf8");
-  if (!supportHtml.includes(supportMatch[1])) {
-    failures.push("Hirame Support: 設定ファイルのsupportEmailが使われていません");
-  }
-}
 
 if (failures.length > 0) {
   console.error("静的出力の検証に失敗しました:\n" + failures.map((item) => `- ${item}`).join("\n"));
