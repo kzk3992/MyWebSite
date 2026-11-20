@@ -50,11 +50,13 @@ export const navigation = {
   ja: [
     { label: "Works", href: "/works/" },
     { label: "About", href: "/about/" },
+    { label: "Goods", href: "/goods/" },
     { label: "Support", href: "/support/" },
   ],
   en: [
     { label: "Works", href: "/en/works/" },
     { label: "About", href: "/en/about/" },
+    { label: "Goods", href: "/en/goods/" },
     { label: "Support", href: "/en/support/" },
   ],
 } as const;

@@ -206,7 +206,9 @@ for (const route of ["/", "/en/"]) {
   // 2026-11: トップは部屋だけになり、グッズは /goods/ へ移した
   const goodsHtml = readFileSync(routeFile(route === "/" ? "/goods/" : "/en/goods/"), "utf8");
   if (!goodsHtml.includes("/brand/line-stickers/14_renshuushinasai.svg")) failures.push(`${route}goods/: グッズ（LINEスタンプ）がありません`);
-  if (!goodsHtml.includes(route === "/" ? "ウズメちゃん LINEスタンプ（全16種）¥120" : "Uzume-chan LINE Stickers (16)")) failures.push(`${route}goods/: グッズのテキストがありません`);
+  if (!goodsHtml.includes(route === "/" ? "ウズメちゃん LINEスタンプ" : "Uzume-chan LINE Stickers") || !goodsHtml.includes("¥120")) failures.push(`${route}goods/: グッズの商品名・価格がありません`);
+  if (!goodsHtml.includes('href="https://line.me/S/sticker/37956024"')) failures.push(`${route}goods/: LINE STORE へのリンクがありません`);
+  if (!goodsHtml.includes("/brand/line-stickers/16_ato1kai.svg")) failures.push(`${route}goods/: スタンプ全16種の一覧がありません`);
   if (!homeHtml.includes("https://www.instagram.com/mika_spark_studio/")) failures.push(`${route}: Instagramへの導線がありません`);
   if (!homeHtml.includes("https://x.com/MIKA_StReIn")) failures.push(`${route}: Xへの導線がありません`);
 }

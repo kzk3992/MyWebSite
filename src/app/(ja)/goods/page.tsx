@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { GoodsSection } from "@/components/GoodsSection";
+import { GoodsPage } from "@/components/GoodsPage";
 import { localizedAlternates } from "@/i18n/site";
 
 export const metadata: Metadata = {
   title: "Goods",
-  description: "Mika Spark Studioのグッズ。ウズメちゃんLINEスタンプなど。",
+  description: "Mika Spark Studioのグッズ。ウズメちゃんLINEスタンプ（全16種・¥120）など。",
   alternates: localizedAlternates("/goods/", "/en/goods/"),
-  openGraph: { title: "Goods | Mika Spark Studio", description: "Mika Spark Studioのグッズ。", url: "/goods/" },
+  openGraph: { title: "Goods | Mika Spark Studio", description: "ウズメちゃんLINEスタンプ（全16種）など、Mika Spark Studioのグッズ。", url: "/goods/" },
 };
 
-export default function GoodsPage() {
-  return <GoodsSection locale="ja" />;
+export default function Page() {
+  return <GoodsPage locale="ja" />;
 }
