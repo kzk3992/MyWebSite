@@ -1,0 +1,72 @@
+/* ---------- トップページ：パースの線の部屋 ---------- */
+.scene { position: relative; isolation: isolate; height: calc(100svh - 73px); min-height: 560px; max-height: 1100px; overflow: hidden; background: radial-gradient(120% 90% at 50% 46%, #ffffff 0%, #f7f7f4 62%, #ededea 100%); border-bottom: 1px solid var(--color-border); }
+.canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; pointer-events: none; }
+
+.copy { position: absolute; z-index: 4500; top: 22px; left: max(20px, 3vw); max-width: min(440px, 70%); pointer-events: none; }
+.title { margin: 0; color: var(--color-text); font-size: .7rem; font-weight: 800; letter-spacing: .22em; line-height: 1.4; text-transform: uppercase; }
+.lead { margin-top: 6px; color: var(--color-muted); font-size: .86rem; line-height: 1.6; }
+
+/* 投影するオブジェクト：左上を原点に置き、JS が translate + scale（下端の中央が基点）を入れる */
+.obj { position: absolute; left: 0; top: 0; display: block; transform-origin: 50% 100%; opacity: 0; color: inherit; text-decoration: none; will-change: transform, opacity; -webkit-user-drag: none; }
+.obj img { display: block; width: 100%; height: auto; -webkit-user-drag: none; }
+.mark { pointer-events: none; }
+.scene:not([data-ready]) .mark { opacity: 0; }
+
+/* 立体ロゴ（13層） */
+.model { position: relative; display: block; width: 100%; aspect-ratio: 640 / 573; perspective: 1400px; transform-style: preserve-3d; }
+.model img { position: absolute; inset: 0; width: 100%; height: 100%; animation: sway 12s ease-in-out infinite; }
+.side { opacity: .62; }
+.back { opacity: .38; }
+@keyframes sway { 0%, 100% { transform: rotateY(-18deg) translateZ(var(--z, 0)); } 50% { transform: rotateY(18deg) translateZ(var(--z, 0)); } }
+.shadow { position: absolute; left: 50%; bottom: -8%; width: 110%; aspect-ratio: 5; transform: translateX(-50%); border-radius: 50%; background: radial-gradient(ellipse at center, rgb(18 20 15 / 18%) 0%, rgb(18 20 15 / 6%) 50%, transparent 72%); }
+
+/* 看板 */
+.sign { width: 288px; height: 150px; }
+.sign i { position: absolute; top: 0; width: 2px; height: 54px; background: var(--color-text); }
+.sign i:first-child { left: 22%; }
+.sign i:nth-child(2) { right: 22%; }
+.board { position: absolute; left: 0; right: 0; bottom: 6px; height: 96px; display: grid; place-content: center; text-align: center; border: 3px solid var(--color-text); background: #ffffff; box-shadow: 6px 6px 0 #b9bab4, 6px 6px 0 3px var(--color-text); }
+.board b { font-size: 34px; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+.board span { margin-top: 4px; font-size: 13px; font-weight: 700; letter-spacing: .32em; text-transform: uppercase; }
+
+/* 立体文字（WORKS / ABOUT MIKA / PRIVACY 共通） */
+.wordmark { --fs: 66px; position: relative; display: block; height: calc(var(--lines, 1) * var(--fs) * .96 + 4px); font-size: var(--fs); font-weight: 900; letter-spacing: -.04em; line-height: .96; text-align: center; white-space: pre-line; }
+.wordmark > span { position: absolute; left: 0; right: 0; top: 0; }
+
+.about { width: 276px; }
+.overMark { position: absolute; left: 0; right: 0; bottom: 10%; }
+
+.works { width: 312px; }
+.fan { position: relative; display: block; height: 176px; margin-top: 10px; perspective: 700px; perspective-origin: 50% 30%; }
+.spin { position: absolute; left: 50%; bottom: 14px; width: 0; height: 0; transform-style: preserve-3d; animation: spin 16s linear infinite; }
+.spin i { position: absolute; left: -46px; top: -132px; width: 92px; height: 132px; border: 1px solid rgb(18 20 15 / 18%); border-radius: 10px; background: linear-gradient(180deg, #ffffff, #f4f4f1); box-shadow: 0 10px 22px rgb(30 32 28 / 14%); backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.spin i:nth-child(1) { transform: rotateY(0deg) translateZ(118px); }
+.spin i:nth-child(2) { transform: rotateY(60deg) translateZ(118px); }
+.spin i:nth-child(3) { transform: rotateY(120deg) translateZ(118px); }
+.spin i:nth-child(4) { transform: rotateY(180deg) translateZ(118px); }
+.spin i:nth-child(5) { transform: rotateY(240deg) translateZ(118px); }
+.spin i:nth-child(6) { transform: rotateY(300deg) translateZ(118px); }
+@keyframes spin { to { transform: rotateY(-360deg); } }
+
+.support { width: 252px; }
+
+.privacy { width: 312px; }
+.shield { display: block; width: 74%; height: auto; margin: 0 auto; filter: drop-shadow(0 16px 18px rgb(30 32 28 / 18%)); }
+.overShield { position: absolute; left: 0; right: 0; top: 40%; z-index: 1; }
+
+/* キーボード・読み上げ・JSなし向けのリンク（見た目は控えめ） */
+.nav { position: absolute; z-index: 4500; left: max(20px, 3vw); bottom: 18px; display: flex; flex-wrap: wrap; gap: 4px 18px; }
+.nav a { color: var(--color-dim); font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-decoration: none; text-transform: uppercase; }
+.nav a:hover, .nav a:focus-visible { color: var(--color-text); }
+.hint { position: absolute; z-index: 4500; right: max(20px, 3vw); bottom: 18px; color: var(--color-dim); font-size: .62rem; letter-spacing: .16em; pointer-events: none; }
+
+@media (max-width: 840px) {
+  .scene { height: calc(100svh - 65px); }
+}
+@media (max-width: 560px) {
+  .hint { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .model img { animation: none; transform: translateZ(var(--z, 0)); }
+  .spin { animation: none; }
+}

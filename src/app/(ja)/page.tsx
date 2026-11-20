@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import { BrandIcon } from "@/components/BrandIcon";
-import { Container } from "@/components/Container";
 import { GoodsSection } from "@/components/GoodsSection";
-import { PerspectiveRoom } from "@/components/PerspectiveRoom";
 import { ProductCard } from "@/components/ProductCard";
+import { RoomHero, type RoomHeroContent } from "@/components/RoomHero";
 import { Section } from "@/components/Section";
 import { siteConfig } from "@/config/site";
 import { localizedAlternates } from "@/i18n/site";
@@ -20,34 +18,22 @@ export const metadata: Metadata = {
   },
 };
 
+const room: RoomHeroContent = {
+  title: "Mika Spark Studio",
+  lead: "小さなアイデアを、使えるプロダクトへ。",
+  hint: "SCROLL ↓",
+  navLabel: "ページ",
+  about: { href: "/about/", label: "About" },
+  works: { href: "/works/", label: "Works" },
+  support: { href: "/support/", label: "Support" },
+  privacy: { href: "/privacy/", label: "Privacy" },
+};
+
 export default function Home() {
   return (
-    <div className={styles.depthHome}>
-      {/* 背景：パースの線の部屋（画面に固定）。スクロールした分だけ奥へ進み、立体ロゴに近づく */}
-      <PerspectiveRoom mode="scroll" logo view={{ horizon: 0.5, vanishX: 0.68, logoZ: 11 }} viewMobile={{ horizon: 0.7, vanishX: 0.5, logoZ: 8 }} className={styles.roomLayer} />
-      <section className={styles.hero} aria-labelledby="hero-title">
-        <Container className={styles.heroInner}>
-          <div className={styles.heroCopyBlock}>
-            <div className={styles.heroSignal}><span>Signal 001</span><i /></div>
-            <p className={styles.heroKicker}>Independent development studio</p>
-            <h1 id="hero-title">
-              <span>Mika Spark</span>
-              <span>Studio</span>
-            </h1>
-            <div className={styles.heroCopy}>
-              <BrandIcon name="spark" size={38} />
-              <div>
-                <p className={styles.heroLead}>小さなアイデアを、使えるプロダクトへ。</p>
-                <p className={styles.heroTagline}>{siteConfig.tagline}</p>
-              </div>
-            </div>
-          </div>
-          <div className={styles.heroRail}>
-            <span className={styles.heroRailTicks} aria-hidden="true" />
-            <a className={styles.heroAside} href="#works"><BrandIcon name="paw" size={30} />Explore works<i aria-hidden="true" /></a>
-          </div>
-        </Container>
-      </section>
+    <>
+      {/* 最初の画面：パースの線の部屋。自動で奥へ歩き、About・Works・Support・Privacy が近づいてくる */}
+      <RoomHero content={room} />
 
       <Section
         id="works"
@@ -85,6 +71,6 @@ export default function Home() {
       </Section>
 
       <GoodsSection locale="ja" />
-    </div>
+    </>
   );
 }

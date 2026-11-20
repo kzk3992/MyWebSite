@@ -207,6 +207,16 @@ for (const route of ["/", "/en/"]) {
   if (!homeHtml.includes("https://x.com/MIKA_StReIn")) failures.push(`${route}: Xへの導線がありません`);
 }
 
+// トップの部屋（RoomHero）：About・Works・Support・Privacy へのリンクと、オブジェクト用の画像
+for (const [route, links] of [["/", ["/about/", "/works/", "/support/", "/privacy/"]], ["/en/", ["/en/about/", "/en/works/", "/en/support/", "https://hirame.mikaspark.com/en/privacy/"]]]) {
+  const homeHtml = readFileSync(routeFile(route), "utf8");
+  if (!homeHtml.includes('aria-labelledby="room-title"')) failures.push(`${route}: トップの部屋がありません`);
+  for (const href of links) if (!homeHtml.includes(`href="${href}"`)) failures.push(`${route}: 部屋から ${href} へのリンクがありません`);
+  for (const image of ["/brand/logo-mark.png", "/brand/logo-mark-green.png", "/brand/room/support-hand.png"]) {
+    if (!homeHtml.includes(image)) failures.push(`${route}: 部屋の画像 ${image} がありません`);
+  }
+}
+
 const sitemapXml = readFileSync(join(outputDirectory, "sitemap.xml"), "utf8");
 for (const [, englishRoute] of localizedRoutePairs) {
   if (!sitemapXml.includes(`<loc>https://mikaspark.com${englishRoute}</loc>`)) failures.push(`sitemap: ${englishRoute} がありません`);
