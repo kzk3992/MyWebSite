@@ -6,12 +6,14 @@ const outputDirectory = join(process.cwd(), "out");
 const routes = [
   "/",
   "/works/",
+  "/goods/",
   "/privacy/",
   "/terms/",
   "/about/",
   "/support/",
   "/en/",
   "/en/works/",
+  "/en/goods/",
   "/en/about/",
   "/en/support/",
 ];
@@ -19,6 +21,7 @@ const routes = [
 const localizedRoutePairs = [
   ["/", "/en/"],
   ["/works/", "/en/works/"],
+  ["/goods/", "/en/goods/"],
   ["/about/", "/en/about/"],
   ["/support/", "/en/support/"],
 ];
@@ -141,7 +144,6 @@ const rootHtml = readFileSync(routeFile("/"), "utf8");
 if (!rootHtml.includes("<details")) failures.push("Header: モバイルメニューがありません");
 // 2026-11 刷新：ヘッダーの Works はトップ内アンカー（/#works）から Works ページ（/works/）へ付け替えた
 if (!rootHtml.includes('href="/works/"')) failures.push("Header: Works ページへのリンクがありません");
-if (!rootHtml.includes('id="works"')) failures.push("Home: Works セクションがありません");
 if (!rootHtml.includes('href="/privacy/"')) failures.push("Footer: Privacy一覧リンクがありません");
 if (!rootHtml.includes('href="/terms/"')) failures.push("Footer: Terms一覧リンクがありません");
 
@@ -189,7 +191,7 @@ for (const [from, to] of [
 if (/^\/apps\/hirame\/\*/m.test(redirects)) failures.push("_redirects: /apps/hirame/* のワイルドカードは app-ads.txt まで転送するので使わないこと");
 if (!existsSync(join(outputDirectory, "apps", "hirame", "app-ads.txt"))) failures.push("apps/hirame/app-ads.txt: 出力されていません");
 for (const route of ["/", "/en/"]) {
-  const homeHtml = readFileSync(routeFile(route), "utf8");
+  const homeHtml = readFileSync(routeFile(route === "/" ? "/works/" : "/en/works/"), "utf8");
   const hirameUrl = route === "/" ? "https://hirame.mikaspark.com/" : "https://hirame.mikaspark.com/en/";
   if (!homeHtml.includes(`href="${hirameUrl}"`)) failures.push(`${route}: Hirame サイトへのリンクがありません`);
   if (homeHtml.includes("/apps/hirame/")) failures.push(`${route}: 旧 Hirame URL へのリンクが残っています`);
@@ -201,14 +203,16 @@ for (const [route, href] of [["/privacy/", "https://hirame.mikaspark.com/privacy
 for (const route of ["/", "/en/"]) {
   const homeHtml = readFileSync(routeFile(route), "utf8");
   if (homeHtml.includes("https://necosmos.mikaspark.com/")) failures.push(`${route}: NeCosmosへの導線が残っています`);
-  if (!homeHtml.includes("/brand/line-stickers/14_renshuushinasai.svg")) failures.push(`${route}: グッズ（LINEスタンプ）がありません`);
-  if (!homeHtml.includes(route === "/" ? "ウズメちゃん LINEスタンプ（全16種）¥120" : "Uzume-chan LINE Stickers (16)")) failures.push(`${route}: グッズのテキストがありません`);
+  // 2026-11: トップは部屋だけになり、グッズは /goods/ へ移した
+  const goodsHtml = readFileSync(routeFile(route === "/" ? "/goods/" : "/en/goods/"), "utf8");
+  if (!goodsHtml.includes("/brand/line-stickers/14_renshuushinasai.svg")) failures.push(`${route}goods/: グッズ（LINEスタンプ）がありません`);
+  if (!goodsHtml.includes(route === "/" ? "ウズメちゃん LINEスタンプ（全16種）¥120" : "Uzume-chan LINE Stickers (16)")) failures.push(`${route}goods/: グッズのテキストがありません`);
   if (!homeHtml.includes("https://www.instagram.com/mika_spark_studio/")) failures.push(`${route}: Instagramへの導線がありません`);
   if (!homeHtml.includes("https://x.com/MIKA_StReIn")) failures.push(`${route}: Xへの導線がありません`);
 }
 
 // トップの部屋（RoomHero）：About・Works・Support・Privacy へのリンクと、オブジェクト用の画像
-for (const [route, links] of [["/", ["/about/", "/works/", "/support/", "/privacy/"]], ["/en/", ["/en/about/", "/en/works/", "/en/support/", "https://hirame.mikaspark.com/en/privacy/"]]]) {
+for (const [route, links] of [["/", ["/about/", "/works/", "/support/", "/privacy/", "/goods/"]], ["/en/", ["/en/about/", "/en/works/", "/en/support/", "https://hirame.mikaspark.com/en/privacy/", "/en/goods/"]]]) {
   const homeHtml = readFileSync(routeFile(route), "utf8");
   if (!homeHtml.includes('aria-labelledby="room-title"')) failures.push(`${route}: トップの部屋がありません`);
   for (const href of links) if (!homeHtml.includes(`href="${href}"`)) failures.push(`${route}: 部屋から ${href} へのリンクがありません`);

@@ -10,7 +10,7 @@ import styles from "./RoomHero.module.css";
  * - 部屋は canvas 1枚に線を引くだけ（3D の大きな面は iPhone でメモリ不足になったため使わない）。
  * - 中央の立体ロゴは固定。看板・About・Works・Support・Privacy は奥から等間隔に近づき、通り過ぎると奥へ戻る（ループ）。
  * - オブジェクトは JS で透視投影して 2D の translate/scale と z-index で重ねる（Safari の3D前後判定に頼らない）。
- * - ページのスクロールは奪わない。スクロールした分は少し前へ進む量に足す。
+ * - トップページはこの部屋だけの独立した画面。ホイール・スワイプ・矢印キーで前後に進む（ページはスクロールしない）。
  * - 画面に見えている間だけ描画する。視差効果を減らす設定では止まった状態で表示する。
  */
 
@@ -25,6 +25,7 @@ export type RoomHeroContent = {
   works: RoomLink;
   support: RoomLink;
   privacy: RoomLink;
+  goods: RoomLink;
 };
 
 const EYE = 1.5;
@@ -32,22 +33,22 @@ const WALL = 3.6;
 const CELL = 1.2;
 const NEAR = 0.6;
 const FAR = 90;
-const LOOP = 40; // 5つのオブジェクトを 8 ずつ等間隔に置く
+const LOOP = 48; // 6つのオブジェクトを 8 ずつ等間隔に置く
 const AUTO_SPEED = 0.9; // 何もしなくても進む速さ（単位／秒）
-const SCROLL_PER_UNIT = 140; // 何 px スクロールで 1 単位進むか
 const BASE = 120; // 1 単位 = 120px で各オブジェクトを組み、投影で拡大縮小する
 const LAYERS = 13;
 const INK = "#12140f";
 
-type Spot = { key: "sign" | "about" | "works" | "support" | "privacy"; y: number; z0: number; pc: [number, number]; phone: [number, number] };
+type Spot = { key: "sign" | "about" | "works" | "support" | "privacy" | "goods"; y: number; z0: number; pc: [number, number]; phone: [number, number] };
 
-// 並び：看板（左上）→ About（右）→ Works（左）→ Support（右）→ Privacy（左）。[x, 幅]
+// 並び：看板（左上）→ About（右）→ Works（左）→ Support（右）→ Privacy（左）→ Goods（右）。[x, 幅]
 const spots: Spot[] = [
   { key: "sign", y: 2.35, z0: 4, pc: [-2.5, 2.4], phone: [-1.55, 1.7] },
   { key: "about", y: 0, z0: 12, pc: [2.6, 2.3], phone: [1.7, 1.7] },
   { key: "works", y: 0, z0: 20, pc: [-2.6, 2.6], phone: [-1.75, 1.9] },
   { key: "support", y: 0, z0: 28, pc: [2.6, 2.1], phone: [1.7, 1.55] },
   { key: "privacy", y: 0, z0: 36, pc: [-2.6, 2.6], phone: [-1.75, 1.9] },
+  { key: "goods", y: 0, z0: 44, pc: [2.6, 2.4], phone: [1.7, 1.8] },
 ];
 
 function smooth(t: number) {
@@ -213,19 +214,60 @@ export function RoomHero({ content }: { content: RoomHeroContent }) {
       raf = 0;
       const dt = Math.min(64, now - previous);
       previous = now;
-      if (!reduced) walked += (AUTO_SPEED * dt) / 1000;
-      const target = walked + (reduced ? 0 : Math.max(0, window.scrollY) / SCROLL_PER_UNIT);
-      camera += (target - camera) * (reduced ? 1 : 0.12);
+      if (!reduced && !dragging) walked += (AUTO_SPEED * dt) / 1000;
+      if (!reduced && !dragging) {
+        walked += velocity * dt; // 指を離した後の惰性
+        velocity *= Math.pow(0.94, dt / 16.7);
+      }
+      camera += (walked - camera) * (reduced ? 1 : 0.12);
       offsetX += (aimX - offsetX) * 0.08;
       offsetY += (aimY - offsetY) * 0.08;
       draw();
-      if (visible && !reduced) request();
+      if (visible && (!reduced || Math.abs(walked - camera) > 0.001)) request();
     };
     function request() {
       if (!raf) raf = window.requestAnimationFrame(tick);
     }
 
+    // ホイール・スワイプ・矢印キーで前後に進む
+    let dragging = false, lastY = 0, lastT = 0, velocity = 0, moved = 0;
+    const onWheel = (event: WheelEvent) => {
+      event.preventDefault();
+      let delta = Math.abs(event.deltaY) >= Math.abs(event.deltaX) ? event.deltaY : event.deltaX;
+      if (event.deltaMode === 1) delta *= 16;
+      walked += delta * 0.012;
+      request();
+    };
+    const onPointerDown = (event: PointerEvent) => {
+      if (event.pointerType === "mouse" && event.button !== 0) return;
+      dragging = true; lastY = event.clientY; lastT = performance.now(); velocity = 0; moved = 0;
+    };
+    const onDrag = (event: PointerEvent) => {
+      if (!dragging) return;
+      const now = performance.now();
+      const dy = event.clientY - lastY;
+      moved += Math.abs(dy);
+      if (now > lastT) velocity = velocity * 0.7 + ((-dy * 0.02) / (now - lastT)) * 0.3;
+      lastY = event.clientY; lastT = now;
+      walked += -dy * 0.02;
+      request();
+    };
+    const onPointerUp = () => { dragging = false; request(); };
+    // スワイプ中にリンクが開かないように
+    const onClick = (event: MouseEvent) => { if (moved > 8) { event.preventDefault(); moved = 0; } };
+    const onKey = (event: KeyboardEvent) => {
+      const forward = ["ArrowDown", "PageDown", " "].includes(event.key);
+      const back = ["ArrowUp", "PageUp"].includes(event.key);
+      if (!forward && !back) return;
+      const target = event.target as HTMLElement | null;
+      if (target && /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName)) return;
+      event.preventDefault();
+      walked += forward ? 2.4 : -2.4;
+      request();
+    };
+
     const onPointerMove = (event: PointerEvent) => {
+      onDrag(event);
       if (event.pointerType !== "mouse") return;
       const rect = scene.getBoundingClientRect();
       aimX = ((event.clientX - rect.left) / rect.width - 0.5) * 1.2;
@@ -247,18 +289,26 @@ export function RoomHero({ content }: { content: RoomHeroContent }) {
     const resizeObserver = new ResizeObserver(resize);
     resizeObserver.observe(scene);
     document.addEventListener("visibilitychange", onVisibility);
-    window.addEventListener("scroll", request, { passive: true });
-    if (!reduced) {
-      scene.addEventListener("pointermove", onPointerMove);
-      scene.addEventListener("pointerleave", onPointerLeave);
-    }
+    scene.addEventListener("wheel", onWheel, { passive: false });
+    scene.addEventListener("pointerdown", onPointerDown);
+    scene.addEventListener("pointerup", onPointerUp);
+    scene.addEventListener("pointercancel", onPointerUp);
+    scene.addEventListener("click", onClick, true);
+    window.addEventListener("keydown", onKey);
+    scene.addEventListener("pointermove", onPointerMove);
+    scene.addEventListener("pointerleave", onPointerLeave);
     resize();
     return () => {
       window.cancelAnimationFrame(raf);
       observer.disconnect();
       resizeObserver.disconnect();
       document.removeEventListener("visibilitychange", onVisibility);
-      window.removeEventListener("scroll", request);
+      scene.removeEventListener("wheel", onWheel);
+      scene.removeEventListener("pointerdown", onPointerDown);
+      scene.removeEventListener("pointerup", onPointerUp);
+      scene.removeEventListener("pointercancel", onPointerUp);
+      scene.removeEventListener("click", onClick, true);
+      window.removeEventListener("keydown", onKey);
       scene.removeEventListener("pointermove", onPointerMove);
       scene.removeEventListener("pointerleave", onPointerLeave);
     };
@@ -309,8 +359,12 @@ export function RoomHero({ content }: { content: RoomHeroContent }) {
         <span className={styles.overShield}><Wordmark text="PRIVACY" size={58} /></span>
       </a>
 
+      <a ref={(element) => { objectRefs.current.goods = element; }} className={`${styles.obj} ${styles.goods}`} href={content.goods.href} tabIndex={-1} aria-hidden="true">
+        <Wordmark text="GOODS" />
+      </a>
+
       <nav className={styles.nav} aria-label={content.navLabel}>
-        {[content.about, content.works, content.support, content.privacy].map((link) => (
+        {[content.about, content.works, content.support, content.privacy, content.goods].map((link) => (
           <a key={link.href} href={link.href}>{link.label}</a>
         ))}
       </nav>

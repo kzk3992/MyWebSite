@@ -1,5 +1,8 @@
 /* ---------- トップページ：パースの線の部屋 ---------- */
-.scene { position: relative; isolation: isolate; height: calc(100svh - 73px); min-height: 560px; max-height: 1100px; overflow: hidden; background: radial-gradient(120% 90% at 50% 46%, #ffffff 0%, #f7f7f4 62%, #ededea 100%); border-bottom: 1px solid var(--color-border); }
+/* トップページはこの部屋だけ：ページをスクロールさせず、フッターも出さない */
+:global(html):has(.scene) { overflow: hidden; overscroll-behavior: none; }
+:global(body):has(.scene) > footer { display: none; }
+.scene { position: relative; isolation: isolate; height: calc(100svh - 73px); overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none; cursor: ns-resize; background: radial-gradient(120% 90% at 50% 46%, #ffffff 0%, #f7f7f4 62%, #ededea 100%); border-bottom: 1px solid var(--color-border); }
 .canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; pointer-events: none; }
 
 .copy { position: absolute; z-index: 4500; top: 22px; left: max(20px, 3vw); max-width: min(440px, 70%); pointer-events: none; }
@@ -49,6 +52,7 @@
 @keyframes spin { to { transform: rotateY(-360deg); } }
 
 .support { width: 252px; }
+.goods { width: 288px; }
 
 .privacy { width: 312px; }
 .shield { display: block; width: 74%; height: auto; margin: 0 auto; filter: drop-shadow(0 16px 18px rgb(30 32 28 / 18%)); }

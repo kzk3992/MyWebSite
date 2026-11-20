@@ -6,6 +6,7 @@ export const dynamic = "force-static";
 const localizedRoutes = [
   ["/", "/en/"],
   ["/works/", "/en/works/"],
+  ["/goods/", "/en/goods/"],
   ["/about/", "/en/about/"],
   ["/support/", "/en/support/"],
 ] as const;

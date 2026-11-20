@@ -3,6 +3,7 @@ export type Locale = "ja" | "en";
 export const localeRoutes = {
   "/": "/en/",
   "/works/": "/en/works/",
+  "/goods/": "/en/goods/",
   "/about/": "/en/about/",
   "/support/": "/en/support/",
   // 一覧ページ（日本語のみ）の英語版はないので、英語トップへ
