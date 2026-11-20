@@ -96,8 +96,6 @@ function Mark({ src }: { src: string }) {
   );
 }
 
-const shieldPath = "M100 8 L174 42 L162 150 C152 190 124 214 100 232 C76 214 48 190 38 150 L26 42 Z";
-
 export function RoomHero({ content }: { content: RoomHeroContent }) {
   const workItems = buildCarouselItems(content.locale);
   const sceneRef = useRef<HTMLElement>(null);
@@ -405,16 +403,7 @@ export function RoomHero({ content }: { content: RoomHeroContent }) {
         <Image src="/brand/room/support-hands.png" width={720} height={339} alt="" />
       </a>
       <a ref={(element) => { objectRefs.current.privacy = element; }} className={`${styles.obj} ${styles.privacy}`} href={content.privacy.href} tabIndex={-1} aria-hidden="true">
-        <svg className={styles.shield} viewBox="0 0 216 250" aria-hidden="true">
-          {Array.from({ length: 8 }, (_, index) => {
-            const depth = 8 - index;
-            const grey = 110 + depth * 12;
-            return <path key={depth} d={shieldPath} transform={`translate(${(depth * 1.6).toFixed(1)} ${(depth * 1.6).toFixed(1)})`} fill={`rgb(${grey},${grey + 2},${grey - 4})`} />;
-          })}
-          <path d={shieldPath} fill="#8c8e87" />
-          <path d="M100 26 L158 54 L148 146 C140 178 118 198 100 212 C82 198 60 178 52 146 L42 54 Z" fill="#91ff19" />
-          <path d="M100 26 L158 54 L148 146 C140 178 118 198 100 212" fill="none" stroke="#ffffff" strokeOpacity=".45" strokeWidth="3" />
-        </svg>
+        <Image className={styles.shield} src="/brand/room/privacy-shield.png" width={663} height={800} alt="" />
         <span className={styles.overShield}><Wordmark text="PRIVACY" size={58} /></span>
       </a>
 

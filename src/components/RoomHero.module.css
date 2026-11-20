@@ -118,7 +118,7 @@
 .overBox { position: absolute; left: 0; right: 0; top: 46%; }
 
 .privacy { width: 312px; }
-.shield { display: block; width: 74%; height: auto; margin: 0 auto; filter: drop-shadow(0 16px 18px rgb(30 32 28 / 18%)); }
+.shield { display: block; width: 74%; height: auto; margin: 0 auto; filter: drop-shadow(0 14px 16px rgb(30 32 28 / 16%)); }
 .overShield { position: absolute; left: 0; right: 0; top: 40%; z-index: 1; }
 
 /* キーボード・読み上げ・JSなし向けのリンク（見た目は控えめ） */
