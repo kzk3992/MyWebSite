@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import type { Locale } from "@/i18n/site";
 import type { CarouselItem } from "./worksCarouselItems";
+import { PerspectiveRoom } from "./PerspectiveRoom";
 import styles from "./WorksCarousel.module.css";
 
 /*
@@ -351,11 +352,9 @@ export function WorksCarousel({ items, locale }: { items: CarouselItem[]; locale
         </header>
 
         <div ref={stageRef} className={styles.stage}>
+          {/* 部屋（奥の壁・床・左右の壁）はパースの線で描く。3D の大きな面は iPhone で重すぎたため */}
+          <PerspectiveRoom mode="static" view={{ horizon: 0.42, vanishX: 0.5 }} className={styles.lines} />
           <div ref={(element) => { tiltRefs.current[0] = element; }} className={`${styles.tilt} ${styles.layerRoom}`} aria-hidden="true">
-            <div className={styles.wall} aria-hidden="true" />
-            <div className={`${styles.wallSide} ${styles.wallSideLeft}`} aria-hidden="true" />
-            <div className={`${styles.wallSide} ${styles.wallSideRight}`} aria-hidden="true" />
-            <div className={styles.floor} aria-hidden="true" />
             <div className={styles.ground} aria-hidden="true" />
           </div>
           <div ref={(element) => { tiltRefs.current[1] = element; }} className={`${styles.tilt} ${styles.layerHub}`} aria-hidden="true">

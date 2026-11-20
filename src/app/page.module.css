@@ -87,3 +87,28 @@
   .heroCopy img { width: 30px; }
   .heroLead { font-size: 1rem; }
 }
+
+/* ---------- パースの線の部屋（トップページ全体の背景） ----------
+   線の部屋は画面に固定し、ページの中身はその上をふつうにスクロールする。
+   ヒーローと各セクションの背景を透明にして線を見せ、文章は白いパネルに載せて読みやすくする。 */
+.depthHome { position: relative; isolation: isolate; background: radial-gradient(120% 90% at 60% 50%, #ffffff 0%, #f7f7f4 62%, #ededea 100%) fixed; }
+.roomLayer { position: fixed !important; inset: 73px 0 0 !important; z-index: 0; }
+.depthHome > section { position: relative; z-index: 1; border-color: transparent; background: transparent; }
+.depthHome .hero { border-bottom: 0; }
+.depthHome .hero::before, .depthHome .hero::after { display: none; }
+.depthHome .heroRail { border-top-color: transparent; }
+.depthHome .aboutGrid { padding: clamp(28px, 5vw, 56px); border: 1px solid rgb(18 20 15 / 12%); border-radius: 20px; background: rgb(255 255 255 / 92%); box-shadow: 0 30px 70px rgb(30 32 28 / 10%); }
+.depthHome > section :is(ul, [data-reveal]):has(a[href^="https://line.me"]) { width: fit-content; padding: 20px; border: 1px solid rgb(18 20 15 / 12%); border-radius: 20px; background: rgb(255 255 255 / 92%); box-shadow: 0 30px 70px rgb(30 32 28 / 10%); }
+@media (max-width: 840px) {
+  .roomLayer { inset: 65px 0 0 !important; }
+}
+@media (max-width: 900px) {
+  /* スマホ・タブレット：見出しの下に床とロゴが見えるよう、ヒーローに高さを残す */
+  .depthHome .hero { min-height: calc(100svh - 65px); }
+  /* 文字を上に詰め、下の床にロゴが立つ場所を空ける */
+  .depthHome .heroCopyBlock { padding-top: 64px; }
+  .depthHome .heroSignal { top: 22px; }
+  .depthHome .heroCopy { margin-top: 24px; padding-top: 18px; }
+  .depthHome .heroRail { position: static; height: auto; margin-top: 22px; justify-content: flex-start; animation: none; }
+  .depthHome .heroRailTicks { display: none; }
+}

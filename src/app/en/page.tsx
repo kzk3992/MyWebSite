@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { BrandIcon } from "@/components/BrandIcon";
 import { Container } from "@/components/Container";
 import { GoodsSection } from "@/components/GoodsSection";
+import { PerspectiveRoom } from "@/components/PerspectiveRoom";
 import { ProductCard } from "@/components/ProductCard";
 import { Section } from "@/components/Section";
 import { englishContent } from "@/content/en";
@@ -23,7 +23,9 @@ export const metadata: Metadata = {
 
 export default function EnglishHomePage() {
   return (
-    <>
+    <div className={styles.depthHome}>
+      {/* 背景：パースの線の部屋（画面に固定）。スクロールした分だけ奥へ進み、立体ロゴに近づく */}
+      <PerspectiveRoom mode="scroll" logo view={{ horizon: 0.5, vanishX: 0.68, logoZ: 11 }} viewMobile={{ horizon: 0.7, vanishX: 0.5, logoZ: 8 }} className={styles.roomLayer} />
       <section className={styles.hero} aria-labelledby="hero-title">
         <Container className={styles.heroInner}>
           <div className={styles.heroCopyBlock}>
@@ -36,11 +38,6 @@ export default function EnglishHomePage() {
                 <p className={styles.heroLead}>{englishContent.home.heroLead}</p>
                 <p className={styles.heroTagline}>{siteConfig.tagline}</p>
               </div>
-            </div>
-          </div>
-          <div className={styles.heroArtwork} aria-hidden="true">
-            <div className={styles.heroArtworkInner}>
-              <Image src="/brand/hero-mono.jpg" width={943} height={793} alt="" priority sizes="(max-width: 900px) 100vw, 55vw" />
             </div>
           </div>
           <div className={styles.heroRail}>
@@ -74,6 +71,6 @@ export default function EnglishHomePage() {
       </Section>
 
       <GoodsSection locale="en" />
-    </>
+    </div>
   );
 }

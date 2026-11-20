@@ -142,7 +142,7 @@ a.goodsCard:hover .goodsCardImage { transform: translate3d(0, -4px, 0); box-shad
 .necosmosWordmark { color: #e6f3d1; font: 700 clamp(2.5rem, 6vw, 4.3rem)/1 "DotGothic16", "Courier New", monospace; letter-spacing: .04em; text-shadow: 0 0 24px #a9d78055; }
 .necosmosCaption { color: #b4c5a8; font-size: .8rem; letter-spacing: .06em; }
 .necosmosEnter { margin-top: 12px; padding: 11px 18px; border: 1px solid #a4ca7a88; color: #d8e9c4; font-size: .72rem; font-weight: 720; letter-spacing: .08em; }
-.footer { border-top: 1px solid var(--color-border); background: var(--color-bg-elevated); padding: 66px 0 28px; }
+.footer { position: relative; z-index: 1; border-top: 1px solid var(--color-border); background: var(--color-bg-elevated); padding: 66px 0 28px; }
 .footerTop, .footerBottom { display: flex; justify-content: space-between; gap: 32px; }
 .footerIdentity { display: flex; align-items: center; gap: 16px; }
 .footerIdentity img { object-fit: contain; }
