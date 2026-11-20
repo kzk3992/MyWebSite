@@ -23,12 +23,9 @@
 @keyframes sway { 0%, 100% { transform: rotateY(-18deg) translateZ(var(--z, 0)); } 50% { transform: rotateY(18deg) translateZ(var(--z, 0)); } }
 .shadow { position: absolute; left: 50%; bottom: -8%; width: 110%; aspect-ratio: 5; transform: translateX(-50%); border-radius: 50%; background: radial-gradient(ellipse at center, rgb(18 20 15 / 18%) 0%, rgb(18 20 15 / 6%) 50%, transparent 72%); }
 
-/* 看板 */
-.sign { width: 288px; height: 150px; }
-.sign i { position: absolute; top: 0; width: 2px; height: 54px; background: var(--color-text); }
-.sign i:first-child { left: 22%; }
-.sign i:nth-child(2) { right: 22%; }
-.board { position: absolute; left: 0; right: 0; bottom: 6px; height: 96px; display: grid; place-content: center; text-align: center; border: 3px solid var(--color-text); background: #ffffff; box-shadow: 6px 6px 0 #b9bab4, 6px 6px 0 3px var(--color-text); }
+/* 看板：鎖で吊るした板の画像に、文字を重ねる（板の中央は画像の 49% / 63.5%） */
+.sign { width: 288px; }
+.board { position: absolute; left: 49%; top: 63.5%; transform: translate(-50%, -50%); display: grid; place-content: center; text-align: center; white-space: nowrap; color: var(--color-text); }
 .board b { font-size: 34px; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
 .board span { margin-top: 4px; font-size: 13px; font-weight: 700; letter-spacing: .32em; text-transform: uppercase; }
 

@@ -371,7 +371,7 @@ export function RoomHero({ content }: { content: RoomHeroContent }) {
 
       {/* 奥から近づいてくるオブジェクト。タブ移動と読み上げは下の nav のリンクで行う */}
       <div ref={(element) => { objectRefs.current.sign = element; }} className={`${styles.obj} ${styles.sign}`} aria-hidden="true">
-        <i /><i />
+        <Image src="/brand/room/sign.png" width={1000} height={516} alt="" priority />
         <span className={styles.board}><b>Mika Spark</b><span>Studio</span></span>
       </div>
       <a ref={(element) => { objectRefs.current.about = element; }} className={`${styles.obj} ${styles.about}`} href={content.about.href} tabIndex={-1} aria-hidden="true">
