@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { siteConfig } from "@/config/site";
 import { RoomHero, type RoomHeroContent } from "@/components/RoomHero";
 import { englishContent } from "@/content/en";
 import { englishAlternates } from "@/i18n/site";
@@ -25,6 +26,8 @@ const room: RoomHeroContent = {
   support: { href: "/en/support/", label: "Support" },
   privacy: { href: "https://hirame.mikaspark.com/en/privacy/", label: "Privacy" },
   goods: { href: "/en/goods/", label: "Goods" },
+  terms: { href: "https://hirame.mikaspark.com/en/terms/", label: "Terms" },
+  socials: siteConfig.socials,
 };
 
 export default function EnglishHomePage() {

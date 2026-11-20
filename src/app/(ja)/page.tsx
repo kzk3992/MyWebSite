@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { siteConfig } from "@/config/site";
 import { RoomHero, type RoomHeroContent } from "@/components/RoomHero";
 import { localizedAlternates } from "@/i18n/site";
 
@@ -24,6 +25,8 @@ const room: RoomHeroContent = {
   support: { href: "/support/", label: "Support" },
   privacy: { href: "/privacy/", label: "Privacy" },
   goods: { href: "/goods/", label: "Goods" },
+  terms: { href: "/terms/", label: "Terms" },
+  socials: siteConfig.socials,
 };
 
 export default function Home() {

@@ -129,6 +129,9 @@
 .nav { position: absolute; z-index: 4500; left: max(20px, 3vw); bottom: 18px; display: flex; flex-wrap: wrap; gap: 4px 18px; }
 .nav a { color: var(--color-dim); font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-decoration: none; text-transform: uppercase; }
 .nav a:hover, .nav a:focus-visible { color: var(--color-text); }
+/* 利用規約・SNS：ページへのリンクより一段小さく薄く */
+.nav .minor { font-size: .6rem; font-weight: 600; letter-spacing: .12em; opacity: .75; }
+.nav .minor:first-of-type { margin-left: 6px; }
 .hint { position: absolute; z-index: 4500; right: max(20px, 3vw); bottom: 18px; color: var(--color-dim); font-size: .62rem; letter-spacing: .16em; pointer-events: none; }
 
 @media (max-width: 840px) {

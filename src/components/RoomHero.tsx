@@ -30,6 +30,9 @@ export type RoomHeroContent = {
   support: RoomLink;
   privacy: RoomLink;
   goods: RoomLink;
+  /** 部屋の外に出る小さなリンク（フッターの代わり） */
+  terms: RoomLink;
+  socials: readonly { label: string; href: string }[];
 };
 
 const EYE = 1.5;
@@ -410,6 +413,10 @@ export function RoomHero({ content }: { content: RoomHeroContent }) {
       <nav className={styles.nav} aria-label={content.navLabel}>
         {[content.about, content.works, content.support, content.privacy, content.goods].map((link) => (
           <a key={link.href} href={link.href}>{link.label}</a>
+        ))}
+        <a className={styles.minor} href={content.terms.href}>{content.terms.label}</a>
+        {content.socials.map((social) => (
+          <a key={social.href} className={styles.minor} href={social.href} target="_blank" rel="noopener noreferrer">{social.label} ↗</a>
         ))}
       </nav>
       <p className={styles.hint} aria-hidden="true">{content.hint}</p>

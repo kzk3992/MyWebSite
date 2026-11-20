@@ -218,6 +218,9 @@ for (const [route, links] of [["/", ["/about/", "/works/", "/support/", "/privac
   const homeHtml = readFileSync(routeFile(route), "utf8");
   if (!homeHtml.includes('aria-labelledby="room-title"')) failures.push(`${route}: トップの部屋がありません`);
   for (const href of links) if (!homeHtml.includes(`href="${href}"`)) failures.push(`${route}: 部屋から ${href} へのリンクがありません`);
+  for (const href of [route === "/" ? "/terms/" : "https://hirame.mikaspark.com/en/terms/", "https://www.instagram.com/mika_spark_studio/", "https://x.com/MIKA_StReIn"]) {
+    if (!homeHtml.includes(`href="${href}"`)) failures.push(`${route}: トップの小さなリンク ${href} がありません`);
+  }
   for (const image of ["/brand/logo-mark.png", "/brand/logo-mark-green.png", "/brand/room/support-hands.png", "/brand/room/goods-box.png", "/brand/room/sign.png", "/brand/room/privacy-shield.png", "/brand/room/works-bg.png"]) {
     if (!homeHtml.includes(image)) failures.push(`${route}: 部屋の画像 ${image} がありません`);
   }
