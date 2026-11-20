@@ -1,14 +1,9 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import { BrandIcon } from "@/components/BrandIcon";
-import { Container } from "@/components/Container";
-import { GoodsSection } from "@/components/GoodsSection";
-import { ProductCard } from "@/components/ProductCard";
-import { Section } from "@/components/Section";
+import { DepthHome, type DepthHomeContent } from "@/components/DepthHome";
+import { buildCarouselItems } from "@/components/worksCarouselItems";
 import { englishContent } from "@/content/en";
-import { hirameEnglish, mahouEnglish, siteConfig, uzmeraEnglish } from "@/config/site";
+import { goodsItems, siteConfig } from "@/config/site";
 import { englishAlternates } from "@/i18n/site";
-import styles from "../page.module.css";
 
 export const metadata: Metadata = {
   title: { absolute: "Mika Spark Studio | Independent Apps & Games" },
@@ -21,59 +16,43 @@ export const metadata: Metadata = {
   },
 };
 
+const homeOrder = ["hirame", "uzmera", "mahou"];
+
+const content: DepthHomeContent = {
+  locale: "en",
+  hero: {
+    kicker: "Independent development studio",
+    titleTop: "Mika Spark",
+    titleBottom: "Studio",
+    lead: englishContent.home.heroLead,
+    tagline: siteConfig.tagline,
+    explore: "Explore works",
+  },
+  works: {
+    eyebrow: "01 / Selected work",
+    title: "Ideas in motion.",
+    intro: englishContent.home.worksIntro,
+    moreLabel: "Explore all works",
+    moreHref: "/en/works/",
+  },
+  products: homeOrder.map((slug) => buildCarouselItems("en").find((item) => item.id === slug)!),
+  about: {
+    eyebrow: "02 / About",
+    title: "Built independently.",
+    paragraphs: englishContent.home.aboutParagraphs,
+    linkLabel: englishContent.home.aboutLink,
+    linkHref: "/en/about/",
+    fields: ["Apps", "Games", "Tools", "Experiments"],
+    fieldsLabel: "What Mika Spark Studio makes",
+  },
+  goods: {
+    eyebrow: "03 / Goods",
+    title: "Goods",
+    items: goodsItems.map((item) => ({ id: item.id, image: item.image, label: item.en, href: item.href })),
+  },
+  rail: { label: "Where you are on this page", stops: ["Top", "Works", "Hirame", "Uzmera", "Mahou", "About", "Goods"] },
+};
+
 export default function EnglishHomePage() {
-  return (
-    <>
-      <section className={styles.hero} aria-labelledby="hero-title">
-        <Container className={styles.heroInner}>
-          <div className={styles.heroCopyBlock}>
-            <div className={styles.heroSignal}><span>Signal 001</span><i /></div>
-            <p className={styles.heroKicker}>Independent development studio</p>
-            <h1 id="hero-title"><span>Mika Spark</span><span>Studio</span></h1>
-            <div className={styles.heroCopy}>
-              <BrandIcon name="spark" size={38} />
-              <div>
-                <p className={styles.heroLead}>{englishContent.home.heroLead}</p>
-                <p className={styles.heroTagline}>{siteConfig.tagline}</p>
-              </div>
-            </div>
-          </div>
-          <div className={styles.heroArtwork} aria-hidden="true">
-            <div className={styles.heroArtworkInner}>
-              <Image src="/brand/hero-mono.jpg" width={943} height={793} alt="" priority sizes="(max-width: 900px) 100vw, 55vw" />
-            </div>
-          </div>
-          <div className={styles.heroRail}>
-            <span className={styles.heroRailTicks} aria-hidden="true" />
-            <a className={styles.heroAside} href="#works"><BrandIcon name="paw" size={30} />Explore works<i aria-hidden="true" /></a>
-          </div>
-        </Container>
-      </section>
-
-      <Section id="works" eyebrow="01 / Selected work" title="Ideas in motion." intro={englishContent.home.worksIntro}>
-        <div className={styles.worksList}>
-          <ProductCard product={hirameEnglish} locale="en" />
-          <ProductCard product={uzmeraEnglish} locale="en" index={2} />
-          <ProductCard product={mahouEnglish} locale="en" index={3} />
-        </div>
-        <a className={styles.worksMore} href="/en/works/">Explore all works →</a>
-      </Section>
-
-      <Section tone="muted" eyebrow="02 / ABOUT" title="Built independently.">
-        <div className={styles.aboutGrid} data-reveal>
-          <div className={styles.aboutCopy}>
-            {englishContent.home.aboutParagraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-            <a className={styles.aboutLink} href="/en/about/">{englishContent.home.aboutLink} →</a>
-          </div>
-          <div className={styles.aboutFields} aria-label="What Mika Spark Studio makes">
-            {["Apps", "Games", "Tools", "Experiments"].map((field, index) => (
-              <p key={field}><span>0{index + 1}</span>{field}</p>
-            ))}
-          </div>
-        </div>
-      </Section>
-
-      <GoodsSection locale="en" />
-    </>
-  );
+  return <DepthHome content={content} />;
 }

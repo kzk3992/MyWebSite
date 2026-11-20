@@ -79,7 +79,7 @@ function ArrowIcon({ external = true }: { external?: boolean }) {
   );
 }
 
-function CardVisual({ item, eager }: { item: CarouselItem; eager: boolean }) {
+export function CardVisual({ item, eager }: { item: CarouselItem; eager: boolean }) {
   const visual = item.visual;
   if (visual.kind === "mahou") {
     return (
