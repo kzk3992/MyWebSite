@@ -377,6 +377,12 @@ export function RoomHero({ content }: { content: RoomHeroContent }) {
           {/* 「ジジ…」：ときどき一瞬だけ、揺れ・ノイズ・横線・文字のちらつきが走る */}
           <span className={styles.noise} />
           <span className={styles.glitchBar} />
+          {/* 緑のビリビリ：灰色のジジ…とは別の周期（3.7秒）で、本数の違う電撃が一瞬ずつ走る */}
+          <svg className={styles.zaps} viewBox="0 0 288 150" aria-hidden="true">
+          <g className={styles.zapA}><path d="M2 62 L20 52 L15 68 L38 58 L32 76 L58 66 L50 86 L78 78" /><path d="M38 58 L52 46 L48 56" /><path d="M32 76 L24 92 L36 88" /></g>
+          <g className={styles.zapB}><path d="M286 120 L264 130 L268 112 L246 122 L252 102 L228 112 L238 94" /><path d="M246 122 L232 134 L240 130" /><path d="M252 102 L270 92 L262 100" /></g>
+          <g className={styles.zapC}><path d="M64 10 L73 24 L61 28 L72 44 L65 54" /><path d="M217 2 L209 20 L222 26 L211 44 L218 54" /><path d="M130 146 L144 136 L140 148 L166 138 L160 150 L186 140" /></g>
+          </svg>
         </span>
       </div>
       <a ref={(element) => { objectRefs.current.about = element; }} className={`${styles.obj} ${styles.about}`} href={content.about.href} tabIndex={-1} aria-hidden="true">
