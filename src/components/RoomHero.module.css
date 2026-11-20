@@ -42,13 +42,13 @@
 .works { width: 312px; }
 .fan { position: relative; display: block; height: 176px; margin-top: 10px; perspective: 700px; perspective-origin: 50% 30%; }
 .spin { position: absolute; left: 50%; bottom: 14px; width: 0; height: 0; transform-style: preserve-3d; animation: spin 16s linear infinite; }
-.spin i { position: absolute; left: -46px; top: -132px; width: 92px; height: 132px; border: 1px solid rgb(18 20 15 / 18%); border-radius: 10px; background: linear-gradient(180deg, #ffffff, #f4f4f1); box-shadow: 0 10px 22px rgb(30 32 28 / 14%); backface-visibility: hidden; -webkit-backface-visibility: hidden; }
-.spin i:nth-child(1) { transform: rotateY(0deg) translateZ(118px); }
-.spin i:nth-child(2) { transform: rotateY(60deg) translateZ(118px); }
-.spin i:nth-child(3) { transform: rotateY(120deg) translateZ(118px); }
-.spin i:nth-child(4) { transform: rotateY(180deg) translateZ(118px); }
-.spin i:nth-child(5) { transform: rotateY(240deg) translateZ(118px); }
-.spin i:nth-child(6) { transform: rotateY(300deg) translateZ(118px); }
+.spinCard { --card-w: 92px; position: absolute; left: -46px; top: -132px; width: 92px; height: 132px; overflow: hidden; border: 1px solid rgb(18 20 15 / 18%); border-radius: 10px; background: #ffffff; box-shadow: 0 10px 22px rgb(30 32 28 / 14%); backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.spinCard:nth-child(1) { transform: rotateY(0deg) translateZ(118px); }
+.spinCard:nth-child(2) { transform: rotateY(60deg) translateZ(118px); }
+.spinCard:nth-child(3) { transform: rotateY(120deg) translateZ(118px); }
+.spinCard:nth-child(4) { transform: rotateY(180deg) translateZ(118px); }
+.spinCard:nth-child(5) { transform: rotateY(240deg) translateZ(118px); }
+.spinCard:nth-child(6) { transform: rotateY(300deg) translateZ(118px); }
 @keyframes spin { to { transform: rotateY(-360deg); } }
 
 .support { width: 360px; }

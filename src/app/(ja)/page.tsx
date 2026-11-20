@@ -14,6 +14,7 @@ export const metadata: Metadata = {
 };
 
 const room: RoomHeroContent = {
+  locale: "ja",
   title: "Mika Spark Studio",
   lead: "小さなアイデアを、使えるプロダクトへ。",
   hint: "SCROLL ／ SWIPE",

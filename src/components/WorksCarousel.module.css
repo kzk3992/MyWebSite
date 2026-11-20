@@ -88,7 +88,8 @@
   backface-visibility: hidden; -webkit-backface-visibility: hidden;
 }
 .card:focus-visible { outline-offset: 3px; }
-.art { position: relative; flex: 0 0 62%; overflow: hidden; border-bottom: 1px solid var(--hairline-soft); }
+/* 説明文は省略せず全部見せる。文字の分だけ絵の高さが縮む（下限あり） */
+.art { position: relative; flex: 1 1 62%; min-height: 34%; overflow: hidden; border-bottom: 1px solid var(--hairline-soft); }
 .artImage, .artFrame { position: absolute; inset: 0; display: block; }
 .artContain .artFrame { inset: 14%; }
 /* アプリアイコンは正方形の枠に入れて角を丸める（横長の枠だと余白ごと丸まり、黒い角が見える） */
@@ -96,11 +97,11 @@
 .artIcon img { border-radius: 22%; box-shadow: 0 10px 28px rgb(0 0 0 / 35%); }
 .shade { position: absolute; inset: 0; background: #ffffff; opacity: 0; pointer-events: none; }
 .fog { position: absolute; z-index: 2; inset: 0; border-radius: inherit; background: #f6f6f3; opacity: 0; pointer-events: none; }
-.body { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 5px; padding: 16px 20px 18px; background: linear-gradient(180deg, #fcfcfa, #ffffff); }
+.body { flex: 0 0 auto; display: flex; flex-direction: column; gap: 5px; padding: 16px 20px 18px; background: linear-gradient(180deg, #fcfcfa, #ffffff); }
 .meta { display: flex; align-items: center; gap: 8px; color: var(--color-dim); font-size: 10.5px; font-weight: 700; letter-spacing: .16em; white-space: nowrap; }
 .dot { flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--ac, #cccccc); }
 .cardTitle { overflow: hidden; color: var(--ink); font-size: clamp(16px, calc(var(--card-w) * .085), 23px); font-weight: 900; line-height: 1.25; letter-spacing: .02em; text-overflow: ellipsis; white-space: nowrap; }
-.summary { display: -webkit-box; overflow: hidden; color: var(--ink-2); font-size: 12.5px; font-weight: 500; line-height: 1.65; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+.summary { color: var(--ink-2); font-size: 12px; font-weight: 500; line-height: 1.6; }
 
 /* まほうのある暮らし：ゲームのドット絵・夕焼け・ロゴの組み方を小さく再現 */
 .mahou { position: absolute; inset: 0; display: block; color: #f4f7ff; background: linear-gradient(#1b1456 0 22%, #4a2a8c 22% 46%, #b84a7a 46% 68%, #ff9a4a 68% 100%); font-family: "DotGothic16", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, monospace; }
@@ -189,8 +190,8 @@
   .art { flex-basis: 54%; }
   .body { gap: 4px; padding: 11px 14px 12px; }
   .meta { font-size: 9px; letter-spacing: .12em; }
-  .cardTitle { font-size: 14px; }
-  .summary { font-size: 11px; line-height: 1.55; }
+  .cardTitle { font-size: 13.5px; letter-spacing: 0; }
+  .summary { font-size: 10px; line-height: 1.5; letter-spacing: -.01em; }
   .detailTitle { font-size: 22px; }
   .chip { padding: 5px 10px; font-size: 10.5px; letter-spacing: .06em; }
   .controls { padding-top: 6px; }

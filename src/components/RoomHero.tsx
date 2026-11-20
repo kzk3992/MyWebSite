@@ -2,6 +2,9 @@
 
 import Image from "next/image";
 import { useEffect, useRef, type CSSProperties } from "react";
+import { CardVisual } from "./WorksCarousel";
+import { buildCarouselItems } from "./worksCarouselItems";
+import type { Locale } from "@/i18n/site";
 import styles from "./RoomHero.module.css";
 
 /*
@@ -17,6 +20,7 @@ import styles from "./RoomHero.module.css";
 export type RoomLink = { href: string; label: string };
 
 export type RoomHeroContent = {
+  locale: Locale;
   title: string;
   lead: string;
   hint: string;
@@ -95,6 +99,7 @@ function Mark({ src }: { src: string }) {
 const shieldPath = "M100 8 L174 42 L162 150 C152 190 124 214 100 232 C76 214 48 190 38 150 L26 42 Z";
 
 export function RoomHero({ content }: { content: RoomHeroContent }) {
+  const workItems = buildCarouselItems(content.locale);
   const sceneRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const markRef = useRef<HTMLDivElement>(null);
@@ -375,7 +380,15 @@ export function RoomHero({ content }: { content: RoomHeroContent }) {
       </a>
       <a ref={(element) => { objectRefs.current.works = element; }} className={`${styles.obj} ${styles.works}`} href={content.works.href} tabIndex={-1} aria-hidden="true">
         <Wordmark text="WORKS" />
-        <span className={styles.fan}><span className={styles.spin}><i /><i /><i /><i /><i /><i /></span></span>
+        <span className={styles.fan}>
+          {/* Works ページのカードと同じ絵（文字なし）。6枠に4作品を順に並べる */}
+          <span className={styles.spin}>
+            {Array.from({ length: 6 }, (_, slot) => {
+              const item = workItems[slot % workItems.length];
+              return <span key={slot} className={styles.spinCard}><CardVisual item={item} eager={false} /></span>;
+            })}
+          </span>
+        </span>
       </a>
       <a ref={(element) => { objectRefs.current.support = element; }} className={`${styles.obj} ${styles.support}`} href={content.support.href} tabIndex={-1} aria-hidden="true" data-text-ratio="0.43">
         <Image src="/brand/room/support-hands.png" width={720} height={339} alt="" />

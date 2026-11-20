@@ -15,6 +15,7 @@ export const metadata: Metadata = {
 };
 
 const room: RoomHeroContent = {
+  locale: "en",
   title: "Mika Spark Studio",
   lead: englishContent.home.heroLead,
   hint: "SCROLL ／ SWIPE",
