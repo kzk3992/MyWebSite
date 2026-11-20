@@ -3,7 +3,7 @@ import type { Locale } from "@/i18n/site";
 
 // Works ページのカルーセル専用の共通型。siteConfig の型は変えず、products と goodsItems をここで変換する。
 export type CarouselVisual =
-  | { kind: "image"; src: string; width: number; height: number; alt: string; fit: "cover" | "contain"; position: string; background: string; pixelated?: boolean; appIcon?: boolean }
+  | { kind: "image"; src: string; width: number; height: number; alt: string; fit: "cover" | "contain"; position: string; background: string; pixelated?: boolean; appIcon?: boolean; squareIcon?: boolean }
   | { kind: "mahou" };
 
 export type CarouselItem = {
@@ -47,7 +47,7 @@ function productVisual(product: Product, locale: Locale): CarouselVisual {
   const ja = locale === "ja";
   if (product.slug === "mahou") return { kind: "mahou" };
   if (product.slug === "uzmera") {
-    return { kind: "image", src: "/brand/uzmera/app-icon.png", width: 1254, height: 1254, alt: ja ? "Uzmera アプリアイコン" : "Uzmera app icon", fit: "contain", position: "50% 50%", background: "linear-gradient(180deg, #2c1e2b 0%, #4a2f3f 52%, #774452 100%)", appIcon: true };
+    return { kind: "image", src: "/brand/uzmera/app-icon.png", width: 1254, height: 1254, alt: ja ? "Uzmera アプリアイコン" : "Uzmera app icon", fit: "contain", position: "50% 50%", background: "linear-gradient(180deg, #2c1e2b 0%, #4a2f3f 52%, #774452 100%)", appIcon: true, squareIcon: true };
   }
   // Hirame：Uzmera と同じくアプリアイコンを表示する（背景はアイコンの紺に合わせる）
   return { kind: "image", src: "/brand/hirame/app-icon.jpg", width: 1254, height: 1254, alt: ja ? "Hirame アプリアイコン" : "Hirame app icon", fit: "contain", position: "50% 50%", background: "linear-gradient(180deg, #0b2a6b 0%, #031f55 55%, #02163d 100%)", appIcon: true };

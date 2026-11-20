@@ -94,6 +94,8 @@
 .artContain .artFrame { inset: 14%; }
 /* アプリアイコンは正方形の枠に入れて角を丸める（横長の枠だと余白ごと丸まり、黒い角が見える） */
 .artIcon .artFrame { top: 14%; bottom: 14%; left: 50%; right: auto; width: auto; aspect-ratio: 1; transform: translateX(-50%); }
+/* Uzmera のアイコンは、白い四隅も含めて画像そのままの正方形で見せる（角を丸めない） */
+.artSquare img { border-radius: 0 !important; }
 .artIcon img { border-radius: 22%; box-shadow: 0 10px 28px rgb(0 0 0 / 35%); }
 .shade { position: absolute; inset: 0; background: #ffffff; opacity: 0; pointer-events: none; }
 .fog { position: absolute; z-index: 2; inset: 0; border-radius: inherit; background: #f6f6f3; opacity: 0; pointer-events: none; }

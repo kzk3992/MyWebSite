@@ -98,7 +98,7 @@ export function CardVisual({ item, eager }: { item: CarouselItem; eager: boolean
     );
   }
   return (
-    <span className={`${styles.artImage} ${visual.fit === "contain" ? styles.artContain : ""} ${visual.appIcon ? styles.artIcon : ""}`} style={{ background: visual.background }}>
+    <span className={`${styles.artImage} ${visual.fit === "contain" ? styles.artContain : ""} ${visual.appIcon ? styles.artIcon : ""} ${visual.squareIcon ? styles.artSquare : ""}`} style={{ background: visual.background }}>
       <span className={styles.artFrame}>
         <Image
           src={visual.src}
