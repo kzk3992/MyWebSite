@@ -167,7 +167,7 @@ export function RoomHero({ content }: { content: RoomHeroContent }) {
       narrow = width / height < 0.8;
       focal = Math.max(width, height) * (narrow ? 0.8 : 0.62);
       half = narrow ? 3 : 4.2;
-      markZ = narrow ? 5.4 : 7;
+      markZ = (narrow ? 5.4 : 7) + CELL * 2; // 床の線2本分だけ奥に置く
       markWidth = narrow ? 1.7 : 2.2;
       heights.clear();
       request();
