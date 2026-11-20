@@ -102,6 +102,8 @@
 .overMark { position: absolute; left: 0; right: 0; bottom: 10%; }
 
 .works { width: 312px; }
+/* 巻物と筆の絵を WORKS の文字の後ろに敷く（文字とカードより奥） */
+.worksBg { position: absolute; left: 50%; top: -34%; width: 82%; height: auto; transform: translateX(-50%); }
 .fan { position: relative; display: block; height: 176px; margin-top: 10px; perspective: 700px; perspective-origin: 50% 30%; }
 .spin { position: absolute; left: 50%; bottom: 14px; width: 0; height: 0; transform-style: preserve-3d; animation: spin 16s linear infinite; }
 .spinCard { --card-w: 92px; position: absolute; left: -46px; top: -132px; width: 92px; height: 132px; overflow: hidden; border: 1px solid rgb(18 20 15 / 18%); border-radius: 10px; background: #ffffff; box-shadow: 0 10px 22px rgb(30 32 28 / 14%); backface-visibility: hidden; -webkit-backface-visibility: hidden; }

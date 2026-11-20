@@ -388,6 +388,7 @@ export function RoomHero({ content }: { content: RoomHeroContent }) {
         <span className={styles.overMark}><Wordmark text={"ABOUT\nMIKA"} size={58} /></span>
       </a>
       <a ref={(element) => { objectRefs.current.works = element; }} className={`${styles.obj} ${styles.works}`} href={content.works.href} tabIndex={-1} aria-hidden="true">
+        <Image className={styles.worksBg} src="/brand/room/works-bg.png" width={711} height={800} alt="" />
         <Wordmark text="WORKS" />
         <span className={styles.fan}>
           {/* Works ページのカードと同じ絵（文字なし）。6枠に4作品を順に並べる */}
