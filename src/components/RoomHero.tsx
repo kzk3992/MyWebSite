@@ -98,6 +98,7 @@ export function RoomHero({ content }: { content: RoomHeroContent }) {
   const sceneRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const markRef = useRef<HTMLDivElement>(null);
+  const copyRef = useRef<HTMLDivElement>(null);
   const objectRefs = useRef<Partial<Record<Spot["key"], HTMLElement | null>>>({});
 
   useEffect(() => {
@@ -105,6 +106,7 @@ export function RoomHero({ content }: { content: RoomHeroContent }) {
     const canvas = canvasRef.current;
     const context = canvas?.getContext("2d");
     const markElement = markRef.current;
+    const copyElement = copyRef.current;
     if (!scene || !canvas || !context || !markElement) return;
     const ctx = context;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -177,6 +179,8 @@ export function RoomHero({ content }: { content: RoomHeroContent }) {
       ctx.clearRect(0, 0, width, height);
       ctx.strokeStyle = INK;
       horizon = height * (narrow ? 0.5 : 0.48) + offsetY;
+      // 左上の文字は消失点（地平線）の高さにそろえる
+      if (copyElement) copyElement.style.top = `${horizon.toFixed(1)}px`;
       vanishX = width / 2;
 
       for (let x = -half; x <= half + 0.001; x += CELL) {
@@ -318,7 +322,7 @@ export function RoomHero({ content }: { content: RoomHeroContent }) {
     <section ref={sceneRef} className={styles.scene} aria-labelledby="room-title">
       <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />
 
-      <div className={styles.copy}>
+      <div ref={copyRef} className={styles.copy}>
         <h1 id="room-title" className={styles.title}>{content.title}</h1>
         <p className={styles.lead}>{content.lead}</p>
       </div>
