@@ -49,7 +49,7 @@ function productVisual(product: Product, locale: Locale): CarouselVisual {
   if (product.slug === "uzmera") {
     return { kind: "image", src: "/brand/uzmera/app-icon.png", width: 1254, height: 1254, alt: ja ? "Uzmera アプリアイコン" : "Uzmera app icon", fit: "contain", position: "50% 50%", background: "linear-gradient(180deg, #2c1e2b 0%, #4a2f3f 52%, #774452 100%)", appIcon: true };
   }
-  // Hirame：スクリーンショットを日英で出し分ける
+  // Hirame：現行 ProductCard と同じ規則でスクリーンショットを日英で出し分ける
   return {
     kind: "image",
     src: ja ? "/brand/hirame/screens/01-concept.png" : "/brand/hirame/screens/en/01-concept.png",

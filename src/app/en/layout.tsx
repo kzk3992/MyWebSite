@@ -43,7 +43,7 @@ export const viewport: Viewport = {
 
 export default function EnglishRootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body>
         <a className="skip-link" href="#main-content">{shellText.en.skipToContent}</a>
         <Header locale="en" />
