@@ -62,17 +62,11 @@ function smooth(t: number) {
 
 function Wordmark({ text, size }: { text: string; size?: number }) {
   const lines = text.split("\n").length;
+  // 背景が賑やかでも読めるよう、黒い文字を白い縁で囲む（縁は text-shadow の輪）
   return (
     <span className={styles.wordmark} style={{ "--lines": lines, ...(size ? { "--fs": `${size}px` } : {}) } as CSSProperties} aria-hidden="true">
-      {Array.from({ length: 10 }, (_, index) => {
-        const depth = 9 - index;
-        const grey = depth === 0 ? 18 : 120 + depth * 9;
-        return (
-          <span key={depth} style={{ color: `rgb(${grey},${grey + 2},${grey - 3})`, transform: `translate(${depth * 1.2}px, ${depth * 1.2}px)` }}>
-            {text}
-          </span>
-        );
-      })}
+      <span className={styles.outline}>{text}</span>
+      <span className={styles.fill}>{text}</span>
     </span>
   );
 }
