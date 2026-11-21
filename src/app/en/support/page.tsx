@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Container } from "@/components/Container";
 import { Section } from "@/components/Section";
 import { englishContent } from "@/content/en";
-import { hirameEnglish, mahouEnglish, uzmeraEnglish } from "@/config/site";
+import { hirameEnglish, mahouEnglish, siteConfig, uzmeraEnglish } from "@/config/site";
 import { englishAlternates } from "@/i18n/site";
 import styles from "../../content.module.css";
 
@@ -17,9 +17,20 @@ export const metadata: Metadata = {
   },
 };
 
-// Hirame は自分のサイトにサポートページがあるので直接そこへ。ほかの作品は各サイトのトップへ。
-function supportHref(product: { slug: string; href: string; internal: boolean }) {
-  return product.internal || product.slug === "hirame" ? `${product.href}support/` : product.href;
+// Link directly to dedicated support pages (Hirame / Uzmera); route browser game inquiries to support email.
+function supportHref(product: { slug: string; name: string; href: string; internal: boolean }) {
+  if (product.internal || product.slug === "hirame" || product.slug === "uzmera") {
+    return `${product.href}support/`;
+  }
+  const subject = encodeURIComponent(`${product.name} Support Inquiry`);
+  return `mailto:${siteConfig.supportEmail}?subject=${subject}`;
+}
+
+function supportDescription(product: { slug: string; tagline: string; platform: string }) {
+  if (product.slug === "mahou") {
+    return `${product.tagline} — Contact support by email`;
+  }
+  return `${product.tagline} — ${englishContent.support.productDescription.replace("{platform}", product.platform)}`;
 }
 
 export default function EnglishSupportPage() {
@@ -43,15 +54,19 @@ export default function EnglishSupportPage() {
       </section>
       <Section eyebrow="Choose a product" title={englishContent.support.heading}>
         <div className={styles.supportList}>
-          {products.map((product) => (
-            <a className={styles.supportCard} href={supportHref(product)} key={product.slug} target={product.internal ? undefined : "_blank"} rel={product.internal ? undefined : "noopener noreferrer"}>
-              <div>
-                <h3>{product.name} Support</h3>
-                <p>{product.tagline} — {englishContent.support.productDescription.replace("{platform}", product.platform)}</p>
-              </div>
-              <span className={styles.supportCardArrow} aria-hidden="true">→</span>
-            </a>
-          ))}
+          {products.map((product) => {
+            const href = supportHref(product);
+            const isExternalHttp = href.startsWith("http");
+            return (
+              <a className={styles.supportCard} href={href} key={product.slug} target={isExternalHttp ? "_blank" : undefined} rel={isExternalHttp ? "noopener noreferrer" : undefined}>
+                <div>
+                  <h3>{product.name} Support</h3>
+                  <p>{supportDescription(product)}</p>
+                </div>
+                <span className={styles.supportCardArrow} aria-hidden="true">→</span>
+              </a>
+            );
+          })}
         </div>
       </Section>
     </>

@@ -16,9 +16,20 @@ export const metadata: Metadata = {
   },
 };
 
-// Hirame は自分のサイトにサポートページがあるので直接そこへ。ほかの作品は各サイトのトップへ。
-function supportHref(product: { slug: string; href: string; internal: boolean }) {
-  return product.internal || product.slug === "hirame" ? `${product.href}support/` : product.href;
+// 個別サポートページがある作品（Hirame / Uzmera）は直接そこへ。ブラウザゲーム（まほうのある暮らし）はメール窓口へ。
+function supportHref(product: { slug: string; name: string; href: string; internal: boolean }) {
+  if (product.internal || product.slug === "hirame" || product.slug === "uzmera") {
+    return `${product.href}support/`;
+  }
+  const subject = encodeURIComponent(`${product.name} サポートへの問い合わせ`);
+  return `mailto:${siteConfig.supportEmail}?subject=${subject}`;
+}
+
+function supportDescription(product: { slug: string; tagline: string; platform: string }) {
+  if (product.slug === "mahou") {
+    return `${product.tagline} — ブラウザゲームに関するお問い合わせ（メール）`;
+  }
+  return `${product.tagline} — ${product.platform}アプリのサポート情報`;
 }
 
 export default function SupportPage() {
@@ -44,15 +55,19 @@ export default function SupportPage() {
 
       <Section eyebrow="Choose a product" title="プロダクト別サポート">
         <div className={styles.supportList}>
-          {siteConfig.products.map((product) => (
-            <a className={styles.supportCard} href={supportHref(product)} key={product.slug} target={product.internal ? undefined : "_blank"} rel={product.internal ? undefined : "noopener noreferrer"}>
-              <div>
-                <h3>{product.name} Support</h3>
-                <p>{product.tagline} — {product.platform}アプリのサポート情報</p>
-              </div>
-              <span className={styles.supportCardArrow} aria-hidden="true">→</span>
-            </a>
-          ))}
+          {siteConfig.products.map((product) => {
+            const href = supportHref(product);
+            const isExternalHttp = href.startsWith("http");
+            return (
+              <a className={styles.supportCard} href={href} key={product.slug} target={isExternalHttp ? "_blank" : undefined} rel={isExternalHttp ? "noopener noreferrer" : undefined}>
+                <div>
+                  <h3>{product.name} Support</h3>
+                  <p>{supportDescription(product)}</p>
+                </div>
+                <span className={styles.supportCardArrow} aria-hidden="true">→</span>
+              </a>
+            );
+          })}
         </div>
       </Section>
     </>

@@ -16,6 +16,7 @@ export const metadata: Metadata = {
 };
 
 export default function PrivacyIndexPage() {
+  const legalProducts = siteConfig.products.filter((product) => product.category === "App");
   return (
     <>
       <section className={styles.pageHero}>
@@ -26,14 +27,14 @@ export default function PrivacyIndexPage() {
             <p className={styles.pageHeroLead}>プロダクトごとのプライバシーポリシーをご確認いただけます。</p>
           </div>
           <aside className={styles.pageHeroSide} aria-label="ポリシー情報">
-            <dl><div><dt>Products</dt><dd>{siteConfig.products.length}</dd></div><div><dt>Language</dt><dd>日本語</dd></div></dl>
+            <dl><div><dt>Products</dt><dd>{legalProducts.length}</dd></div><div><dt>Language</dt><dd>日本語</dd></div></dl>
           </aside>
         </Container>
       </section>
       <Section eyebrow="Choose a product" title="プライバシーポリシー一覧">
         <nav className={styles.policyList} aria-label="プロダクト別プライバシーポリシー">
-          {siteConfig.products.map((product, index) => (
-            <a href={`${product.href}privacy/`} key={product.slug}>
+          {legalProducts.map((product, index) => (
+            <a href={`${product.href}privacy/`} key={product.slug} target="_blank" rel="noopener noreferrer">
               <span className={styles.policyNumber}>{String(index + 1).padStart(2, "0")}</span>
               <span><b>{product.name}</b><small>{product.platform} · Privacy Policy</small></span>
               <span className={styles.policyArrow} aria-hidden="true">→</span>

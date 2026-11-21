@@ -160,16 +160,18 @@
 .indexList li { min-height: 58px; display: grid; grid-template-columns: 44px minmax(0, 1fr) minmax(0, 1.2fr) auto; align-items: center; gap: 16px; border-bottom: 1px solid var(--color-border); font-size: .82rem; }
 .indexNumber { color: var(--color-dim); font-size: .66rem; font-weight: 700; letter-spacing: .14em; font-variant-numeric: tabular-nums; }
 .indexName { font-weight: 720; }
-.indexKind { color: var(--color-muted); font-size: .74rem; }
+.indexKind { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; color: var(--color-muted); font-size: .74rem; }
+.indexStatus { display: inline-flex; align-items: center; padding: 2px 8px; border: 1px solid var(--color-border); border-radius: 999px; color: var(--ink); font-size: .68rem; font-weight: 700; white-space: nowrap; }
 .indexLinks { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px 18px; }
-.indexList a { color: var(--ink); font-size: .74rem; font-weight: 720; text-underline-offset: 4px; }
+.indexList a { display: inline-flex; align-items: center; min-height: 36px; color: var(--ink); font-size: .74rem; font-weight: 720; text-underline-offset: 4px; white-space: nowrap; }
 
 @media (max-width: 840px) {
   .root { height: calc(100svh - 65px); }
   .index { width: calc(100% - 34px); }
-  .indexList li { grid-template-columns: 34px 1fr auto; padding: 12px 0; }
+  .indexList li { grid-template-columns: 34px minmax(0, 1fr); gap: 6px 12px; padding: 14px 0; }
   .indexKind { grid-column: 2; grid-row: 2; }
-  .indexLinks { grid-column: 3; grid-row: 1 / span 2; flex-direction: column; align-items: flex-end; }
+  .indexLinks { grid-column: 2; grid-row: 3; justify-content: flex-start; gap: 4px 16px; margin-top: 2px; }
+  .indexList a { min-height: 40px; }
 }
 /* スマホ・狭い画面：チップは1段目、CTAは2段目に固定（作品で折り返しが変わって画面がブレないように） */
 @media (max-width: 760px) {

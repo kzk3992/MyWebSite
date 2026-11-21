@@ -476,7 +476,10 @@ export function WorksCarousel({ items, locale }: { items: CarouselItem[]; locale
             <li key={item.id}>
               <span className={styles.indexNumber}>{counter(index + 1)}</span>
               <span className={styles.indexName}>{item.title}</span>
-              <span className={styles.indexKind}>{item.kind} ・ {item.status}</span>
+              <span className={styles.indexKind}>
+                <span>{item.kind}</span>
+                <span className={styles.indexStatus}>{item.status}</span>
+              </span>
               <span className={styles.indexLinks}>
                 <a href={item.href} {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>{item.ctaLabel} →</a>
                 {item.storeUrl && <a href={item.storeUrl} target="_blank" rel="noopener noreferrer">{item.storeLabel} →</a>}

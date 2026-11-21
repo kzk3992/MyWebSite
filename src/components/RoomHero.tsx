@@ -48,14 +48,14 @@ const INK = "#12140f";
 
 type Spot = { key: "sign" | "about" | "works" | "support" | "privacy" | "goods"; y: number; z0: number; pc: [number, number]; phone: [number, number] };
 
-// 並び：看板（左上）→ About（右）→ Works（左）→ Support（右）→ Privacy（左）→ Goods（右）。[x, 幅]
+// 並び：Works（左・最優先で最初に見せる）→ 看板（左上）→ About（右）→ Goods（左）→ Privacy（右）→ Support（左）。[x, 幅]
 const spots: Spot[] = [
-  { key: "sign", y: 2.35, z0: 4, pc: [-2.5, 2.4], phone: [-1.55, 1.7] },
-  { key: "about", y: 0, z0: 12, pc: [2.6, 2.3], phone: [1.7, 1.7] },
-  { key: "works", y: 0, z0: 20, pc: [-2.6, 2.6], phone: [-1.75, 1.9] },
-  { key: "support", y: 0.5, z0: 28, pc: [2.5, 3.0], phone: [1.6, 2.1] },
-  { key: "privacy", y: 0, z0: 36, pc: [-2.6, 2.6], phone: [-1.75, 1.9] },
-  { key: "goods", y: 0, z0: 44, pc: [2.6, 2.4], phone: [1.7, 1.8] },
+  { key: "works", y: 0, z0: 4, pc: [-2.4, 2.6], phone: [-1.2, 1.45] },
+  { key: "sign", y: 2.35, z0: 12, pc: [-2.5, 2.4], phone: [-1.15, 1.35] },
+  { key: "about", y: 0, z0: 20, pc: [2.6, 2.3], phone: [1.2, 1.35] },
+  { key: "goods", y: 0, z0: 28, pc: [-2.6, 2.4], phone: [-1.2, 1.4] },
+  { key: "privacy", y: 0, z0: 36, pc: [2.6, 2.6], phone: [1.2, 1.45] },
+  { key: "support", y: 0.5, z0: 44, pc: [-2.5, 3.0], phone: [-1.15, 1.55] },
 ];
 
 function smooth(t: number) {
@@ -110,8 +110,8 @@ export function RoomHero({ content }: { content: RoomHeroContent }) {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     let width = 0, height = 0, focal = 600, horizon = 0, vanishX = 0, half = 4.2, narrow = false, markZ = 7, markWidth = 2.2;
-    // 最初は看板が中くらいの距離に見える位置から歩き始める（いきなり目の前に来ないように）
-    let walked = -6, camera = -6, aimX = 0, aimY = 0, offsetX = 0, offsetY = 0;
+    // 最初は WORKS が中くらいの距離に見える位置から歩き始める（開いてすぐに作品カードが見えるように）
+    let walked = -4.5, camera = -4.5, aimX = 0, aimY = 0, offsetX = 0, offsetY = 0;
     let visible = true, raf = 0, previous = performance.now();
     const heights = new Map<HTMLElement, number>();
 
@@ -356,6 +356,10 @@ export function RoomHero({ content }: { content: RoomHeroContent }) {
       <div className={styles.copy}>
         <h1 id="room-title" className={styles.title}>{content.title}</h1>
         <p className={styles.lead}>{content.lead}</p>
+        <a className={styles.primaryCta} href={content.works.href}>
+          {content.locale === "ja" ? "作品を見る" : "Explore Works"}
+          <span aria-hidden="true">→</span>
+        </a>
       </div>
 
       {/* 中央の立体ロゴ（固定） */}

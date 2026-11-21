@@ -31,9 +31,9 @@ type Copy = { ja: string; en: string };
 
 // products / goodsItems に項目がない表示用の文言だけを slug ごとに持つ。
 const presentation: Record<string, { accent: string; status?: Copy; cta: Copy; label: Copy }> = {
-  uzmera: { accent: "#e58aa5", status: { ja: "公開準備中", en: "Coming soon" }, cta: { ja: "公式サイトで見る", en: "Visit website" }, label: { ja: "iOS APP", en: "iOS APP" } },
-  hirame: { accent: "#e8b64c", cta: { ja: "詳しく見る", en: "Learn more" }, label: { ja: "iOS APP", en: "iOS APP" } },
-  mahou: { accent: "#8b7fd6", status: { ja: "公開中", en: "Available" }, cta: { ja: "ブラウザで遊ぶ", en: "Play in browser" }, label: { ja: "BROWSER GAME", en: "BROWSER GAME" } },
+  uzmera: { accent: "#e58aa5", status: { ja: "公開準備中", en: "Coming soon" }, cta: { ja: "ティザーサイトを見る", en: "Visit teaser site" }, label: { ja: "iOS APP", en: "iOS APP" } },
+  hirame: { accent: "#e8b64c", cta: { ja: "機能を見る", en: "View features" }, label: { ja: "iOS APP", en: "iOS APP" } },
+  mahou: { accent: "#8b7fd6", status: { ja: "公開中", en: "Available" }, cta: { ja: "ブラウザで今すぐ遊ぶ", en: "Play in browser" }, label: { ja: "BROWSER GAME", en: "BROWSER GAME" } },
 };
 
 const categoryLabel: Record<Product["category"], Copy> = {
