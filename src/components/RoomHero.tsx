@@ -46,16 +46,17 @@ const BASE = 120; // 1 単位 = 120px で各オブジェクトを組み、投影
 const LAYERS = 13;
 const INK = "#12140f";
 
-type Spot = { key: "sign" | "about" | "works" | "support" | "privacy" | "goods"; y: number; z0: number; pc: [number, number]; phone: [number, number] };
+type Spot = { key: "sign" | "about" | "works" | "support" | "privacy" | "goods"; y: number; z0: number; width: number; pcX: number; phoneX: number };
 
-// 並び：Works（左・最優先で最初に見せる）→ 看板（左上）→ About（右）→ Goods（左）→ Privacy（右）→ Support（左）。[x, 幅]
+// 並び（左・右交互、8ずつ等間隔）：Works（左）→ About（右）→ 看板（左）→ Goods（右）→ Privacy（左）→ Support（右）
+// width は PC・スマホ共通の基準幅（単位×120px）にし、スマホの縮小は scale 側で行うことでテキストと背景画像の比率・中央揃えを維持する。
 const spots: Spot[] = [
-  { key: "works", y: 0, z0: 4, pc: [-2.4, 2.6], phone: [-1.2, 1.45] },
-  { key: "sign", y: 2.35, z0: 12, pc: [-2.5, 2.4], phone: [-1.15, 1.35] },
-  { key: "about", y: 0, z0: 20, pc: [2.6, 2.3], phone: [1.2, 1.35] },
-  { key: "goods", y: 0, z0: 28, pc: [-2.6, 2.4], phone: [-1.2, 1.4] },
-  { key: "privacy", y: 0, z0: 36, pc: [2.6, 2.6], phone: [1.2, 1.45] },
-  { key: "support", y: 0.5, z0: 44, pc: [-2.5, 3.0], phone: [-1.15, 1.55] },
+  { key: "works", y: 0, z0: 4, width: 2.6, pcX: -2.6, phoneX: -1.35 },
+  { key: "about", y: 0, z0: 12, width: 2.3, pcX: 2.6, phoneX: 1.35 },
+  { key: "sign", y: 2.35, z0: 20, width: 2.4, pcX: -2.5, phoneX: -1.3 },
+  { key: "goods", y: 0, z0: 28, width: 2.4, pcX: 2.6, phoneX: 1.35 },
+  { key: "privacy", y: 0, z0: 36, width: 2.6, pcX: -2.6, phoneX: -1.35 },
+  { key: "support", y: 0.5, z0: 44, width: 3.0, pcX: 2.5, phoneX: 1.3 },
 ];
 
 function smooth(t: number) {
@@ -156,8 +157,8 @@ export function RoomHero({ content }: { content: RoomHeroContent }) {
       return ratio;
     };
 
-    const place = (element: HTMLElement, x: number, yBottom: number | "text", widthUnits: number, z: number, alpha: number) => {
-      const scale = focal / z / BASE;
+    const place = (element: HTMLElement, x: number, yBottom: number | "text", widthUnits: number, z: number, alpha: number, scaleFactor = 1) => {
+      const scale = (focal / z / BASE) * scaleFactor;
       const baseWidth = widthUnits * BASE;
       if (element.style.width !== `${baseWidth}px`) {
         element.style.width = `${baseWidth}px`;
@@ -173,7 +174,7 @@ export function RoomHero({ content }: { content: RoomHeroContent }) {
       let bottom = 0;
       if (yBottom === "text") {
         const ratio = textRatio(element);
-        bottom = ratio === null ? 0 : EYE - ((1 - ratio) * elementHeight) / BASE;
+        bottom = ratio === null ? 0 : EYE - ((1 - ratio) * elementHeight * scaleFactor) / BASE;
       } else bottom = yBottom;
       element.style.transform = `translate(${(screenX(x, z) - baseWidth / 2).toFixed(1)}px, ${(screenY(bottom, z) - elementHeight).toFixed(1)}px) scale(${scale.toFixed(4)})`;
       element.style.zIndex = String(Math.round(4000 - z * 40));
@@ -224,13 +225,14 @@ export function RoomHero({ content }: { content: RoomHeroContent }) {
       });
 
       place(markElement, 0, 0, markWidth, markZ, 1);
+      const spotScale = narrow ? 0.68 : 1;
       spots.forEach((spot) => {
         const element = objectRefs.current[spot.key];
         if (!element) return;
-        const [x, widthUnits] = narrow ? spot.phone : spot.pc;
+        const x = narrow ? spot.phoneX : spot.pcX;
         const z = (((spot.z0 - camera) % LOOP) + LOOP) % LOOP;
         const alpha = smooth((z - 1.3) / 1.4) * (1 - smooth((z - (LOOP - 7)) / 6));
-        place(element, x, spot.key === "sign" ? spot.y : "text", widthUnits, Math.max(0.9, z), alpha);
+        place(element, x, spot.key === "sign" ? spot.y : "text", spot.width, Math.max(0.9, z), alpha, spotScale);
       });
       scene.dataset.ready = "true";
     };
