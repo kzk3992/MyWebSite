@@ -190,6 +190,16 @@ for (const [from, to] of [
 }
 if (/^\/apps\/hirame\/\*/m.test(redirects)) failures.push("_redirects: /apps/hirame/* のワイルドカードは app-ads.txt まで転送するので使わないこと");
 if (!existsSync(join(outputDirectory, "apps", "hirame", "app-ads.txt"))) failures.push("apps/hirame/app-ads.txt: 出力されていません");
+// ホーム画面に追加したときのアイコンと表示名（MikaSpark）
+for (const file of ["apple-touch-icon.png", "icon-192.png", "icon-512.png", "icon-maskable-512.png", "manifest.webmanifest"]) {
+  if (!existsSync(join(outputDirectory, file))) failures.push(`${file}: 出力されていません`);
+}
+for (const route of ["/", "/en/", "/works/", "/about/"]) {
+  const html = readFileSync(routeFile(route), "utf8");
+  if (!html.includes('rel="apple-touch-icon" href="/apple-touch-icon.png"')) failures.push(`${route}: apple-touch-icon がありません`);
+  if (!html.includes('name="apple-mobile-web-app-title" content="MikaSpark"')) failures.push(`${route}: ホーム画面の表示名（MikaSpark）がありません`);
+  if (!html.includes('rel="manifest" href="/manifest.webmanifest"')) failures.push(`${route}: manifest がありません`);
+}
 for (const route of ["/", "/en/"]) {
   const homeHtml = readFileSync(routeFile(route === "/" ? "/works/" : "/en/works/"), "utf8");
   const hirameUrl = route === "/" ? "https://hirame.mikaspark.com/" : "https://hirame.mikaspark.com/en/";

@@ -30,7 +30,10 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: ["/brand/header-mono.jpg"],
   },
-  icons: { icon: "/brand/logo-mono.png" },
+  // ホーム画面に追加したときのアイコン（180px・四隅まで白）と表示名
+  icons: { icon: "/brand/logo-mono.png", apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }] },
+  appleWebApp: { title: "MikaSpark" },
+  manifest: "/manifest.webmanifest",
   robots: { index: true, follow: true },
 };
 
