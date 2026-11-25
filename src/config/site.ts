@@ -39,8 +39,8 @@ export const siteConfig = {
     },
     {
       label: "Zenn",
-      handle: "@kzk3992",
-      href: "https://zenn.dev/kzk3992",
+      handle: "@mikartmis",
+      href: "https://zenn.dev/mikartmis",
     },
     {
       label: "GitHub",

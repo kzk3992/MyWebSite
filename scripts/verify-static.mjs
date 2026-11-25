@@ -228,7 +228,7 @@ for (const route of ["/", "/en/"]) {
   if (!goodsHtml.includes('href="https://line.me/S/sticker/37956024"')) failures.push(`${route}goods/: LINE STORE へのリンクがありません`);
   if (!goodsHtml.includes("/brand/line-stickers/16_ato1kai.svg")) failures.push(`${route}goods/: スタンプ全16種の一覧がありません`);
   // SNS導線は JSON-LD の sameAs（表記統一の正本）と一致させる
-  for (const sns of ["https://www.instagram.com/mika_spark_studio", "https://www.threads.com/@mika_spark_studio", "https://www.youtube.com/@FluteAndCo", "https://zenn.dev/kzk3992", "https://github.com/kzk3992"]) {
+  for (const sns of ["https://www.instagram.com/mika_spark_studio", "https://www.threads.com/@mika_spark_studio", "https://www.youtube.com/@FluteAndCo", "https://zenn.dev/mikartmis", "https://github.com/kzk3992"]) {
     if (!homeHtml.includes(sns)) failures.push(`${route}: ${sns} への導線がありません`);
   }
 }
@@ -239,7 +239,7 @@ for (const [route, links] of [["/", ["/about/", "/works/", "/support/", "/privac
   if (!homeHtml.includes('aria-labelledby="room-title"')) failures.push(`${route}: トップの部屋がありません`);
   for (const href of links) if (!homeHtml.includes(`href="${href}"`)) failures.push(`${route}: 部屋から ${href} へのリンクがありません`);
   // 小さなリンクのSNS分は JSON-LD の sameAs（表記統一の正本）と一致させる
-  for (const href of [route === "/" ? "/terms/" : "https://hirame.mikaspark.com/en/terms/", "https://www.instagram.com/mika_spark_studio", "https://www.threads.com/@mika_spark_studio", "https://www.youtube.com/@FluteAndCo", "https://zenn.dev/kzk3992", "https://github.com/kzk3992"]) {
+  for (const href of [route === "/" ? "/terms/" : "https://hirame.mikaspark.com/en/terms/", "https://www.instagram.com/mika_spark_studio", "https://www.threads.com/@mika_spark_studio", "https://www.youtube.com/@FluteAndCo", "https://zenn.dev/mikartmis", "https://github.com/kzk3992"]) {
     if (!homeHtml.includes(`href="${href}"`)) failures.push(`${route}: トップの小さなリンク ${href} がありません`);
   }
   for (const image of ["/brand/logo-mark.png", "/brand/logo-mark-green.png", "/brand/room/support-hands.png", "/brand/room/goods-box.png", "/brand/room/sign.png", "/brand/room/privacy-shield.png", "/brand/room/works-bg.png"]) {

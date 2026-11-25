@@ -16,7 +16,7 @@ export const organizationJsonLd = {
     "https://www.youtube.com/@FluteAndCo",
     "https://www.instagram.com/mika_spark_studio",
     "https://www.threads.com/@mika_spark_studio",
-    "https://zenn.dev/kzk3992",
+    "https://zenn.dev/mikartmis",
     "https://github.com/kzk3992",
   ],
 } as const;
