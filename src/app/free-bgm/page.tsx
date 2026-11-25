@@ -1,3 +1,4 @@
+import { JsonLd } from "@/components/JsonLd";
 import styles from "./free-bgm.module.css";
 
 // Audio files live in a Cloudflare R2 bucket (custom domain dl.mikaspark.com).
@@ -21,9 +22,66 @@ const tracks: Track[] = [
   { title: "Beneath the Cedar Bough", duration: "1:28", file: "10-beneath-the-cedar-bough.mp3" },
 ];
 
+/** FAQ本文とFAQPage JSON-LDは同じ正本から生成する（内容を一致させるため）。 */
+const FAQ = [
+  {
+    question: "Is the music on this page really free to use?",
+    answer:
+      'Yes. Every track published on this page can be used as background music in your own videos, live streams, and podcasts, free of charge, including monetized content. Credit is required: Music: "[Track Title]" by FLUTE & CO. — https://www.youtube.com/@FluteAndCo',
+  },
+  {
+    question: "What am I not allowed to do with these tracks?",
+    answer:
+      "You may not re-upload a track on its own, include the tracks in a music compilation, or sell or redistribute the music itself. Trimming or fading a track to fit your video is allowed.",
+  },
+  {
+    question: "Who makes this music?",
+    answer:
+      "FLUTE & CO. is a jazz project led by the flute, published by Mika Spark Studio, a solo indie studio in Nagano, Japan. The tracks are composed with Google Gemini (Lyria) and contain AI-generated music.",
+  },
+  {
+    question: 'What is Vol.1 "A Day in a Port Town"?',
+    answer:
+      "Vol.1 is a set of 10 flute-and-piano jazz and bossa nova tracks (27 minutes in total) themed on a day in a port town. All 10 tracks can be downloaded as MP3 files from this page.",
+  },
+  {
+    question: "Do I need to ask permission before using a track?",
+    answer: "No. Use within the license terms above does not require permission or notification.",
+  },
+] as const;
+
+const albumJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "MusicAlbum",
+  name: "A Day in a Port Town (Vol.1)",
+  byArtist: { "@type": "MusicGroup", name: "FLUTE & CO." },
+  publisher: { "@type": "Organization", name: "Mika Spark Studio", url: "https://mikaspark.com/" },
+  genre: ["Jazz", "Bossa Nova"],
+  numTracks: tracks.length,
+  url: "https://mikaspark.com/free-bgm/",
+  license: "https://mikaspark.com/free-bgm/#license",
+  track: tracks.map((track, index) => ({
+    "@type": "MusicRecording",
+    position: index + 1,
+    name: track.title,
+  })),
+};
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: { "@type": "Answer", text: item.answer },
+  })),
+};
+
 export default function FreeBgmPage() {
   return (
     <div className={styles.page}>
+      <JsonLd data={albumJsonLd} />
+      <JsonLd data={faqJsonLd} />
       <header className={styles.topbar}>
         <p className={styles.brand}>FLUTE &amp; CO.</p>
         <a className={styles.topLink} href={YOUTUBE_URL} target="_blank" rel="noreferrer">
@@ -92,7 +150,7 @@ export default function FreeBgmPage() {
           </ol>
         </section>
 
-        <section className={styles.license} aria-labelledby="license-heading">
+        <section className={styles.license} id="license" aria-labelledby="license-heading">
           <h2 id="license-heading" className={styles.sectionTitle}>
             License — how you can use this music
           </h2>
@@ -132,6 +190,18 @@ export default function FreeBgmPage() {
             composed with Google Gemini (Lyria); this page distributes AI-generated music,
             curated by a flute player.
           </p>
+        </section>
+
+        <section aria-labelledby="faq-heading">
+          <h2 id="faq-heading" className={styles.sectionTitle}>
+            Frequently asked questions
+          </h2>
+          {FAQ.map((item) => (
+            <div className={styles.faqItem} key={item.question}>
+              <h3>{item.question}</h3>
+              <p>{item.answer}</p>
+            </div>
+          ))}
         </section>
 
         <section aria-labelledby="about-heading">

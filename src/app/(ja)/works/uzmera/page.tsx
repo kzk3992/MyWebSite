@@ -17,6 +17,18 @@ const data: WorkDetailData = {
   index: "01",
   name: "Uzmera",
   lead: "音と動きで、練習を楽しく。吹奏楽や管楽器の個人練習を記録し、聴き比べるための、iPhone / iPad向け練習支援アプリです（公開準備中）。",
+  fact: "Uzmeraは、吹奏楽・管楽器奏者のための音楽練習アプリです。練習の録音、多重録音、録音同士の聴き比べができ、外部マイクでの使用を想定した横画面のチューナーとメトロノームを備えています。",
+  // 公開前版：ストアURL・offers・評価は入れない。公開後に json-ld.md の「公開後版」へ差し替える。
+  jsonLd: {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "Uzmera",
+    applicationCategory: "MusicApplication",
+    operatingSystem: "iOS 18.0+",
+    author: { "@type": "Organization", name: "Mika Spark Studio", url: "https://mikaspark.com/" },
+    description:
+      "A music practice app for wind and brass players: record takes, layer multitrack recordings, and compare performances. Includes a tuner and metronome designed for use with external microphones.",
+  },
   meta: [
     ["Category", "アプリ"],
     ["Platform", "iPhone / iPad"],

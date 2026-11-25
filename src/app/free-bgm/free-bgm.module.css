@@ -216,6 +216,22 @@
   font-size: 14px;
 }
 
+.faqItem {
+  border-top: 1px solid var(--line);
+  padding: 18px 0 6px;
+  max-width: 720px;
+}
+
+.faqItem h3 {
+  font-size: 19px;
+  margin: 0 0 6px;
+}
+
+.faqItem p {
+  margin: 0;
+  color: var(--muted);
+}
+
 .ytButton {
   display: inline-block;
   border: 1px solid var(--ink);

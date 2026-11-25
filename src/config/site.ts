@@ -20,16 +20,32 @@ export const siteConfig = {
   description:
     "Mika Spark Studioは、個人でアプリやゲームを企画・開発・公開するインディーデベロップメントスタジオです。",
   baseUrl: "https://mikaspark.com",
+  // JSON-LD の sameAs と一致させる（AI引用対策・表記統一、2026-11-25）。
   socials: [
     {
       label: "Instagram",
       handle: "@mika_spark_studio",
-      href: "https://www.instagram.com/mika_spark_studio/",
+      href: "https://www.instagram.com/mika_spark_studio",
     },
     {
-      label: "X",
-      handle: "@MIKA_StReIn",
-      href: "https://x.com/MIKA_StReIn",
+      label: "Threads",
+      handle: "@mika_spark_studio",
+      href: "https://www.threads.com/@mika_spark_studio",
+    },
+    {
+      label: "YouTube",
+      handle: "@FluteAndCo",
+      href: "https://www.youtube.com/@FluteAndCo",
+    },
+    {
+      label: "Zenn",
+      handle: "@kzk3992",
+      href: "https://zenn.dev/kzk3992",
+    },
+    {
+      label: "GitHub",
+      handle: "@kzk3992",
+      href: "https://github.com/kzk3992",
     },
   ],
   supportEmail: "support@mikaspark.com",

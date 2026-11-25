@@ -17,6 +17,17 @@ const data: WorkDetailData = {
   index: "02",
   name: "Hirame",
   lead: "制約が、ひらめきを生む。言葉の組み合わせや連想といった「制約」から発想する力を鍛える、iPhone / iPad向けアイデアトレーニングアプリです（公開中）。",
+  fact: "Hirameは、制約から発想力を鍛えるiOS向けアイデアトレーニングアプリです。App Storeで公開中です。",
+  jsonLd: {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "Hirame",
+    applicationCategory: "EducationalApplication",
+    operatingSystem: "iOS",
+    author: { "@type": "Organization", name: "Mika Spark Studio", url: "https://mikaspark.com/" },
+    url: "https://apps.apple.com/jp/app/hirame/id6808982302",
+    offers: { "@type": "Offer", price: "0", priceCurrency: "JPY" },
+  },
   meta: [
     ["Category", "アプリ"],
     ["Platform", "iPhone / iPad"],

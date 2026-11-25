@@ -1,4 +1,5 @@
 import { Container } from "@/components/Container";
+import { JsonLd } from "@/components/JsonLd";
 import { Section } from "@/components/Section";
 import styles from "../../content.module.css";
 
@@ -10,6 +11,10 @@ export type WorkDetailData = {
   index: string;
   name: string;
   lead: string;
+  /** 冒頭の事実文（AI引用対策。自己完結した定義文を1文だけ、Overviewの先頭に置く） */
+  fact?: string;
+  /** ページ固有のJSON-LD構造化データ */
+  jsonLd?: object;
   meta: readonly (readonly [string, string])[];
   overviewTitle: string;
   overview: readonly string[];
@@ -22,6 +27,7 @@ export type WorkDetailData = {
 export function WorkDetail({ data }: { data: WorkDetailData }) {
   return (
     <>
+      {data.jsonLd && <JsonLd data={data.jsonLd} />}
       <section className={styles.pageHero}>
         <Container className={styles.pageHeroInner}>
           <div>
@@ -47,6 +53,7 @@ export function WorkDetail({ data }: { data: WorkDetailData }) {
           <p className={styles.proseAside}>Overview</p>
           <div className={styles.proseBody}>
             <h2>{data.overviewTitle}</h2>
+            {data.fact && <p>{data.fact}</p>}
             {data.overview.map((paragraph) => (
               <p key={paragraph.slice(0, 24)}>{paragraph}</p>
             ))}

@@ -79,6 +79,8 @@ for (const requiredFile of ["404.html", "robots.txt", "sitemap.xml", "app-ads.tx
 }
 
 const brandFiles = [
+  // AI引用対策（GEO）: /llms.txt が出力に含まれることもここで担保する
+  "llms.txt",
   "brand/header.jpg",
   "brand/hero-wolf.jpg",
   "brand/logo.png",
@@ -225,8 +227,10 @@ for (const route of ["/", "/en/"]) {
   if (!goodsHtml.includes(route === "/" ? "ウズメちゃん LINEスタンプ" : "Uzume-chan LINE Stickers") || !goodsHtml.includes("¥120")) failures.push(`${route}goods/: グッズの商品名・価格がありません`);
   if (!goodsHtml.includes('href="https://line.me/S/sticker/37956024"')) failures.push(`${route}goods/: LINE STORE へのリンクがありません`);
   if (!goodsHtml.includes("/brand/line-stickers/16_ato1kai.svg")) failures.push(`${route}goods/: スタンプ全16種の一覧がありません`);
-  if (!homeHtml.includes("https://www.instagram.com/mika_spark_studio/")) failures.push(`${route}: Instagramへの導線がありません`);
-  if (!homeHtml.includes("https://x.com/MIKA_StReIn")) failures.push(`${route}: Xへの導線がありません`);
+  // SNS導線は JSON-LD の sameAs（表記統一の正本）と一致させる
+  for (const sns of ["https://www.instagram.com/mika_spark_studio", "https://www.threads.com/@mika_spark_studio", "https://www.youtube.com/@FluteAndCo", "https://zenn.dev/kzk3992", "https://github.com/kzk3992"]) {
+    if (!homeHtml.includes(sns)) failures.push(`${route}: ${sns} への導線がありません`);
+  }
 }
 
 // トップの部屋（RoomHero）：About・Works・Support・Privacy へのリンクと、オブジェクト用の画像
@@ -234,7 +238,8 @@ for (const [route, links] of [["/", ["/about/", "/works/", "/support/", "/privac
   const homeHtml = readFileSync(routeFile(route), "utf8");
   if (!homeHtml.includes('aria-labelledby="room-title"')) failures.push(`${route}: トップの部屋がありません`);
   for (const href of links) if (!homeHtml.includes(`href="${href}"`)) failures.push(`${route}: 部屋から ${href} へのリンクがありません`);
-  for (const href of [route === "/" ? "/terms/" : "https://hirame.mikaspark.com/en/terms/", "https://www.instagram.com/mika_spark_studio/", "https://x.com/MIKA_StReIn"]) {
+  // 小さなリンクのSNS分は JSON-LD の sameAs（表記統一の正本）と一致させる
+  for (const href of [route === "/" ? "/terms/" : "https://hirame.mikaspark.com/en/terms/", "https://www.instagram.com/mika_spark_studio", "https://www.threads.com/@mika_spark_studio", "https://www.youtube.com/@FluteAndCo", "https://zenn.dev/kzk3992", "https://github.com/kzk3992"]) {
     if (!homeHtml.includes(`href="${href}"`)) failures.push(`${route}: トップの小さなリンク ${href} がありません`);
   }
   for (const image of ["/brand/logo-mark.png", "/brand/logo-mark-green.png", "/brand/room/support-hands.png", "/brand/room/goods-box.png", "/brand/room/sign.png", "/brand/room/privacy-shield.png", "/brand/room/works-bg.png"]) {

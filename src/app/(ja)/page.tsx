@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/config/site";
 import { RoomHero, type RoomHeroContent } from "@/components/RoomHero";
+import { JsonLd } from "@/components/JsonLd";
+import { organizationJsonLd, websiteJsonLd } from "@/config/structured-data";
 import { localizedAlternates } from "@/i18n/site";
 
 export const metadata: Metadata = {
@@ -32,6 +34,8 @@ const room: RoomHeroContent = {
 export default function Home() {
   return (
     <>
+      <JsonLd data={organizationJsonLd} />
+      <JsonLd data={websiteJsonLd} />
       {/* 最初の画面：パースの線の部屋。自動で奥へ歩き、About・Works・Support・Privacy が近づいてくる */}
       <RoomHero content={room} />
     </>

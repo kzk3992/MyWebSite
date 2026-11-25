@@ -54,6 +54,9 @@ export default function AboutPage() {
           <div className={styles.proseBody}>
             <h2>好奇心を、動くかたちに。</h2>
             <p>
+              Mika Spark Studioは、長野県を拠点とする個人開発スタジオです。iOSアプリとゲームを企画・実装・公開・運営まで一人で手がけています。代表作は、音楽練習アプリ「Uzmera」（公開準備中）、アイデアトレーニングアプリ「Hirame」（公開中）、ブラウザゲーム「まほうのある暮らし」（公開中）です。
+            </p>
+            <p>
               新しいアイデア、便利な仕組み、遊び心のある体験を、ひとつずつ丁寧に形にして公開していきます。規模を追うよりも、使う人の日常に小さな変化を生むプロダクトを目指しています。
             </p>
             <div className={styles.directionGrid}>
