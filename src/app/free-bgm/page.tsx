@@ -47,7 +47,15 @@ export default function FreeBgmPage() {
 
         <section className={styles.volume} aria-labelledby="vol1-heading">
           <div className={styles.volumeHead}>
-            <div>
+            <img
+              className={styles.cover}
+              src="/brand/flute-and-co/vol1-cover.jpg"
+              alt="Cover art for Vol. 1 — A Day in a Port Town (Before the Town Wakes)"
+              width={720}
+              height={720}
+              loading="lazy"
+            />
+            <div className={styles.volumeHeadText}>
               <h2 id="vol1-heading" className={styles.volumeTitle}>
                 Vol. 1 — A Day in a Port Town
               </h2>

@@ -110,6 +110,7 @@ const brandFiles = [
   "brand/hirame/screens/en/05-library.png",
   "brand/hirame/screens/en/06-bridge.png",
   "brand/hirame/mascot.png",
+  "brand/flute-and-co/vol1-cover.jpg",
 ];
 
 for (const file of brandFiles) {
