@@ -20,6 +20,7 @@ const routes = [
   "/en/goods/",
   "/en/about/",
   "/en/support/",
+  "/free-bgm/",
 ];
 
 const localizedRoutePairs = [

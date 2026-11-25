@@ -13,6 +13,8 @@ const localizedRoutes = [
 
 const japaneseOnlyRoutes = ["/privacy/", "/terms/", "/works/uzmera/", "/works/hirame/", "/works/mahou/", "/works/uzume-stamps/"] as const;
 
+const englishOnlyRoutes = ["/free-bgm/"] as const;
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const localizedEntries = localizedRoutes.flatMap(([japanese, english]) => {
     const languages = {
@@ -36,6 +38,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date("2026-09-08"),
       changeFrequency: "yearly" as const,
       priority: 0.5,
+    })),
+    ...englishOnlyRoutes.map((route) => ({
+      url: new URL(route, siteConfig.baseUrl).toString(),
+      lastModified: new Date("2026-09-08"),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
     })),
   ];
 }
