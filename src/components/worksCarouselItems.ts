@@ -24,6 +24,8 @@ export type CarouselItem = {
   ctaLabel: string;
   storeUrl: string | null;
   storeLabel: string;
+  /** 作品詳細ページ（日本語のみ。第1弾では /works/ 一覧の静的リストからリンクする） */
+  detailHref: string | null;
   visual: CarouselVisual;
 };
 
@@ -72,6 +74,7 @@ function fromProduct(product: Product, locale: Locale): CarouselItem {
     ctaLabel: ja ? view.cta.ja : view.cta.en,
     storeUrl: product.appStoreUrl,
     storeLabel: ja ? "App Storeで見る" : "View on the App Store",
+    detailHref: ja ? `/works/${product.slug}/` : null,
     visual: productVisual(product, locale),
   };
 }
@@ -92,6 +95,7 @@ function fromGoods(item: GoodsItem, locale: Locale): CarouselItem {
     ctaLabel: ja ? "LINEストアで見る" : "View in LINE Store",
     storeUrl: null,
     storeLabel: "",
+    detailHref: ja ? "/works/uzume-stamps/" : null,
     visual: { kind: "image", src: item.image, width: 370, height: 320, alt: ja ? item.ja : item.en, fit: "contain", position: "50% 60%", background: "linear-gradient(165deg, #ffffff, #f1f1ed)", pixelated: true },
   };
 }

@@ -6,6 +6,10 @@ const outputDirectory = join(process.cwd(), "out");
 const routes = [
   "/",
   "/works/",
+  "/works/uzmera/",
+  "/works/hirame/",
+  "/works/mahou/",
+  "/works/uzume-stamps/",
   "/goods/",
   "/privacy/",
   "/terms/",

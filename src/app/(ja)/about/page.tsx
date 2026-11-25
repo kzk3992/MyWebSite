@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
 import { Section } from "@/components/Section";
+import { siteConfig } from "@/config/site";
 import { localizedAlternates } from "@/i18n/site";
 import styles from "../../content.module.css";
 
@@ -16,6 +18,13 @@ export const metadata: Metadata = {
 };
 
 const directions = ["Apps", "Games", "Tools", "Experiments"];
+
+const worksList = [
+  { number: "01", name: "Uzmera", note: "音と動きで、練習を楽しく。（公開準備中）", href: "/works/uzmera/" },
+  { number: "02", name: "Hirame", note: "制約が、ひらめきを生む。（公開中）", href: "/works/hirame/" },
+  { number: "03", name: "まほうのある暮らし", note: "魔法使いの一生を、静かに生きる。（公開中）", href: "/works/mahou/" },
+  { number: "04", name: "ウズメちゃん LINEスタンプ", note: "ピクセルアートのLINEスタンプ（販売中）", href: "/works/uzume-stamps/" },
+];
 
 export default function AboutPage() {
   return (
@@ -54,6 +63,32 @@ export default function AboutPage() {
                   <h3>{direction}</h3>
                 </article>
               ))}
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      <Section eyebrow="Works" title="作っているもの">
+        <nav className={styles.policyList} aria-label="作品詳細">
+          {worksList.map((work) => (
+            <a href={work.href} key={work.href}>
+              <span className={styles.policyNumber}>{work.number}</span>
+              <span><b>{work.name}</b><small>{work.note}</small></span>
+              <span className={styles.policyArrow} aria-hidden="true">→</span>
+            </a>
+          ))}
+        </nav>
+      </Section>
+
+      <Section eyebrow="Operator" title="運営者">
+        <div className={styles.proseGrid}>
+          <p className={styles.proseAside}>Contact</p>
+          <div className={styles.proseBody}>
+            <p>屋号: Mika Spark Studio</p>
+            <p>所在地: 長野県（詳細はお問い合わせ時にお知らせします）</p>
+            <div className={styles.contactBox}>
+              <p>アプリやゲームへのご意見・ご感想、不具合のご報告は下記メールアドレスまでお願いします。</p>
+              <Button href={`mailto:${siteConfig.supportEmail}`}>{siteConfig.supportEmail}</Button>
             </div>
           </div>
         </div>

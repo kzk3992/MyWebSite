@@ -11,7 +11,7 @@ const localizedRoutes = [
   ["/support/", "/en/support/"],
 ] as const;
 
-const japaneseOnlyRoutes = ["/privacy/", "/terms/"] as const;
+const japaneseOnlyRoutes = ["/privacy/", "/terms/", "/works/uzmera/", "/works/hirame/", "/works/mahou/", "/works/uzume-stamps/"] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const localizedEntries = localizedRoutes.flatMap(([japanese, english]) => {

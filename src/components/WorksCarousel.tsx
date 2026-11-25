@@ -483,6 +483,7 @@ export function WorksCarousel({ items, locale }: { items: CarouselItem[]; locale
               <span className={styles.indexLinks}>
                 <a href={item.href} {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>{item.ctaLabel} →</a>
                 {item.storeUrl && <a href={item.storeUrl} target="_blank" rel="noopener noreferrer">{item.storeLabel} →</a>}
+                {item.detailHref && <a href={item.detailHref}>詳細を見る →</a>}
               </span>
             </li>
           ))}
