@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/config/site";
+import { getAllNotes } from "@/lib/notes";
 
 export const dynamic = "force-static";
 
@@ -44,6 +45,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date("2026-09-08"),
       changeFrequency: "monthly" as const,
       priority: 0.6,
+    })),
+    {
+      url: new URL("/notes/", siteConfig.baseUrl).toString(),
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.6,
+    },
+    ...getAllNotes().map((note) => ({
+      url: new URL(`/notes/${note.slug}/`, siteConfig.baseUrl).toString(),
+      lastModified: new Date(note.date),
+      changeFrequency: "yearly" as const,
+      priority: 0.5,
     })),
   ];
 }

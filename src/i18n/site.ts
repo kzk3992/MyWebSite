@@ -49,6 +49,7 @@ export function englishAlternates(japanese: string, english: string) {
 export const navigation = {
   ja: [
     { label: "Works", href: "/works/" },
+    { label: "Notes", href: "/notes/" },
     { label: "About", href: "/about/" },
     { label: "Goods", href: "/goods/" },
     { label: "Support", href: "/support/" },

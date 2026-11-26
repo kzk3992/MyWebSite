@@ -11,6 +11,7 @@ const routes = [
   "/works/mahou/",
   "/works/uzume-stamps/",
   "/goods/",
+  "/notes/",
   "/privacy/",
   "/terms/",
   "/about/",
@@ -22,6 +23,14 @@ const routes = [
   "/en/support/",
   "/free-bgm/",
 ];
+
+// 開発ノートの記事ルートは src/content/notes/*.md から動的に足す（ファイル名＝スラッグ）。
+const notesDirectory = join(process.cwd(), "src", "content", "notes");
+if (existsSync(notesDirectory)) {
+  for (const name of readdirSync(notesDirectory)) {
+    if (name.endsWith(".md")) routes.push(`/notes/${name.replace(/\.md$/, "")}/`);
+  }
+}
 
 const localizedRoutePairs = [
   ["/", "/en/"],

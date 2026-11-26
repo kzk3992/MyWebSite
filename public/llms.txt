@@ -20,3 +20,7 @@
 - [About Mika Spark Studio](https://mikaspark.com/about/): Studio profile, product list, and contact information.
 - [Works](https://mikaspark.com/works/): All products by Mika Spark Studio.
 - [Privacy Policy](https://mikaspark.com/privacy/)
+
+## Notes
+
+- [Development notes](https://mikaspark.com/notes/): A short Japanese development log by Mika Spark Studio — day-to-day progress, failures, and verification notes from building its apps and games, with concrete numbers and dates.
