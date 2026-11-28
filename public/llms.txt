@@ -7,7 +7,7 @@
 - [Uzmera](https://uzmera.mikaspark.com/): A music practice app for iOS for wind and brass players. Record practice takes, layer multitrack recordings, and compare performances side by side. Includes a tuner and metronome (landscape mode designed for external microphones). Free with ads; the one-time "Uzmera Plus" upgrade (¥490) removes ads and unlocks unlimited takes, 8-track recording, high-quality audio, and WAV export. Currently in preparation for release on the App Store.
 - [Hirame](https://mikaspark.com/works/hirame/): An idea-training app for iOS that builds creative thinking through constraints. Available on the App Store.
 - [A Witch's Life (まほうのある暮らし)](https://mahou.mikaspark.com/): A browser game about quietly living the life of a witch. Free to play in the browser.
-- [Uzume-chan LINE Stickers](https://line.me/S/sticker/37956024): A set of 16 pixel-art stickers of Uzume-chan, the studio mascot, sold on the LINE Store for ¥120.
+- [Uzume-chan LINE Stickers](https://line.me/S/sticker/37956024): A set of 16 pixel-art stickers of Uzume-chan, the studio mascot, sold on the LINE Store for ¥190.
 
 ## Free BGM — FLUTE & CO.
 
@@ -24,3 +24,13 @@
 ## Notes
 
 - [Development notes](https://mikaspark.com/notes/): A short Japanese development log by Mika Spark Studio — day-to-day progress, failures, and verification notes from building its apps and games, with concrete numbers and dates.
+
+## Markdown versions
+
+Key pages are also published as plain Markdown for AI agents:
+
+- [Uzmera (Markdown)](https://mikaspark.com/works/uzmera.md)
+- [Hirame (Markdown)](https://mikaspark.com/works/hirame.md)
+- [A Witch's Life (Markdown)](https://mikaspark.com/works/mahou.md)
+- [Uzume-chan LINE Stickers (Markdown)](https://mikaspark.com/works/uzume-stamps.md)
+- Development notes: each article is also available as Markdown at https://mikaspark.com/notes/<slug>.md (for example, https://mikaspark.com/notes/2026-11-28-nagano-run-zenkoji.md)
