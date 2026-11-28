@@ -42,15 +42,16 @@ const WALL = 3.6;
 const CELL = 1.2;
 const NEAR = 0.6;
 const FAR = 90;
-const LOOP = 48; // 6つのオブジェクトを 8 ずつ等間隔に置く
+const SPACING = 8; // オブジェクトの間隔。1周の長さ＝表示するオブジェクトの数×8
 const AUTO_SPEED = 0.9; // 何もしなくても進む速さ（単位／秒）
 const BASE = 120; // 1 単位 = 120px で各オブジェクトを組み、投影で拡大縮小する
 const LAYERS = 13;
 const INK = "#12140f";
 
-type Spot = { key: "sign" | "about" | "works" | "support" | "privacy" | "goods"; y: number; z0: number; width: number; pcX: number; phoneX: number };
+type Spot = { key: "sign" | "about" | "works" | "support" | "privacy" | "goods" | "notes"; y: number; z0: number; width: number; pcX: number; phoneX: number };
 
-// 並び（左・右交互、8ずつ等間隔）：Works（左）→ About（右）→ 看板（左）→ Goods（右）→ Privacy（左）→ Support（右）
+// 並び（左・右交互、8ずつ等間隔）：Works（左）→ About（右）→ 看板（左）→ Goods（右）→ Privacy（左）→ Support（右）→ Notes（左）
+// Notes は content.notes があるとき（日本語版）だけ出す。出さないときは残りで等間隔に詰める。
 // width は PC・スマホ共通の基準幅（単位×120px）にし、スマホの縮小は scale 側で行うことでテキストと背景画像の比率・中央揃えを維持する。
 const spots: Spot[] = [
   { key: "works", y: 0, z0: 4, width: 2.6, pcX: -2.6, phoneX: -1.35 },
@@ -59,6 +60,7 @@ const spots: Spot[] = [
   { key: "goods", y: 0, z0: 28, width: 2.4, pcX: 2.6, phoneX: 1.35 },
   { key: "privacy", y: 0, z0: 36, width: 2.6, pcX: -2.6, phoneX: -1.35 },
   { key: "support", y: 0.5, z0: 44, width: 3.0, pcX: 2.5, phoneX: 1.3 },
+  { key: "notes", y: 0, z0: 52, width: 2.4, pcX: -2.6, phoneX: -1.35 },
 ];
 
 function smooth(t: number) {
@@ -97,6 +99,7 @@ function Mark({ src }: { src: string }) {
 }
 
 export function RoomHero({ content }: { content: RoomHeroContent }) {
+  const hasNotes = Boolean(content.notes);
   const workItems = buildCarouselItems(content.locale);
   const sceneRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -104,6 +107,8 @@ export function RoomHero({ content }: { content: RoomHeroContent }) {
   const objectRefs = useRef<Partial<Record<Spot["key"], HTMLElement | null>>>({});
 
   useEffect(() => {
+    const activeSpots = spots.filter((spot) => spot.key !== "notes" || hasNotes);
+    const loop = activeSpots.length * SPACING;
     const scene = sceneRef.current;
     const canvas = canvasRef.current;
     const context = canvas?.getContext("2d");
@@ -228,12 +233,13 @@ export function RoomHero({ content }: { content: RoomHeroContent }) {
 
       place(markElement, 0, 0, markWidth, markZ, 1);
       const spotScale = narrow ? 0.68 : 1;
-      spots.forEach((spot) => {
+      activeSpots.forEach((spot, index) => {
         const element = objectRefs.current[spot.key];
         if (!element) return;
         const x = narrow ? spot.phoneX : spot.pcX;
-        const z = (((spot.z0 - camera) % LOOP) + LOOP) % LOOP;
-        const alpha = smooth((z - 1.3) / 1.4) * (1 - smooth((z - (LOOP - 7)) / 6));
+        const z0 = 4 + index * SPACING;
+        const z = (((z0 - camera) % loop) + loop) % loop;
+        const alpha = smooth((z - 1.3) / 1.4) * (1 - smooth((z - (loop - 7)) / 6));
         place(element, x, spot.key === "sign" ? spot.y : "text", spot.width, Math.max(0.9, z), alpha, spotScale);
       });
       scene.dataset.ready = "true";
@@ -351,7 +357,7 @@ export function RoomHero({ content }: { content: RoomHeroContent }) {
       scene.removeEventListener("pointermove", onPointerMove);
       scene.removeEventListener("pointerleave", onPointerLeave);
     };
-  }, []);
+  }, [hasNotes]);
 
   return (
     <section ref={sceneRef} className={styles.scene} aria-labelledby="room-title">
@@ -417,6 +423,13 @@ export function RoomHero({ content }: { content: RoomHeroContent }) {
         <Image src="/brand/room/goods-box.png" width={720} height={658} alt="" />
         <span className={styles.overBox}><Wordmark text="GOODS" size={64} /></span>
       </a>
+
+      {content.notes && (
+        <a ref={(element) => { objectRefs.current.notes = element; }} className={`${styles.obj} ${styles.notes}`} href={content.notes.href} tabIndex={-1} aria-hidden="true">
+          <Image src="/brand/room/notes-book.png" width={706} height={800} alt="" />
+          <span className={styles.overBook}><Wordmark text="NOTES" size={64} /></span>
+        </a>
+      )}
 
       <nav className={styles.nav} aria-label={content.navLabel}>
         {[content.about, content.works, ...(content.notes ? [content.notes] : []), content.support, content.privacy, content.goods].map((link) => (

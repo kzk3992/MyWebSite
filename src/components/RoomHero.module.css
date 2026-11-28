@@ -123,6 +123,8 @@
 .support { width: 360px; }
 .goods { width: 288px; }
 .overBox { position: absolute; left: 0; right: 0; top: 46%; }
+.notes { width: 288px; }
+.overBook { position: absolute; left: 0; right: 0; top: 44%; }
 
 .privacy { width: 312px; }
 .shield { display: block; width: 74%; height: auto; margin: 0 auto; filter: drop-shadow(0 14px 16px rgb(30 32 28 / 16%)); }

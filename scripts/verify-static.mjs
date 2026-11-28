@@ -207,6 +207,13 @@ for (const [from, to] of [
 }
 if (/^\/apps\/hirame\/\*/m.test(redirects)) failures.push("_redirects: /apps/hirame/* のワイルドカードは app-ads.txt まで転送するので使わないこと");
 if (!existsSync(join(outputDirectory, "apps", "hirame", "app-ads.txt"))) failures.push("apps/hirame/app-ads.txt: 出力されていません");
+// トップの NOTES オブジェ（Notes ページは日本語のみ）
+{
+  const homeHtml = readFileSync(routeFile("/"), "utf8");
+  if (!homeHtml.includes("/brand/room/notes-book.png")) failures.push("/: NOTES のオブジェがありません");
+  if (!homeHtml.includes('href="/notes/"')) failures.push("/: Notes へのリンクがありません");
+}
+
 // ホーム画面に追加したときのアイコンと表示名（MikaSpark）
 for (const file of ["apple-touch-icon.png", "icon-192.png", "icon-512.png", "icon-maskable-512.png", "manifest.webmanifest"]) {
   if (!existsSync(join(outputDirectory, file))) failures.push(`${file}: 出力されていません`);
