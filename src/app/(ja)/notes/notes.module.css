@@ -43,6 +43,9 @@
   letter-spacing: .14em;
 }
 
+.noteBody h2 { margin-top: 64px; }
+.noteBody > h2:first-child { margin-top: 0; }
+
 .noteBody img {
   max-width: 100%;
   height: auto;
