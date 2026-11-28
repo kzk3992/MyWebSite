@@ -71,7 +71,7 @@ Saramonic SR-C2003です。3.5mm TRSメス → USB-Cオスの短いケーブル�
 
 3.5mm TRSメス → Lightningオス　**※未検証**
 
-購入リンク: AmazonでSR \~C2002 を見る
+購入リンク: [Amazonで SR-C2002 を見る](https://link.amazon/B0bNzETFY)
 
 TM-40IVの価格は1,691円でした（同上）。なお、価格と在庫状況は確認時点のもので変わることがあります。最新の価格はリンク先の商品ページでご確認ください。購入リンク: [Amazonで TM-40IV を見る](https://link.amazon/B04xoJL3W)／[楽天市場で TM-40IV を見る](https://item.rakuten.co.jp/sakurayama/yamaha-tm40iv-01/)
 
