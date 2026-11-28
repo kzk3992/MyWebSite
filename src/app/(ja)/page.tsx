@@ -27,6 +27,7 @@ const room: RoomHeroContent = {
   support: { href: "/support/", label: "Support" },
   privacy: { href: "/privacy/", label: "Privacy" },
   goods: { href: "/goods/", label: "Goods" },
+  notes: { href: "/notes/", label: "Notes" },
   terms: { href: "/terms/", label: "Terms" },
   socials: siteConfig.socials,
 };

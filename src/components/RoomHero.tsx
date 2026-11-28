@@ -30,6 +30,8 @@ export type RoomHeroContent = {
   support: RoomLink;
   privacy: RoomLink;
   goods: RoomLink;
+  /** Notesへの導線（任意。指定したロケールのトップだけに出す） */
+  notes?: RoomLink;
   /** 部屋の外に出る小さなリンク（フッターの代わり） */
   terms: RoomLink;
   socials: readonly { label: string; href: string }[];
@@ -417,7 +419,7 @@ export function RoomHero({ content }: { content: RoomHeroContent }) {
       </a>
 
       <nav className={styles.nav} aria-label={content.navLabel}>
-        {[content.about, content.works, content.support, content.privacy, content.goods].map((link) => (
+        {[content.about, content.works, ...(content.notes ? [content.notes] : []), content.support, content.privacy, content.goods].map((link) => (
           <a key={link.href} href={link.href}>{link.label}</a>
         ))}
         <a className={styles.minor} href={content.terms.href}>{content.terms.label}</a>

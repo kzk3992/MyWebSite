@@ -50,5 +50,6 @@ export const workData: WorkDetailData = {
   ],
   links: [
     { label: "ティザーサイト", description: "Uzmera ティザーサイト（uzmera.mikaspark.com）", href: "https://uzmera.mikaspark.com/", external: true },
+    { label: "関連記事", description: "チューナーマイクをiPhoneに繋ぐ方法（外部マイクの接続ガイド）", href: "/notes/2026-11-29-tuner-mic-iphone/", external: false },
   ],
 };
