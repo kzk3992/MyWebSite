@@ -3,9 +3,7 @@
 - 公開日: 2026-11-29
 - 元ページ: https://mikaspark.com/notes/2026-11-29-tuner-mic-iphone/
 
-*— まず検証結果から。あとは、その理由と端子の話です*
-
-## 結論 — 検証結果
+# 検証結果
 
 こちらで実際に検証した組み合わせと結果は、次のとおりです。
 
@@ -29,7 +27,7 @@
 
 ![TM-40IVのクリップ部とプラグ](/notes/2026-11-29-tuner-mic-iphone/mic-clip.jpg)
 
-## 重要なのは端子の種類 — リングの数で見分けます
+## 重要なのは端子の種類 
 
 チューナーマイクのプラグは3.5mmのミニプラグですが、iPhoneには挿す穴がありません。そこで変換ケーブルが要るのですが、ここで問題になるのが「3.5mmプラグには種類がある」ことです。
 
@@ -65,15 +63,13 @@ Saramonic SR-C2003です。3.5mm TRSメス → USB-Cオスの短いケーブル�
 
 ![SR-C2003。左がUSB-C、右が3.5mmメス](/notes/2026-11-29-tuner-mic-iphone/adapter.jpg)
 
-3.5mm TRSメス → USB-Cオス
+## 購入リンク
 
-購入リンク: [Amazonで SR-C2003 を見る](https://link.amazon/B0hilxsMq)
+- **SR-C2003**（3.5mm TRSメス → USB-Cオス）: [Amazonで見る](https://link.amazon/B0hilxsMq)
+- **SR-C2002**（3.5mm TRSメス → Lightningオス）**※未検証**: [Amazonで見る](https://link.amazon/B0bNzETFY)
+- **TM-40IV**（価格は1,691円でした）: [Amazonで見る](https://link.amazon/B04xoJL3W)／[楽天市場で見る](https://item.rakuten.co.jp/sakurayama/yamaha-tm40iv-01/)
 
-3.5mm TRSメス → Lightningオス　**※未検証**
-
-購入リンク: [Amazonで SR-C2002 を見る](https://link.amazon/B0bNzETFY)
-
-TM-40IVの価格は1,691円でした（同上）。なお、価格と在庫状況は確認時点のもので変わることがあります。最新の価格はリンク先の商品ページでご確認ください。購入リンク: [Amazonで TM-40IV を見る](https://link.amazon/B04xoJL3W)／[楽天市場で TM-40IV を見る](https://item.rakuten.co.jp/sakurayama/yamaha-tm40iv-01/)
+※価格と在庫状況は確認時点のもので変わることがあります。最新の価格はリンク先の商品ページでご確認ください。
 
 ## 検証の範囲と、未検証のこと
 
@@ -93,7 +89,7 @@ TM-40IVの価格は1,691円でした（同上）。なお、価格と在庫状�
 
 ぜひみなさんの使ってみたお声を聞かせて下さい。
 
-詳しくは [Uzmeraの紹介ページ](https://mikaspark.com/works/uzmera/) をご覧ください。App Storeのリンクは、公開後にそちらへ掲載します。
+詳しくは [Uzmeraの紹介ページ](https://mikaspark.com/works/uzmera/) をご覧ください。
 
 ---
 
