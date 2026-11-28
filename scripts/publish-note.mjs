@@ -18,7 +18,7 @@
  * 注意: 承認なしに実行しないこと。公開フロー全体は docs/notes-pipeline.md を参照。
  */
 import { execFileSync } from "node:child_process";
-import { copyFileSync, existsSync, readFileSync } from "node:fs";
+import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { basename, join } from "node:path";
 
 const draftPath = process.argv[2];
@@ -58,11 +58,31 @@ if (existsSync(destination)) {
 copyFileSync(draftPath, destination);
 console.log(`配置: ${destination}`);
 
+// AI向けMarkdown版（/notes/<slug>.md）を public/notes/ へ生成する。
+// ビルドスクリプト経由の生成はCloudflare Pagesのビルドで実行されないため、
+// 静的ファイルとしてコミットする方式にしている。
+const date = frontMatter[1].match(/^date:\s*(.+)$/m)[1].trim().replace(/^"|"$/g, "");
+const body = raw.slice(frontMatter[0].length).replace(/^\n+/, "");
+const markdown = [
+  `# ${title.replace(/^"|"$/g, "")}`,
+  "",
+  `- 公開日: ${date}`,
+  `- 元ページ: https://mikaspark.com/notes/${slug}/`,
+  "",
+  body.trim(),
+  "",
+].join("\n");
+const markdownDir = join(process.cwd(), "public", "notes");
+mkdirSync(markdownDir, { recursive: true });
+const markdownPath = join(markdownDir, `${slug}.md`);
+writeFileSync(markdownPath, markdown);
+console.log(`配置: ${markdownPath}`);
+
 const run = (command, args) =>
   execFileSync(command, args, { stdio: "inherit" });
 
 run("npm", ["run", "check"]);
-run("git", ["add", destination]);
+run("git", ["add", destination, markdownPath]);
 run("git", ["commit", "-m", `Add note: ${title}`]);
 run("git", ["push", "origin", "redesign"]);
 
